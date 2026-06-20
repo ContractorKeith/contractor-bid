@@ -1,0 +1,48 @@
+{
+  "_README": "Single source of truth for the takeoff/BOM workbook. Edit this JSON, then run contractor-bid build-workbook <project> --profile {{PROFILE_ID}}.",
+  "project_name": "{{PROJECT_NAME}}",
+  "prepared_date": "{{PREPARED_DATE}}",
+  "scope_rule": "{{SCOPE_RULE}}",
+  "latest_revision_basis": [
+    "Bid set date TBD",
+    "Latest addendum TBD"
+  ],
+  "project_details": [
+    ["Project", "{{PROJECT_NAME}}"],
+    ["Address", "{{ADDRESS}}"],
+    ["GC / Contact", "{{GC}}"],
+    ["Bid Due", "{{BID_DUE}}"],
+    ["Prepared", "{{PREPARED_DATE}}"],
+    ["Scope Profile", "{{PROFILE_ID}}"],
+    ["Scope Rule", "{{SCOPE_RULE}}"],
+    ["Latest Basis", "TBD"],
+    ["Base Carry", "TBD"],
+    ["Critical Exclusions", "TBD"]
+  ],
+  "scope_summary": [
+    {
+      "status": "Included",
+      "scope": "TBD base scope item",
+      "quantity": "0",
+      "notes": "Replace with source-backed scope."
+    }
+  ],
+  "bom": [
+    {
+      "section": "{{TRADE_NAME}}",
+      "item": "TBD line item",
+      "description": "Replace with a source-backed item.",
+      "qty": 0,
+      "uom": "EA",
+      "status": "Included",
+      "source": "TBD"
+    }
+  ],
+  "scope_specs": [],
+  "page_references": [],
+  "rfi_notes": [
+    "Confirm all quantities against latest dated addendum before pricing."
+  ],
+  "alerts": [],
+  "source_files": []
+}

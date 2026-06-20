@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "profile_id": "electrical",
+  "company_name": "Example Electrical Subcontractor",
+  "trade_name": "Electrical",
+  "csi_divisions": ["26", "27", "28"],
+  "scope_rule": "Base bid is limited to electrical systems defined by the profile. Low-voltage, fire alarm, security, data, controls, utility company work, and owner-furnished equipment must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": ["panels", "feeders", "branch circuits", "lighting", "devices", "gear", "conduit"],
+  "include_terms": ["electrical", "panel", "lighting", "conduit", "feeder", "26 05", "26 24"],
+  "spec_sections": ["26 05 00", "26 24 16", "26 51 00"],
+  "quantity_units": ["EA", "LF", "HR"],
+  "review_terms": ["fire alarm", "security", "data", "controls", "low voltage", "generator"],
+  "exclude_terms": ["utility company", "owner furnished", "mechanical controls unless listed"],
+  "proposal_exclusions": ["utility fees", "temporary power unless listed", "low voltage systems unless listed"]
+}

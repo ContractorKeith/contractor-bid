@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "profile_id": "drywall-framing",
+  "company_name": "Example Interiors Subcontractor",
+  "trade_name": "Drywall and Metal Framing",
+  "csi_divisions": ["09"],
+  "scope_rule": "Base bid is limited to metal framing, gypsum board assemblies, finishing, and listed accessories. Adjacent insulation, ceilings, blocking, painting, and firestopping must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": ["metal studs", "gypsum board", "shaftwall", "drywall finishing", "corner bead", "control joints"],
+  "include_terms": ["gypsum", "drywall", "metal stud", "shaftwall", "partition", "09 21"],
+  "spec_sections": ["09 21 16", "09 29 00"],
+  "quantity_units": ["SF", "LF", "EA"],
+  "review_terms": ["insulation", "acoustical ceiling", "firestopping", "blocking", "painting"],
+  "exclude_terms": ["millwork", "casework", "doors", "hardware", "flooring"],
+  "proposal_exclusions": ["painting unless listed", "acoustical ceilings unless listed", "wood blocking unless listed"]
+}

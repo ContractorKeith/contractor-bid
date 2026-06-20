@@ -1,0 +1,23 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Generated bid-project artifacts
+**/bid-docs/
+**/bid-package-working/page-images/
+**/bid-package-working/text-extracts/
+**/bid-package-working/*.pdf
+**/bid-package-working/*.xlsx
+**/bid-package-working/supplier-sendoff/
+
+# Local user/company configuration
+.contractor-bid/local.json
+.contractor-bid/feedback.jsonl

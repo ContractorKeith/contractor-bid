@@ -1,0 +1,19 @@
+{
+  "_README": "Fill this file after triage. It drives contractor-bid build-packets. Page numbers are 1-based PDF page numbers, not sheet numbers. pdf_page accepts 12, \"12\", \"12-14\", \"12,15\", or a list.",
+  "project_name": "{{PROJECT_NAME}}",
+  "prepared": "{{PREPARED_DATE}}",
+  "scope_profile": "{{PROFILE_ID}}",
+  "scope_note": "{{SCOPE_RULE}}",
+  "bid_decision_summary": "TBD. Plain-English first-pass summary: what the project appears to require, where the best markup/detail/spec pages are, what to open first, what is in base scope, and what is excluded or needs clarification.",
+  "what_to_open_first": [],
+  "scope_items": [],
+  "quantity_mentions": [],
+  "brand_or_product_mentions": [],
+  "access_or_interface_notes": [],
+  "not_in_base_scope": [],
+  "open_questions": [],
+  "no_spec_pages_found": "",
+  "scope_pages": [],
+  "spec_pages": [],
+  "excluded_or_reference_only": []
+}
