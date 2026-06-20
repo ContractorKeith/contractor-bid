@@ -12,14 +12,17 @@ PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 
 
 def templates_dir() -> Path:
-    candidates = [
-        PACKAGE_ROOT / "templates",
-        PACKAGE_DIR / "templates",
-    ]
-    for candidate in candidates:
+    for candidate in resource_dirs("templates"):
         if candidate.exists():
             return candidate
-    return candidates[0]
+    return PACKAGE_ROOT / "templates"
+
+
+def resource_dirs(name: str) -> list[Path]:
+    return [
+        PACKAGE_ROOT / name,
+        PACKAGE_DIR / name,
+    ]
 
 
 def slugify(text: str, default: str = "project") -> str:

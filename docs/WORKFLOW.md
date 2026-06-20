@@ -3,13 +3,20 @@
 ## One-Time Setup
 
 ```bash
-python3 -m venv .venv
-. .venv/bin/activate
-pip install -e .
-brew install poppler
+git clone https://github.com/ContractorKeith/contractor-bid.git
+cd contractor-bid
+scripts/install.sh --install-poppler
 ```
 
-Poppler provides `pdfinfo`, `pdftotext`, and `pdftoppm`. The scripts fall back to `pypdf` for text/page counts, but Poppler is usually faster and better for bid sets.
+On Windows, run `.\scripts\install.ps1 -InstallPoppler` from PowerShell.
+
+Poppler provides `pdfinfo`, `pdftotext`, and `pdftoppm`. The scripts fall back to `pypdf` for some text/page-count work, but Poppler is faster and required for rendered page images.
+
+Check a machine with:
+
+```bash
+contractor-bid doctor
+```
 
 ## Per-Bid Pipeline
 
@@ -23,6 +30,13 @@ Poppler provides `pdfinfo`, `pdftotext`, and `pdftoppm`. The scripts fall back t
 8. Update the reference index and proposal letter.
 9. Run alerts check.
 10. Package sendoff.
+
+Built-in starter profiles:
+
+- `fences-gates`
+- `concrete-flatwork`
+- `drywall-framing`
+- `electrical`
 
 ## Naming
 

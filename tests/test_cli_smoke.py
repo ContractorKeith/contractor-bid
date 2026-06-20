@@ -102,6 +102,28 @@ class CliSmokeTest(unittest.TestCase):
             zips = list((project / "bid-package-working" / "supplier-sendoff").glob("*.zip"))
             self.assertEqual(len(zips), 1)
 
+    def test_builtin_profile_loads_without_workspace_profile(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            project = root / "bids" / "070126-fence-sample"
+
+            self.assertEqual(
+                main(
+                    [
+                        "--root",
+                        str(root),
+                        "new",
+                        str(project),
+                        "--profile",
+                        "fences-gates",
+                        "--project-name",
+                        "Fence Sample",
+                    ]
+                ),
+                0,
+            )
+            self.assertTrue((project / ".agent" / "skills" / "fences-gates-bid-scope" / "SKILL.md").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from .util import now_iso, read_json, slugify, write_json
+from .util import now_iso, read_json, resource_dirs, slugify, write_json
 
 
 DEFAULT_QUESTIONS = [
@@ -24,9 +24,10 @@ def load_profile(path_or_id: str | Path, root: Path) -> dict[str, Any]:
     raw = Path(path_or_id)
     if raw.exists():
         return read_json(raw)
-    path = profile_path(root, str(path_or_id))
-    if path.exists():
-        return read_json(path)
+    for base in [root / "profiles", *resource_dirs("profiles")]:
+        path = base / f"{path_or_id}.json"
+        if path.exists():
+            return read_json(path)
     raise FileNotFoundError(f"Scope profile not found: {path_or_id}")
 
 

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "profile_id": "fences-gates",
+  "company_name": "Your Company",
+  "trade_name": "Fences and Gates",
+  "csi_divisions": ["32"],
+  "scope_rule": "Base bid is limited to permanent fences, gates, gate hardware, and fence/gate-specific accessories. Adjacent scopes must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": ["fence runs", "gate openings", "gate hardware", "operators", "posts", "rails", "panels", "fabric"],
+  "include_terms": ["fence", "gate", "chain link", "ornamental", "access control", "operator", "32 31"],
+  "spec_sections": ["32 31 13", "32 31 19"],
+  "quantity_units": ["LF", "EA", "PAIR", "SF"],
+  "review_terms": ["railing", "handrail", "guardrail"],
+  "exclude_terms": ["bollard", "temporary fence", "silt fence", "tree protection fence", "concrete", "paving"],
+  "proposal_exclusions": ["bollards", "temporary fencing", "concrete pads", "electrical wiring unless specifically included"]
+}

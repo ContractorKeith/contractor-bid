@@ -5,6 +5,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
+from .doctor import format_doctor, run_doctor
 from .learning import record_feedback
 from .packets import build_packets
 from .profile import build_profile, load_profile, parse_csv, write_profile
@@ -152,6 +153,12 @@ def command_learn(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_doctor(args: argparse.Namespace) -> int:
+    checks, exit_code = run_doctor()
+    print(format_doctor(checks))
+    return exit_code
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="contractor-bid",
@@ -221,6 +228,9 @@ def build_parser() -> argparse.ArgumentParser:
     learn.add_argument("--profile", default=None)
     learn.add_argument("--category", default="correction")
     learn.set_defaults(func=command_learn)
+
+    doctor = sub.add_parser("doctor", help="Check local dependencies and optional PDF tools.")
+    doctor.set_defaults(func=command_doctor)
 
     return parser
 

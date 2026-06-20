@@ -28,6 +28,9 @@ packages = ["src/contractor_bid"]
 "templates" = "contractor_bid/templates"
 "examples" = "contractor_bid/examples"
 "docs" = "contractor_bid/docs"
+"scripts" = "contractor_bid/scripts"
+"profiles" = "contractor_bid/profiles"
+"skills" = "contractor_bid/skills"
 "AGENTS.md" = "contractor_bid/AGENTS.md"
 "CLAUDE.md" = "contractor_bid/CLAUDE.md"
 
@@ -37,6 +40,9 @@ include = [
   "/templates",
   "/examples",
   "/docs",
+  "/scripts",
+  "/profiles",
+  "/skills",
   "/README.md",
   "/AGENTS.md",
   "/CLAUDE.md",

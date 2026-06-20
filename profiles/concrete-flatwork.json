@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "profile_id": "concrete-flatwork",
+  "company_name": "Your Company",
+  "trade_name": "Concrete Flatwork",
+  "csi_divisions": ["03"],
+  "scope_rule": "Base bid is limited to concrete flatwork defined by the profile. Adjacent sitework, asphalt, striping, landscaping, and utility work must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": ["slabs", "sidewalks", "curbs", "equipment pads", "reinforcing for carried concrete"],
+  "include_terms": ["concrete", "slab", "sidewalk", "curb", "equipment pad", "rebar", "03 30"],
+  "spec_sections": ["03 30 00", "03 20 00"],
+  "quantity_units": ["CY", "SF", "LF", "EA"],
+  "review_terms": ["sawcut", "demo", "asphalt", "striping", "excavation"],
+  "exclude_terms": ["landscaping", "irrigation", "utility", "electrical", "fence"],
+  "proposal_exclusions": ["unsuitable soils", "survey/layout by others unless included", "asphalt and striping unless listed"]
+}

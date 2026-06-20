@@ -1,5 +1,10 @@
 # Profiles
 
-`contractor-bid init` writes generated scope profiles here.
+Built-in starter profiles live here and can be used immediately:
 
-Profiles are deterministic JSON rules used by the scripts. Example profiles live in `examples/profiles/`; copy one here or run the initializer to create your own.
+- `fences-gates`
+- `concrete-flatwork`
+- `drywall-framing`
+- `electrical`
+
+Profiles are deterministic JSON rules used by the scripts. Run `contractor-bid init` to create or overwrite a custom profile for your own company and scope.

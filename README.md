@@ -13,42 +13,86 @@ The workflow is designed for Claude, Codex, or another model to operate inside a
 
 The original pattern comes from real fence/gate bid-package work, but the names and guardrails are generic so concrete, millwork, electrical, drywall, roofing, sitework, and other trades can define their own scope boundaries.
 
-## Install For Local Development
+## Install
+
+### macOS / Linux
+
+From a checkout:
 
 ```bash
-cd /Users/keithbloemendaal/Documents/github.nosync/projects/contractor-bid
+git clone https://github.com/ContractorKeith/contractor-bid.git
+cd contractor-bid
+scripts/install.sh --install-poppler
+```
+
+When the repo is public, this can also be installed with:
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/ContractorKeith/contractor-bid/main/scripts/install.sh)"
+```
+
+### Windows PowerShell
+
+```powershell
+git clone https://github.com/ContractorKeith/contractor-bid.git
+cd contractor-bid
+.\scripts\install.ps1 -InstallPoppler
+```
+
+The installer creates an isolated virtualenv under `~/.contractor-bid`, installs the CLI there, and writes a launcher to `~/.local/bin/contractor-bid`.
+
+### Developer Install
+
+Use this only if you are editing the source code:
+
+```bash
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -e .
 ```
 
-For PDF text and page images, install Poppler if it is not already available:
+## Prerequisites
+
+Required:
+
+- Python 3.11 or newer
+- Git, for the installer and updates
+
+Installed automatically into the virtualenv:
+
+- `openpyxl`, for `.xlsx` takeoff workbooks
+- `pypdf`, for page packet PDFs and PDF fallback parsing
+
+Recommended system dependency:
+
+- Poppler: `pdfinfo`, `pdftotext`, and `pdftoppm`
+
+Poppler gives faster PDF text extraction and page-image rendering. Without Poppler, basic PDF handling can fall back to `pypdf`, but rendered candidate page images are unavailable. This project does not do OCR yet; scanned image-only plans will need OCR before triage works well.
+
+Check a machine:
 
 ```bash
-brew install poppler
+contractor-bid doctor
 ```
+
+No GitHub CLI is required for normal use.
 
 ## Quick Start
 
-Create a scope profile:
+Start with a built-in scope profile:
 
-```bash
-python -m contractor_bid init \
-  --profile fences-gates \
-  --company "Complete Custom Fence" \
-  --trade "Fences and Gates" \
-  --divisions "32" \
-  --base-scope "fence runs,gate openings,gate hardware,operators,posts,rails,panels,fabric" \
-  --include-terms "fence,gate,chain link,ornamental,operator,access control,32 31" \
-  --review-terms "railing,handrail,guardrail" \
-  --exclude-terms "bollard,temporary fence,silt fence,tree protection fence,concrete,paving" \
-  --non-interactive
-```
+- `fences-gates`
+- `concrete-flatwork`
+- `drywall-framing`
+- `electrical`
 
 Start a bid project:
 
 ```bash
-python -m contractor_bid new bids/070126-example-project \
+mkdir contractor-bid-workspace
+cd contractor-bid-workspace
+
+contractor-bid new bids/070126-example-project \
   --profile fences-gates \
   --project-name "Example Project" \
   --bid-due "2026-07-01 14:00"
@@ -57,11 +101,17 @@ python -m contractor_bid new bids/070126-example-project \
 Add source PDFs to `bids/070126-example-project/bid-docs/`, then run:
 
 ```bash
-python -m contractor_bid triage bids/070126-example-project --profile fences-gates --render
-python -m contractor_bid build-packets bids/070126-example-project
-python -m contractor_bid build-workbook bids/070126-example-project --profile fences-gates
-python -m contractor_bid check bids/070126-example-project --profile fences-gates
-python -m contractor_bid package-sendoff bids/070126-example-project
+contractor-bid triage bids/070126-example-project --profile fences-gates --render
+contractor-bid build-packets bids/070126-example-project
+contractor-bid build-workbook bids/070126-example-project --profile fences-gates
+contractor-bid check bids/070126-example-project --profile fences-gates
+contractor-bid package-sendoff bids/070126-example-project
+```
+
+Create a custom scope profile when the built-ins are not close enough:
+
+```bash
+contractor-bid init
 ```
 
 ## Generated Bid Artifacts
@@ -82,10 +132,12 @@ Each bid project gets the same basic working set:
 
 ## Scope Profiles And Skills
 
-`contractor-bid init` writes:
+Starter profiles and skills are included in the installed package and in the repo:
 
 - `profiles/<profile>.json` - deterministic scope profile used by scripts.
 - `skills/<profile>-bid-scope/SKILL.md` - model-readable instructions for Claude/Codex-style agents.
+
+`contractor-bid init` writes or overwrites a custom profile and matching skill in the current workspace.
 
 The profile is where each contractor defines:
 
@@ -101,7 +153,7 @@ The profile is where each contractor defines:
 Record corrections:
 
 ```bash
-python -m contractor_bid learn \
+contractor-bid learn \
   --profile fences-gates \
   --project bids/070126-example-project \
   --note "Flag motor operators separately when electrical power/control responsibility is unclear."
