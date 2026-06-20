@@ -12,6 +12,7 @@ This repo builds AI-ready commercial subcontractor bid projects.
 - Do not silently include excluded or review-only adjacent scopes in base bid.
 - Carry the same scope boundary through the summary, reference index, workbook, proposal letter, alerts, and sendoff.
 - Record user corrections with `contractor-bid learn`; only update durable profile rules when the user confirms the correction should persist.
+- Keep the workspace bid tracker current with the `track-*` commands, but ALWAYS confirm with the user and show a one-line change summary before writing (see `skills/bid-tracker/SKILL.md`).
 
 ## Standard Pipeline
 
@@ -29,6 +30,23 @@ contractor-bid package-sendoff <project>
 
 Use `contractor-bid status <project> --profile <profile>` for a non-writing readiness check,
 or `contractor-bid run <project> --profile <profile>` after the two human-fill steps are done.
+
+## Bid Tracker
+
+Maintain a workspace-wide pipeline view with the `track-*` commands. Source of truth is
+`.contractor-bid/bid-tracker.json`; the readable sheet is `Bid-Tracker.xlsx` (Active Bids +
+Archived & Completed). Read `skills/bid-tracker/SKILL.md` first.
+
+Hard rule: never write to the tracker silently. Before any `track-add`, `track-update`,
+`track-move`, or `track-reopen`, show the user a one-line summary of the change and wait for
+confirmation. `track-list` and `track-build` are read-only.
+
+```bash
+contractor-bid track-add bids/<project> --progress Triage     # add a bid (pulls project.json)
+contractor-bid track-update "<bid>" --progress Submitted --next "Follow up Friday"
+contractor-bid track-move "<bid>" --outcome won               # moves it to Archived & Completed
+contractor-bid track-list                                     # read-only
+```
 
 ## Review Before Pricing
 

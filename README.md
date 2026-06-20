@@ -219,6 +219,24 @@ The command appends to:
 
 Agents should review those files before similar bids. When a correction becomes a durable rule, update the profile, regenerated skill, templates, or validator.
 
+## Bid Tracker
+
+Track every bid in flight on one readable spreadsheet. The tracker spans the whole workspace, not a single project.
+
+```bash
+contractor-bid track-add bids/070126-example-project --progress Triage
+contractor-bid track-update "Example Project" --progress Submitted --next "Follow up Friday"
+contractor-bid track-move "Example Project" --outcome won
+contractor-bid track-list
+```
+
+This writes `.contractor-bid/bid-tracker.json` (source of truth) and regenerates `Bid-Tracker.xlsx`:
+
+- **Active Bids** — Project, Location, Due, Progress, Next Action, Client / GC, Updated. Due dates within two days are amber; past-due are red.
+- **Archived & Completed** — finished bids move here automatically with an outcome (won, lost, no-bid, completed).
+
+The `bid-tracker` skill lets Claude, Codex, or another agent keep the tracker current as you work — and it asks for confirmation with a change summary before every write. Both tracker files are gitignored so your bid pipeline stays private.
+
 ## Limitations
 
 - Not a final pricing engine.
