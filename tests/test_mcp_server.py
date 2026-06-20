@@ -7,18 +7,22 @@ import unittest
 from pathlib import Path
 
 from contractor_bid import __version__
-from contractor_bid.mcp_server import (
-    cb_build_packets,
-    cb_build_workbook,
-    cb_check,
-    cb_list_profiles,
-    cb_new_project,
-    cb_package_sendoff,
-    cb_track_add,
-    cb_track_list,
-    cb_triage,
-    mcp,
-)
+try:
+    from contractor_bid.mcp_server import (
+        cb_build_packets,
+        cb_build_workbook,
+        cb_check,
+        cb_list_profiles,
+        cb_new_project,
+        cb_package_sendoff,
+        cb_track_add,
+        cb_track_list,
+        cb_triage,
+        mcp,
+    )
+    HAS_MCP = True
+except (ImportError, SystemExit):
+    HAS_MCP = False
 from contractor_bid.util import read_json
 
 
