@@ -63,10 +63,13 @@ More detail: [What A Bid Project Produces](docs/WHAT_YOU_GET.md).
 
 Starter profiles are included for:
 
-- `fences-gates`
-- `concrete-flatwork`
-- `drywall-framing`
-- `electrical`
+- `fences-gates` — CSI Div 32
+- `concrete-flatwork` — CSI Div 03
+- `drywall-framing` — CSI Div 09
+- `electrical` — CSI Div 26/27/28
+- `plumbing` — CSI Div 22
+- `hvac` — CSI Div 23 (HVAC and mechanical)
+- `roofing` — CSI Div 07
 
 Use `contractor-bid init` when your trade or company rules are different.
 
@@ -236,6 +239,55 @@ This writes `.contractor-bid/bid-tracker.json` (source of truth) and regenerates
 - **Archived & Completed** — finished bids move here automatically with an outcome (won, lost, no-bid, completed).
 
 The `bid-tracker` skill lets Claude, Codex, or another agent keep the tracker current as you work — and it asks for confirmation with a change summary before every write. Both tracker files are gitignored so your bid pipeline stays private.
+
+## Architecture
+
+`contractor-bid` is a small, dependency-light Python CLI. The design rule is simple: **JSON files are the source of truth, and the scripts are deterministic glue that turn them into reviewable artifacts.** An AI agent reads the scope profile and skill, fills the JSON, and runs the commands — so every output traces back to a source page or a stated assumption.
+
+### Per-bid data flow
+
+```
+profiles/<id>.json  ─┐
+bid-docs/*.pdf       ─┴─► triage ──► candidate-pages.md + scope-pages-sources.suggested.json
+                                          │
+   takeoff/scope-pages-sources.json  ─────┴──► build-packets ──► scope/spec PDFs + 00-Bid-Scope-Summary.md
+   takeoff/<project>.json            ──────────► build-workbook ─► 01-Takeoff-Worksheet-REV1.xlsx
+                                          │
+                              check ──► ALERTS.md ──► package-sendoff ──► supplier-sendoff/*.zip
+```
+
+The bid tracker is a separate, workspace-level layer: `.contractor-bid/bid-tracker.json` → `Bid-Tracker.xlsx`.
+
+### Repository layout
+
+```
+contractor-bid/
+├── src/contractor_bid/      # the CLI package (one module per command area)
+│   ├── cli.py               # argparse entrypoint; dispatches each subcommand
+│   ├── profile.py           # scope-profile schema + skill generation (render_skill)
+│   ├── project.py           # `new` — scaffolds a bid project folder from templates
+│   ├── triage.py            # PDF text extraction + candidate-page scoring
+│   ├── packets.py           # `build-packets` — scope/spec PDFs + quick-read summary
+│   ├── workbook.py          # `build-workbook` — styled takeoff/BOM .xlsx
+│   ├── validate.py          # `check` / `status` — deliverable + scope-drift checks
+│   ├── sendoff.py           # `package-sendoff` — supplier zip
+│   ├── tracker.py           # bid tracker (track-* commands)
+│   ├── learning.py          # `learn` — correction/feedback log
+│   ├── doctor.py            # `doctor` — environment checks
+│   └── util.py              # shared helpers
+├── profiles/<id>.json       # built-in scope profiles (one per trade / CSI division)
+├── skills/<id>-bid-scope/   # generated agent skills (one per profile)
+├── skills/bid-tracker/      # workflow skill for the bid tracker
+├── examples/profiles/       # example profiles with sample company names
+├── templates/               # project file templates copied by `new`
+├── docs/                    # workflow / what-you-get / self-learning docs
+├── scripts/                 # install.sh / install.ps1
+└── tests/                   # unittest suite (incl. profile round-trip)
+```
+
+### Adding a trade or CSI division
+
+A division is three files: `profiles/<id>.json`, the matching `skills/<id>-bid-scope/SKILL.md` (generated from the profile so `tests/test_profile_roundtrip.py` stays green), and `examples/profiles/<id>.json`. Run `contractor-bid init` to generate them interactively, or copy an existing starter and edit the scope terms.
 
 ## Limitations
 

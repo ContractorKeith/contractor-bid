@@ -5,7 +5,7 @@ This repo builds AI-ready commercial subcontractor bid projects.
 ## Operating Rules
 
 - Read `profiles/<profile>.json` and `skills/<profile>-bid-scope/SKILL.md` before making scope calls.
-- Built-in starter profiles are `fences-gates`, `concrete-flatwork`, `drywall-framing`, and `electrical`.
+- Built-in starter profiles are `fences-gates`, `concrete-flatwork`, `drywall-framing`, `electrical`, `plumbing`, `hvac`, and `roofing`.
 - If none of the starter profiles fit, run `contractor-bid init` to create a custom profile and matching skill.
 - Source PDFs and bid forms belong in `bid-docs/`; generated artifacts belong in `bid-package-working/`.
 - Treat `takeoff/*.json` as the source of truth for workbook generation.

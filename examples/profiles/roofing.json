@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "profile_id": "roofing",
+  "company_name": "Example Roofing Subcontractor",
+  "trade_name": "Roofing",
+  "skill_description": "Bid-project scope rules for roofing. Use when starting, triaging, validating, or packaging a commercial roofing bid.",
+  "csi_divisions": [
+    "07"
+  ],
+  "scope_rule": "Base bid is limited to roofing systems defined by the profile: membrane or steep-slope roofing, roof insulation, cover board, flashing, and roof-related sheet metal. Wood blocking and nailers, structural decking, roof drains, and below-grade waterproofing must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "membrane roofing",
+    "roof insulation",
+    "cover board",
+    "base and counter flashing",
+    "coping and edge metal",
+    "roof curb flashing",
+    "pipe boots",
+    "walkway pads"
+  ],
+  "include_terms": [
+    "roofing",
+    "membrane",
+    "TPO",
+    "EPDM",
+    "modified bitumen",
+    "roof insulation",
+    "flashing",
+    "coping",
+    "07 22",
+    "07 54"
+  ],
+  "spec_sections": [
+    "07 22 00",
+    "07 54 00",
+    "07 52 00",
+    "07 62 00"
+  ],
+  "quantity_units": [
+    "SF",
+    "LF",
+    "EA"
+  ],
+  "review_terms": [
+    "wood blocking",
+    "nailer",
+    "roof drain",
+    "overflow",
+    "skylight",
+    "expansion joint",
+    "lightning protection",
+    "fall protection"
+  ],
+  "exclude_terms": [
+    "structural deck",
+    "metal deck",
+    "below grade waterproofing",
+    "firestopping",
+    "gutters and downspouts"
+  ],
+  "proposal_exclusions": [
+    "wood blocking and nailers unless listed",
+    "structural roof deck by others",
+    "roof drains and overflow plumbing by others",
+    "below-grade waterproofing unless listed",
+    "interior firestopping by others"
+  ]
+}

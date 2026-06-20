@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "profile_id": "hvac",
+  "company_name": "Your Company",
+  "trade_name": "HVAC and Mechanical",
+  "skill_description": "Bid-project scope rules for HVAC and mechanical work. Use when starting, triaging, validating, or packaging a commercial HVAC/mechanical bid.",
+  "csi_divisions": ["23"],
+  "scope_rule": "Base bid is limited to HVAC and mechanical systems defined by the profile: equipment, ductwork, hydronic and refrigerant piping, and air distribution. Test and balance, building automation/controls, plumbing, electrical power connections, and owner-furnished equipment must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": ["rooftop units", "split systems", "air handlers", "ductwork", "grilles registers diffusers", "hydronic piping", "refrigerant piping", "exhaust fans", "VAV boxes"],
+  "include_terms": ["hvac", "mechanical", "ductwork", "rooftop unit", "air handler", "VAV", "diffuser", "refrigerant", "23 05", "23 31"],
+  "spec_sections": ["23 05 00", "23 07 00", "23 31 13", "23 74 00"],
+  "quantity_units": ["EA", "LF", "SF", "HR"],
+  "review_terms": ["test and balance", "controls", "building automation", "natural gas", "louvers", "fire damper", "smoke damper", "roof curbs"],
+  "exclude_terms": ["fire sprinkler", "electrical wiring", "plumbing fixtures", "structural steel", "owner furnished"],
+  "proposal_exclusions": ["test and balance unless listed", "building automation and DDC controls unless listed", "electrical power wiring by others", "natural gas piping unless listed", "structural support steel unless listed"]
+}

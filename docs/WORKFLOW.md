@@ -38,10 +38,13 @@ can rebuild packets, workbook, alerts, and sendoff in one pass.
 
 Built-in starter profiles:
 
-- `fences-gates`
-- `concrete-flatwork`
-- `drywall-framing`
-- `electrical`
+- `fences-gates` (Div 32)
+- `concrete-flatwork` (Div 03)
+- `drywall-framing` (Div 09)
+- `electrical` (Div 26/27/28)
+- `plumbing` (Div 22)
+- `hvac` (Div 23)
+- `roofing` (Div 07)
 
 ## Naming
 
