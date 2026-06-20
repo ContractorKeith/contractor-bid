@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-12-furnishings",
+  "company_name": "Your Company",
+  "trade_name": "Division 12 - Furnishings",
+  "skill_description": "Whole-division starter rules for CSI Division 12 - Furnishings. Use when starting, triaging, validating, or packaging a commercial furnishings bid.",
+  "csi_divisions": [
+    "12"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 12 - Furnishings work specifically assigned to the bidder: window treatments, casework, countertops, entrance mats, furniture, seating, and systems furniture. Millwork in Division 06, appliances, electrical/data connections, blocking, and owner-furnished items must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "window treatments",
+    "manufactured casework when assigned",
+    "countertops when assigned",
+    "entrance floor mats and frames",
+    "furniture and seating when assigned",
+    "systems furniture when assigned",
+    "accessory furnishings when assigned"
+  ],
+  "include_terms": [
+    "furnishings",
+    "window treatment",
+    "shade",
+    "casework",
+    "countertop",
+    "furniture",
+    "seating",
+    "entrance mat",
+    "12 00"
+  ],
+  "spec_sections": [
+    "12 00 00",
+    "12 21 00",
+    "12 24 00",
+    "12 32 00",
+    "12 36 00",
+    "12 48 00",
+    "12 50 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "LF",
+    "SF",
+    "SET"
+  ],
+  "review_terms": [
+    "blocking",
+    "power/data",
+    "owner furnished",
+    "field measure"
+  ],
+  "exclude_terms": [
+    "rough carpentry",
+    "electrical wiring",
+    "plumbing fixtures",
+    "appliances"
+  ],
+  "proposal_exclusions": [
+    "blocking and backing by others unless listed",
+    "power and data connections by others unless listed",
+    "field finishing by others unless listed",
+    "owner-furnished items unless listed"
+  ]
+}

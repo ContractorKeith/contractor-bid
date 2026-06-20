@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-04-masonry",
+  "company_name": "Your Company",
+  "trade_name": "Division 04 - Masonry",
+  "skill_description": "Whole-division starter rules for CSI Division 04 - Masonry. Use when starting, triaging, validating, or packaging a commercial masonry bid.",
+  "csi_divisions": [
+    "04"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 04 - Masonry work specifically assigned to the bidder: unit masonry, stone, masonry accessories, reinforcement, grout, mortar, cleaning, and restoration. Structural steel, concrete, waterproofing, sealants, insulation, and delegated engineering must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "CMU and unit masonry",
+    "brick masonry",
+    "stone assemblies when assigned",
+    "mortar and grout",
+    "masonry reinforcement and ties",
+    "lintels and masonry accessories when assigned",
+    "masonry cleaning and restoration when assigned"
+  ],
+  "include_terms": [
+    "masonry",
+    "CMU",
+    "concrete masonry unit",
+    "brick",
+    "block",
+    "stone",
+    "mortar",
+    "grout",
+    "04 00"
+  ],
+  "spec_sections": [
+    "04 00 00",
+    "04 05 00",
+    "04 20 00",
+    "04 22 00",
+    "04 40 00",
+    "04 70 00"
+  ],
+  "quantity_units": [
+    "SF",
+    "LF",
+    "EA",
+    "CY"
+  ],
+  "review_terms": [
+    "lintel",
+    "flashing",
+    "weep",
+    "cavity insulation",
+    "restoration"
+  ],
+  "exclude_terms": [
+    "structural steel",
+    "cast-in-place concrete",
+    "sealant",
+    "waterproofing"
+  ],
+  "proposal_exclusions": [
+    "structural steel lintels unless listed",
+    "waterproofing and air barriers unless listed",
+    "sealants by others unless listed",
+    "engineered shoring or bracing unless listed"
+  ]
+}

@@ -5,7 +5,8 @@ This repo builds AI-ready commercial subcontractor bid projects.
 ## Operating Rules
 
 - Read `profiles/<profile>.json` and `skills/<profile>-bid-scope/SKILL.md` before making scope calls.
-- Built-in starter profiles are `fences-gates`, `concrete-flatwork`, `drywall-framing`, `electrical`, `plumbing`, `hvac`, and `roofing`.
+- Built-in starter profiles include canonical `division-XX-*` profiles for every active CSI MasterFormat division from 03 through 33. Read `docs/CSI_DIVISIONS.md` when selecting a starter.
+- Trade-specific examples such as `fences-gates`, `concrete-flatwork`, `drywall-framing`, `electrical`, `plumbing`, `hvac`, and `roofing` are narrower examples, not the full CSI coverage set.
 - If none of the starter profiles fit, run `contractor-bid init` to create a custom profile and matching skill.
 - Source PDFs and bid forms belong in `bid-docs/`; generated artifacts belong in `bid-package-working/`.
 - Treat `takeoff/*.json` as the source of truth for workbook generation.

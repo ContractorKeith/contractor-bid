@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-09-finishes",
+  "company_name": "Example Division 09 Contractor",
+  "trade_name": "Division 09 - Finishes",
+  "skill_description": "Whole-division starter rules for CSI Division 09 - Finishes. Use when starting, triaging, validating, or packaging a commercial finishes bid.",
+  "csi_divisions": [
+    "09"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 09 - Finishes work specifically assigned to the bidder: gypsum assemblies, tile, ceilings, flooring, wall finishes, painting, coatings, and specialty finishes. Structural framing, MEP supports, waterproofing, Division 10 specialties, and furniture must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "metal studs and gypsum board when assigned",
+    "tile and setting materials",
+    "acoustical ceilings",
+    "resilient flooring",
+    "carpet and walk-off mats when assigned",
+    "painting and coatings",
+    "wall coverings and specialty finishes when assigned"
+  ],
+  "include_terms": [
+    "finishes",
+    "gypsum",
+    "drywall",
+    "tile",
+    "ceiling",
+    "flooring",
+    "paint",
+    "coating",
+    "wall covering",
+    "09 00"
+  ],
+  "spec_sections": [
+    "09 00 00",
+    "09 21 16",
+    "09 29 00",
+    "09 30 00",
+    "09 51 00",
+    "09 65 00",
+    "09 68 00",
+    "09 90 00"
+  ],
+  "quantity_units": [
+    "SF",
+    "LF",
+    "EA",
+    "SY"
+  ],
+  "review_terms": [
+    "level 5",
+    "moisture mitigation",
+    "floor prep",
+    "fire-rated assembly"
+  ],
+  "exclude_terms": [
+    "structural steel",
+    "waterproofing",
+    "casework",
+    "toilet accessories"
+  ],
+  "proposal_exclusions": [
+    "substrate correction beyond listed prep",
+    "moisture mitigation unless listed",
+    "temporary heat and humidity control by others",
+    "after-hours phasing unless listed"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-07-thermal-moisture-protection",
+  "company_name": "Example Division 07 Contractor",
+  "trade_name": "Division 07 - Thermal and Moisture Protection",
+  "skill_description": "Whole-division starter rules for CSI Division 07 - Thermal and Moisture Protection. Use when starting, triaging, validating, or packaging a commercial roofing, waterproofing, insulation, firestopping, or sealants bid.",
+  "csi_divisions": [
+    "07"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 07 - Thermal and Moisture Protection work specifically assigned to the bidder: waterproofing, insulation, air barriers, roofing, flashing, sheet metal, firestopping, joint protection, and sealants. Structural deck, framing, roof drains, interior finishes, and MEP penetrations must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "below-grade waterproofing when assigned",
+    "thermal insulation",
+    "air and vapor barriers",
+    "roofing assemblies",
+    "flashing and sheet metal",
+    "firestopping",
+    "joint sealants and expansion joints"
+  ],
+  "include_terms": [
+    "roofing",
+    "waterproofing",
+    "insulation",
+    "air barrier",
+    "vapor barrier",
+    "flashing",
+    "sheet metal",
+    "firestopping",
+    "sealant",
+    "07 00"
+  ],
+  "spec_sections": [
+    "07 00 00",
+    "07 10 00",
+    "07 21 00",
+    "07 24 00",
+    "07 27 00",
+    "07 50 00",
+    "07 60 00",
+    "07 84 00",
+    "07 90 00"
+  ],
+  "quantity_units": [
+    "SF",
+    "LF",
+    "EA",
+    "ROLL"
+  ],
+  "review_terms": [
+    "wood blocking",
+    "roof drain",
+    "curb",
+    "penetration",
+    "warranty"
+  ],
+  "exclude_terms": [
+    "structural deck",
+    "roof drain plumbing",
+    "metal framing",
+    "interior painting"
+  ],
+  "proposal_exclusions": [
+    "structural roof deck by others unless listed",
+    "roof drains and overflow piping by others unless listed",
+    "temporary dry-in unless listed",
+    "manufacturer warranty fees unless listed"
+  ]
+}

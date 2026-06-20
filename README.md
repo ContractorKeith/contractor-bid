@@ -68,15 +68,36 @@ More detail: [What A Bid Project Produces](docs/WHAT_YOU_GET.md).
 - Contractors building repeatable bid workflows.
 - Developers building trade-specific AI agents for construction.
 
-Starter profiles are included for:
+Canonical starter profiles are included for the active CSI MasterFormat divisions from 03 through 33:
 
-- `fences-gates` — CSI Div 32
-- `concrete-flatwork` — CSI Div 03
-- `drywall-framing` — CSI Div 09
-- `electrical` — CSI Div 26/27/28
-- `plumbing` — CSI Div 22
-- `hvac` — CSI Div 23 (HVAC and mechanical)
-- `roofing` — CSI Div 07
+| CSI division | Profile |
+|---|---|
+| 03 - Concrete | `division-03-concrete` |
+| 04 - Masonry | `division-04-masonry` |
+| 05 - Metals | `division-05-metals` |
+| 06 - Wood, Plastics, and Composites | `division-06-wood-plastics-composites` |
+| 07 - Thermal and Moisture Protection | `division-07-thermal-moisture-protection` |
+| 08 - Openings | `division-08-openings` |
+| 09 - Finishes | `division-09-finishes` |
+| 10 - Specialties | `division-10-specialties` |
+| 11 - Equipment | `division-11-equipment` |
+| 12 - Furnishings | `division-12-furnishings` |
+| 13 - Special Construction | `division-13-special-construction` |
+| 14 - Conveying Equipment | `division-14-conveying-equipment` |
+| 21 - Fire Suppression | `division-21-fire-suppression` |
+| 22 - Plumbing | `division-22-plumbing` |
+| 23 - Heating, Ventilating, and Air Conditioning (HVAC) | `division-23-hvac` |
+| 25 - Integrated Automation | `division-25-integrated-automation` |
+| 26 - Electrical | `division-26-electrical` |
+| 27 - Communications | `division-27-communications` |
+| 28 - Electronic Safety and Security | `division-28-electronic-safety-security` |
+| 31 - Earthwork | `division-31-earthwork` |
+| 32 - Exterior Improvements | `division-32-exterior-improvements` |
+| 33 - Utilities | `division-33-utilities` |
+
+Divisions 15-20, 24, 29, and 30 are reserved in this range, so they are documented but do not get bid starters. More detail: [CSI Division Starters](docs/CSI_DIVISIONS.md).
+
+The repo also keeps narrower trade-specific examples like `fences-gates`, `concrete-flatwork`, `drywall-framing`, `electrical`, `plumbing`, `hvac`, and `roofing`.
 
 Use `contractor-bid init` when your trade or company rules are different.
 
@@ -145,7 +166,7 @@ Start a project from a built-in profile:
 
 ```bash
 contractor-bid new bids/070126-example-project \
-  --profile fences-gates \
+  --profile division-32-exterior-improvements \
   --project-name "Example Project" \
   --bid-due "2026-07-01 14:00"
 ```
@@ -159,10 +180,10 @@ bids/070126-example-project/bid-docs/
 Run the bid workflow:
 
 ```bash
-contractor-bid triage bids/070126-example-project --profile fences-gates --render --write-sources
+contractor-bid triage bids/070126-example-project --profile division-32-exterior-improvements --render --write-sources
 contractor-bid build-packets bids/070126-example-project
-contractor-bid build-workbook bids/070126-example-project --profile fences-gates
-contractor-bid check bids/070126-example-project --profile fences-gates
+contractor-bid build-workbook bids/070126-example-project --profile division-32-exterior-improvements
+contractor-bid check bids/070126-example-project --profile division-32-exterior-improvements
 contractor-bid package-sendoff bids/070126-example-project
 ```
 
