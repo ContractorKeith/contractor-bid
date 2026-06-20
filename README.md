@@ -1,23 +1,74 @@
 # contractor-bid
 
-`contractor-bid` is a starter kit for commercial subcontractors who want an AI-ready bid project folder for any CSI division.
+AI-ready bid workspaces for commercial subcontractors.
 
-The workflow is designed for Claude, Codex, or another model to operate inside a repeatable folder structure:
+![contractor-bid workflow](docs/assets/contractor-bid-flow.svg)
 
-1. Initialize a subcontractor scope profile.
-2. Start a new bid project.
-3. Drop the bid documents into `bid-docs/`.
-4. Triage PDFs into candidate scope/spec pages.
-5. Build a quick-read summary, page packets, takeoff workbook, proposal draft, alerts, and sendoff zip.
-6. Record corrections and promote durable lessons into the profile, skill, templates, or scripts.
+Commercial bid folders are usually messy: large plan sets, project manuals, addenda, bid forms, scope gaps, and adjacent trades that can accidentally drift into your number. `contractor-bid` gives a subcontractor a repeatable project structure that an AI agent can work inside without losing the audit trail.
 
-The original pattern comes from real fence/gate bid-package work, but the names and guardrails are generic so concrete, millwork, electrical, drywall, roofing, sitework, and other trades can define their own scope boundaries.
+It does not price the job for you. It helps turn bid documents into a reviewable package: relevant pages, source-backed summaries, workbook inputs, proposal language, alerts, and a sendoff folder.
+
+## What This Repo Does
+
+`contractor-bid` is a Python CLI plus agent instructions, templates, starter trade profiles, and validation checks.
+
+Use it when you want to open Claude, Codex, or another model and say:
+
+```text
+Start a new bid project for my electrical scope.
+```
+
+The project gives the model a structure to follow:
+
+1. Ask or load the subcontractor's CSI division and scope rules.
+2. Create a bid project folder.
+3. Put source documents in `bid-docs/`.
+4. Triage PDFs for likely scope/spec pages.
+5. Build a short page packet and quick-read summary.
+6. Build a takeoff/BOM workbook from JSON.
+7. Check for missing artifacts, addenda, and scope drift.
+8. Package a supplier or internal-review sendoff.
+9. Record corrections so the next bid gets better.
+
+## What You Get
+
+Each bid project is built around `bid-package-working/`:
+
+| File | Purpose |
+|---|---|
+| `00-Bid-Scope-Summary.md` | First-read summary: what it is, where it is, what to open first, what is excluded, and what needs clarification. |
+| `00-Scope-Reference-Index.md` | Drawing/spec/RFI index for the carried scope. |
+| `scope-pages.pdf` | Isolated drawing pages relevant to the subcontractor's scope. |
+| `spec-pages.pdf` | Isolated spec pages when specs are found. |
+| `scope-and-spec-pages.pdf` | Combined page packet for review or supplier handoff. |
+| `01-Takeoff-Worksheet-REV1.xlsx` | Workbook with BOM rows, supplier quote inputs, RFIs, alerts, and sources. |
+| `02 - Proposal Letter.md` | Draft proposal language with inclusions, exclusions, alternates, and clarifications. |
+| `ALERTS.md` | Validator output for missing deliverables, due dates, addenda, and excluded/review-only scope terms. |
+| `supplier-sendoff/*.zip` | Shareable package for vendors, suppliers, or internal review. |
+
+The pattern comes from real fence/gate bid work. In one package, the workflow produced a scope PDF, a spec PDF, a combined packet, a workbook, alerts, and a supplier zip. In another smaller package, the scope packet was only a few pages and no separate spec packet was needed. The structure stayed the same, which is what lets the model and estimator stay aligned.
+
+More detail: [What A Bid Project Produces](docs/WHAT_YOU_GET.md).
+
+## Who It Is For
+
+- Commercial subcontractors in any CSI division.
+- Estimators who want AI help but still need source-backed files.
+- Contractors building repeatable bid workflows.
+- Developers building trade-specific AI agents for construction.
+
+Starter profiles are included for:
+
+- `fences-gates`
+- `concrete-flatwork`
+- `drywall-framing`
+- `electrical`
+
+Use `contractor-bid init` when your trade or company rules are different.
 
 ## Install
 
 ### macOS / Linux
-
-From a checkout:
 
 ```bash
 git clone https://github.com/ContractorKeith/contractor-bid.git
@@ -25,7 +76,7 @@ cd contractor-bid
 scripts/install.sh --install-poppler
 ```
 
-When the repo is public, this can also be installed with:
+Or use the one-line installer:
 
 ```bash
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/ContractorKeith/contractor-bid/main/scripts/install.sh)"
@@ -41,22 +92,12 @@ cd contractor-bid
 
 The installer creates an isolated virtualenv under `~/.contractor-bid`, installs the CLI there, and writes a launcher to `~/.local/bin/contractor-bid`.
 
-### Developer Install
-
-Use this only if you are editing the source code:
-
-```bash
-python3 -m venv .venv
-. .venv/bin/activate
-pip install -e .
-```
-
 ## Prerequisites
 
 Required:
 
 - Python 3.11 or newer
-- Git, for the installer and updates
+- Git, for install and updates
 
 Installed automatically into the virtualenv:
 
@@ -67,7 +108,7 @@ Recommended system dependency:
 
 - Poppler: `pdfinfo`, `pdftotext`, and `pdftoppm`
 
-Poppler gives faster PDF text extraction and page-image rendering. Without Poppler, basic PDF handling can fall back to `pypdf`, but rendered candidate page images are unavailable. This project does not do OCR yet; scanned image-only plans will need OCR before triage works well.
+Poppler gives faster PDF text extraction and page-image rendering. Without Poppler, basic PDF handling can fall back to `pypdf`, but rendered candidate page images are unavailable. This project does not do OCR yet; scanned image-only plans need OCR before triage works well.
 
 Check a machine:
 
@@ -79,26 +120,29 @@ No GitHub CLI is required for normal use.
 
 ## Quick Start
 
-Start with a built-in scope profile:
-
-- `fences-gates`
-- `concrete-flatwork`
-- `drywall-framing`
-- `electrical`
-
-Start a bid project:
+Create a workspace for your bids:
 
 ```bash
 mkdir contractor-bid-workspace
 cd contractor-bid-workspace
+```
 
+Start a project from a built-in profile:
+
+```bash
 contractor-bid new bids/070126-example-project \
   --profile fences-gates \
   --project-name "Example Project" \
   --bid-due "2026-07-01 14:00"
 ```
 
-Add source PDFs to `bids/070126-example-project/bid-docs/`, then run:
+Put source PDFs and bid forms in:
+
+```text
+bids/070126-example-project/bid-docs/
+```
+
+Run the bid workflow:
 
 ```bash
 contractor-bid triage bids/070126-example-project --profile fences-gates --render
@@ -108,38 +152,26 @@ contractor-bid check bids/070126-example-project --profile fences-gates
 contractor-bid package-sendoff bids/070126-example-project
 ```
 
-Create a custom scope profile when the built-ins are not close enough:
+Then open:
+
+```text
+bids/070126-example-project/bid-package-working/00-Bid-Scope-Summary.md
+```
+
+## Custom Scope Profiles
+
+Run:
 
 ```bash
 contractor-bid init
 ```
 
-## Generated Bid Artifacts
+That writes:
 
-Each bid project gets the same basic working set:
+- `profiles/<profile>.json`
+- `skills/<profile>-bid-scope/SKILL.md`
 
-- `bid-docs/` for source PDFs, bid forms, addenda, and spreadsheets.
-- `bid-package-working/takeoff/candidate-pages.md` from triage.
-- `bid-package-working/takeoff/triage-scope-signals.md` from triage.
-- `bid-package-working/takeoff/scope-pages-sources.json` as the source map for extracted PDFs.
-- `bid-package-working/00-Bid-Scope-Summary.md` as the first file to read.
-- `bid-package-working/00-Scope-Reference-Index.md` as the drawing/spec/RFI index.
-- `bid-package-working/01-Takeoff-Worksheet-REV1.xlsx` as the supplier-input workbook.
-- `bid-package-working/02 - Proposal Letter.md` as the GC-facing proposal draft.
-- `bid-package-working/scope-pages.pdf`, `spec-pages.pdf`, and `scope-and-spec-pages.pdf` when page sources are filled.
-- `bid-package-working/ALERTS.md` from the validator.
-- `bid-package-working/supplier-sendoff/*.zip` for supplier or partner handoff.
-
-## Scope Profiles And Skills
-
-Starter profiles and skills are included in the installed package and in the repo:
-
-- `profiles/<profile>.json` - deterministic scope profile used by scripts.
-- `skills/<profile>-bid-scope/SKILL.md` - model-readable instructions for Claude/Codex-style agents.
-
-`contractor-bid init` writes or overwrites a custom profile and matching skill in the current workspace.
-
-The profile is where each contractor defines:
+The profile defines:
 
 - CSI division and spec section hints.
 - Work carried in base bid.
@@ -147,6 +179,8 @@ The profile is where each contractor defines:
 - Adjacent scope to exclude by default.
 - Adjacent scope to flag before pricing.
 - Standard proposal exclusions.
+
+The generated skill is for Claude, Codex, or another model to read before making scope calls.
 
 ## Learning Loop
 
@@ -159,8 +193,29 @@ contractor-bid learn \
   --note "Flag motor operators separately when electrical power/control responsibility is unclear."
 ```
 
-The command appends to `.contractor-bid/feedback.jsonl` and `.contractor-bid/LESSONS.md`. Agents should review those files before similar bids. When a correction becomes a durable rule, update the profile, regenerate the skill, and adjust scripts/templates if needed.
+The command appends to:
 
-## Repository Status
+- `.contractor-bid/feedback.jsonl`
+- `.contractor-bid/LESSONS.md`
 
-This repository is private while it is being built. It includes an MIT license so it can be opened later when the project is ready for public use.
+Agents should review those files before similar bids. When a correction becomes a durable rule, update the profile, regenerated skill, templates, or validator.
+
+## Limitations
+
+- Not a final pricing engine.
+- Not a legal or contract-review tool.
+- Not a substitute for manual measurement.
+- Not an OCR pipeline for scanned drawings.
+- Not a guarantee that every relevant sheet was found.
+
+The intended use is practical: reduce the time between "I received a bid invite" and "I have a source-backed package I can review and price."
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Public examples should be fictional or sanitized. Do not commit proprietary bid documents, supplier quotes, private estimates, or customer files.
+
+This project follows a [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">contractor-bid workflow</title>
+  <desc id="desc">Flow from bid documents and a scope profile through an agent-ready bid workspace to summaries, page packets, workbook, alerts, proposal, sendoff, and reusable lessons.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#e8f1f6" stroke-opacity="0.09" stroke-width="1"/>
+    </pattern>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#e07a1f"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#64a8c8"/>
+    </marker>
+    <style>
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .label { fill: #e8e2da; font-size: 22px; font-weight: 700; }
+      .small { fill: #e8e2da; font-size: 16px; opacity: 0.78; }
+      .tiny { fill: #e8e2da; font-size: 13px; opacity: 0.68; }
+      .accent { fill: #e07a1f; }
+      .blue { fill: #64a8c8; }
+      .panel { fill: #16323f; stroke: #e8e2da; stroke-opacity: 0.32; stroke-width: 2; }
+      .paper { fill: #e8e2da; fill-opacity: 0.08; stroke: #e8e2da; stroke-opacity: 0.34; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="#1d4254"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#e8e2da" stroke-opacity="0.45" stroke-width="2"/>
+
+  <text x="56" y="76" class="mono accent" font-size="34" font-weight="800">contractor-bid</text>
+  <text x="56" y="110" class="mono small">turn a pile of commercial bid docs into an agent-ready bid package</text>
+  <text x="1144" y="76" text-anchor="end" class="mono tiny">scope-backed | source-backed | repeatable</text>
+
+  <rect x="70" y="150" width="230" height="104" rx="10" class="panel"/>
+  <text x="92" y="185" class="mono label">bid docs</text>
+  <text x="92" y="214" class="mono small">plans, specs, addenda</text>
+  <text x="92" y="238" class="mono tiny">dropped into bid-docs/</text>
+
+  <rect x="70" y="292" width="230" height="104" rx="10" class="panel"/>
+  <text x="92" y="327" class="mono label">scope profile</text>
+  <text x="92" y="356" class="mono small">CSI division + terms</text>
+  <text x="92" y="380" class="mono tiny">what to carry, flag, exclude</text>
+
+  <line x1="300" y1="202" x2="397" y2="270" stroke="#e07a1f" stroke-width="4" marker-end="url(#arrow-orange)"/>
+  <line x1="300" y1="344" x2="397" y2="306" stroke="#64a8c8" stroke-width="4" marker-end="url(#arrow-blue)"/>
+
+  <rect x="400" y="185" width="320" height="220" rx="14" fill="#0f2530" stroke="#e8e2da" stroke-opacity="0.4" stroke-width="2"/>
+  <rect x="400" y="185" width="320" height="46" rx="14" fill="#16323f"/>
+  <rect x="400" y="211" width="320" height="20" fill="#16323f"/>
+  <circle cx="430" cy="208" r="7" fill="#d96b5b"/>
+  <circle cx="454" cy="208" r="7" fill="#e0b14f"/>
+  <circle cx="478" cy="208" r="7" fill="#7bb661"/>
+  <text x="426" y="268" class="mono small"><tspan fill="#7bb661">$</tspan> contractor-bid triage</text>
+  <text x="426" y="306" class="mono small"><tspan fill="#7bb661">$</tspan> build-packets</text>
+  <text x="426" y="344" class="mono small"><tspan fill="#7bb661">$</tspan> build-workbook</text>
+  <text x="426" y="382" class="mono small"><tspan fill="#7bb661">$</tspan> check + package-sendoff</text>
+  <text x="560" y="224" text-anchor="middle" class="mono tiny">Claude / Codex / local model can work here</text>
+
+  <line x1="720" y1="295" x2="798" y2="295" stroke="#e07a1f" stroke-width="4" marker-end="url(#arrow-orange)"/>
+
+  <rect x="810" y="132" width="310" height="350" rx="14" class="panel"/>
+  <text x="838" y="170" class="mono label">bid-package-working/</text>
+
+  <g class="mono">
+    <rect x="842" y="198" width="112" height="72" rx="6" class="paper"/>
+    <text x="858" y="225" class="small">summary</text>
+    <text x="858" y="248" class="tiny">what / where / why</text>
+
+    <rect x="976" y="198" width="112" height="72" rx="6" class="paper"/>
+    <text x="992" y="225" class="small">page PDFs</text>
+    <text x="992" y="248" class="tiny">scope + specs</text>
+
+    <rect x="842" y="292" width="112" height="72" rx="6" class="paper"/>
+    <text x="858" y="319" class="small">workbook</text>
+    <text x="858" y="342" class="tiny">BOM + quote inputs</text>
+
+    <rect x="976" y="292" width="112" height="72" rx="6" class="paper"/>
+    <text x="992" y="319" class="small">alerts</text>
+    <text x="992" y="342" class="tiny">scope drift check</text>
+
+    <rect x="842" y="386" width="112" height="72" rx="6" class="paper"/>
+    <text x="858" y="413" class="small">proposal</text>
+    <text x="858" y="436" class="tiny">GC-facing draft</text>
+
+    <rect x="976" y="386" width="112" height="72" rx="6" class="paper"/>
+    <text x="992" y="413" class="small">sendoff</text>
+    <text x="992" y="436" class="tiny">zip for suppliers</text>
+  </g>
+
+  <path d="M965 482 C930 548 790 562 638 535 C516 513 408 467 352 407" fill="none" stroke="#64a8c8" stroke-width="3" stroke-dasharray="9 9" marker-end="url(#arrow-blue)"/>
+  <rect x="356" y="456" width="330" height="72" rx="10" fill="#16323f" stroke="#64a8c8" stroke-opacity="0.65" stroke-width="2"/>
+  <text x="378" y="486" class="mono blue" font-size="20" font-weight="700">learn from corrections</text>
+  <text x="378" y="512" class="mono tiny">feedback.jsonl -> profile, skill, template, validator</text>
+
+  <text x="56" y="562" class="mono accent" font-size="25" font-weight="800">from source docs to a reviewable package before pricing</text>
+  <text x="1144" y="562" text-anchor="end" class="mono tiny">ContractorKeith palette: blueprint blue, construction orange, cream linework</text>
+</svg>
