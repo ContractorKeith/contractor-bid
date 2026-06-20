@@ -24,12 +24,17 @@ contractor-bid doctor
 2. Create a bid project folder.
 3. Add bid documents.
 4. Triage PDFs.
-5. Review candidate pages and fill `scope-pages-sources.json`.
-6. Build page packets and quick-read summary.
-7. Fill the takeoff JSON and build the workbook.
-8. Update the reference index and proposal letter.
-9. Run alerts check.
-10. Package sendoff.
+5. Review `candidate-pages.md` and `scope-pages-sources.suggested.json`.
+6. Copy approved suggestions into `scope-pages-sources.json`; do not blindly accept every hit.
+7. Build page packets and quick-read summary.
+8. Fill the takeoff JSON and build the workbook.
+9. Update the reference index and proposal letter.
+10. Run alerts check.
+11. Package sendoff.
+
+Use `contractor-bid status <project> --profile <profile>` for a non-writing readiness check.
+After the page-source and takeoff JSON files have been reviewed and filled, `contractor-bid run`
+can rebuild packets, workbook, alerts, and sendoff in one pass.
 
 Built-in starter profiles:
 

@@ -43,6 +43,27 @@ class WorkbookTest(unittest.TestCase):
             self.assertNotIn("Old fence fallback", values)
             self.assertNotIn("Should not appear", values)
 
+    def test_suggested_sources_json_is_not_treated_as_takeoff_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            project = Path(tmp) / "070126-sample"
+            takeoff = project / "bid-package-working" / "takeoff"
+            takeoff.mkdir(parents=True)
+            write_json(
+                takeoff / "scope-pages-sources.suggested.json",
+                {"scope_pages": [{"source_pdf": "bid-docs/source.pdf", "pdf_page": 1}]},
+            )
+            write_json(
+                takeoff / "sample.json",
+                {
+                    "project_name": "Sample",
+                    "bom": [],
+                    "scope_specs": [],
+                },
+            )
+
+            out = build_workbook(project)
+            self.assertTrue(out.exists())
+
 
 if __name__ == "__main__":
     unittest.main()

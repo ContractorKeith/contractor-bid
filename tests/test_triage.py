@@ -91,6 +91,10 @@ class TriageTest(unittest.TestCase):
                 hits = triage_project(project, profile(), write_sources=True)
 
             self.assertTrue(hits)
+            statuses = {(hit.source_file, hit.pdf_page): hit.status for hit in hits}
+            self.assertEqual(statuses[("triage-sample.pdf", 1)], "primary-review")
+            self.assertEqual(statuses[("triage-sample.pdf", 2)], "exclude-review")
+            self.assertEqual(statuses[("triage-sample.pdf", 3)], "flag-review")
             self.assertIn("looks scanned/image-only", stdout.getvalue())
 
             suggested = read_json(takeoff / "scope-pages-sources.suggested.json")

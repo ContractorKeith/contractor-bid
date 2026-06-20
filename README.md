@@ -1,5 +1,7 @@
 # contractor-bid
 
+[![CI](https://github.com/ContractorKeith/contractor-bid/actions/workflows/ci.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/ci.yml)
+
 AI-ready bid workspaces for commercial subcontractors.
 
 ![contractor-bid workflow](docs/assets/contractor-bid-flow.svg)
@@ -147,12 +149,15 @@ bids/070126-example-project/bid-docs/
 Run the bid workflow:
 
 ```bash
-contractor-bid triage bids/070126-example-project --profile fences-gates --render
+contractor-bid triage bids/070126-example-project --profile fences-gates --render --write-sources
 contractor-bid build-packets bids/070126-example-project
 contractor-bid build-workbook bids/070126-example-project --profile fences-gates
 contractor-bid check bids/070126-example-project --profile fences-gates
 contractor-bid package-sendoff bids/070126-example-project
 ```
+
+Review `scope-pages-sources.json` before `build-packets`; triage suggestions are a starting point,
+not a pricing decision.
 
 Then open:
 
@@ -183,6 +188,18 @@ The profile defines:
 - Standard proposal exclusions.
 
 The generated skill is for Claude, Codex, or another model to read before making scope calls.
+
+## Test And Lint
+
+For contributors:
+
+```bash
+python3 -m pip install -e . ruff
+python3 -m unittest discover -s tests
+ruff check
+```
+
+CI runs the same checks on Python 3.11 and 3.12.
 
 ## Learning Loop
 

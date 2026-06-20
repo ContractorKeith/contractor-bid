@@ -126,7 +126,7 @@ def locate_takeoff_json(project: Path, config: Path | None) -> Path:
     candidates = [
         path
         for path in sorted(takeoff.glob("*.json"))
-        if path.name != "scope-pages-sources.json" and not path.name.startswith("_")
+        if not path.name.startswith("scope-pages-sources") and not path.name.startswith("_")
     ]
     if len(candidates) != 1:
         names = ", ".join(path.name for path in candidates)

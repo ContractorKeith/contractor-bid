@@ -78,7 +78,7 @@ def find_takeoff_jsons(work: Path) -> list[Path]:
     return [
         path
         for path in sorted(takeoff.glob("*.json"))
-        if path.name != "scope-pages-sources.json" and not path.name.startswith("_")
+        if not path.name.startswith("scope-pages-sources") and not path.name.startswith("_")
     ]
 
 

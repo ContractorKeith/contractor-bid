@@ -160,6 +160,8 @@ def extract_pdf_text_pages(pdf: Path, page_count: int) -> list[str]:
 def classify(score: int, includes: list[str], reviews: list[str], excludes: list[str]) -> str:
     if includes and score >= 10:
         return "primary-review"
+    if excludes:
+        return "exclude-review"
     if includes:
         return "secondary-review"
     if reviews:

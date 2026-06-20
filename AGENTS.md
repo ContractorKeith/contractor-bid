@@ -18,11 +18,17 @@ This repo builds AI-ready commercial subcontractor bid projects.
 ```bash
 contractor-bid doctor
 contractor-bid triage <project> --profile <profile> --render
+# Human review: open candidate-pages.md and scope-pages-sources.suggested.json.
+# Copy/merge approved pages into takeoff/scope-pages-sources.json.
 contractor-bid build-packets <project>
+# Human review: fill the takeoff/BOM JSON from source-backed quantities and quotes.
 contractor-bid build-workbook <project> --profile <profile>
 contractor-bid check <project> --profile <profile>
 contractor-bid package-sendoff <project>
 ```
+
+Use `contractor-bid status <project> --profile <profile>` for a non-writing readiness check,
+or `contractor-bid run <project> --profile <profile>` after the two human-fill steps are done.
 
 ## Review Before Pricing
 
