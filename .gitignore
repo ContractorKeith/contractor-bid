@@ -22,6 +22,10 @@ build/
 .contractor-bid/local.json
 .contractor-bid/feedback.jsonl
 
+# Bid tracker (holds the user's real bid pipeline — do not commit)
+.contractor-bid/bid-tracker.json
+Bid-Tracker.xlsx
+
 # Local handover notes
 handover.md
 HANDOVER.md

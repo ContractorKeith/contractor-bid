@@ -13,6 +13,18 @@ from .packets import build_packets
 from .profile import build_profile, list_available_profiles, load_profile, parse_csv, write_profile
 from .project import create_project, ensure_workspace
 from .sendoff import package_sendoff
+from .tracker import (
+    OUTCOMES,
+    PROGRESS_STAGES,
+    active_bids,
+    add_or_update,
+    archived_bids,
+    change_summary,
+    load_tracker,
+    move_entry,
+    reopen_entry,
+    render_tracker,
+)
 from .triage import triage_project
 from .util import markdown_table
 from .validate import deliverable_checklist, validate_project
@@ -237,6 +249,109 @@ def command_run(args: argparse.Namespace) -> int:
     return exit_code
 
 
+def _render_and_report(root: Path) -> None:
+    out = render_tracker(root)
+    if out:
+        print(f"Tracker spreadsheet: {out}")
+    else:
+        print("Tracker JSON updated. Install openpyxl to render Bid-Tracker.xlsx.")
+
+
+def command_track_add(args: argparse.Namespace) -> int:
+    root = args.root.resolve()
+    ensure_workspace(root)
+    project_path = args.project.resolve() if args.project else None
+    entry, created, changed = add_or_update(
+        root,
+        project_path=project_path,
+        id=args.id,
+        name=args.name,
+        location=args.location,
+        due_date=args.due,
+        progress=args.progress,
+        next_action=args.next_action,
+        client_gc=args.gc,
+        profile=args.profile,
+        note=args.note,
+    )
+    print(change_summary(entry, created, changed))
+    _render_and_report(root)
+    return 0
+
+
+def command_track_update(args: argparse.Namespace) -> int:
+    root = args.root.resolve()
+    ensure_workspace(root)
+    entry, created, changed = add_or_update(
+        root,
+        id=args.bid,
+        location=args.location,
+        due_date=args.due,
+        progress=args.progress,
+        next_action=args.next_action,
+        client_gc=args.gc,
+        note=args.note,
+    )
+    print(change_summary(entry, created, changed))
+    _render_and_report(root)
+    return 0
+
+
+def command_track_move(args: argparse.Namespace) -> int:
+    root = args.root.resolve()
+    ensure_workspace(root)
+    entry = move_entry(root, args.bid, outcome=args.outcome)
+    print(f"Moved '{entry.get('project')}' to Archived/Completed (outcome={entry.get('outcome')}).")
+    _render_and_report(root)
+    return 0
+
+
+def command_track_reopen(args: argparse.Namespace) -> int:
+    root = args.root.resolve()
+    ensure_workspace(root)
+    entry = reopen_entry(root, args.bid)
+    print(f"Reopened '{entry.get('project')}' back to Active Bids.")
+    _render_and_report(root)
+    return 0
+
+
+def command_track_list(args: argparse.Namespace) -> int:
+    root = args.root.resolve()
+    data = load_tracker(root)
+    active = active_bids(data)
+    print(f"Active bids ({len(active)}):")
+    if active:
+        rows = [
+            [b.get("project", ""), b.get("due_date", "") or "TBD", b.get("progress", ""), b.get("next_action", "")]
+            for b in active
+        ]
+        print("\n".join(markdown_table(["Project", "Due", "Progress", "Next Action"], rows)))
+    else:
+        print("- none")
+    if args.all:
+        archived = archived_bids(data)
+        print(f"\nArchived/completed bids ({len(archived)}):")
+        if archived:
+            rows = [
+                [b.get("project", ""), b.get("outcome", ""), b.get("closed", "")] for b in archived
+            ]
+            print("\n".join(markdown_table(["Project", "Outcome", "Closed"], rows)))
+        else:
+            print("- none")
+    return 0
+
+
+def command_track_build(args: argparse.Namespace) -> int:
+    root = args.root.resolve()
+    ensure_workspace(root)
+    out = render_tracker(root)
+    if out:
+        print(f"Built tracker spreadsheet: {out}")
+        return 0
+    print("openpyxl is required to render Bid-Tracker.xlsx. Install with: pip install openpyxl")
+    return 1
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="contractor-bid",
@@ -333,6 +448,45 @@ def build_parser() -> argparse.ArgumentParser:
     learn.add_argument("--profile", default=None)
     learn.add_argument("--category", default="correction")
     learn.set_defaults(func=command_learn)
+
+    def add_field_flags(p: argparse.ArgumentParser) -> None:
+        p.add_argument("--location", default=None, help="Project location / address.")
+        p.add_argument("--due", default=None, help="Bid due date, e.g. 2026-07-01 or '2026-07-01 14:00'.")
+        p.add_argument("--progress", default=None, help="Stage, e.g. " + ", ".join(PROGRESS_STAGES) + ".")
+        p.add_argument("--next", dest="next_action", default=None, help="Next action to take.")
+        p.add_argument("--gc", default=None, help="Client / GC contact info.")
+        p.add_argument("--note", default=None, help="Append a dated note to the bid.")
+
+    track_add = sub.add_parser("track-add", help="Add a bid to the tracker (Active sheet).")
+    track_add.add_argument(
+        "project", type=Path, nargs="?", help="Optional bid project folder to pull project.json from."
+    )
+    track_add.add_argument("--id", default=None, help="Explicit bid id (slug).")
+    track_add.add_argument("--name", default=None, help="Project name when not using a project folder.")
+    track_add.add_argument("--profile", default=None, help="Scope profile id.")
+    add_field_flags(track_add)
+    track_add.set_defaults(func=command_track_add)
+
+    track_update = sub.add_parser("track-update", help="Update fields on an existing bid.")
+    track_update.add_argument("bid", help="Bid id or project name.")
+    add_field_flags(track_update)
+    track_update.set_defaults(func=command_track_update)
+
+    track_move = sub.add_parser("track-move", help="Move a bid to the Archived/Completed sheet.")
+    track_move.add_argument("bid", help="Bid id or project name.")
+    track_move.add_argument("--outcome", choices=OUTCOMES, default="completed")
+    track_move.set_defaults(func=command_track_move)
+
+    track_reopen = sub.add_parser("track-reopen", help="Move an archived bid back to Active.")
+    track_reopen.add_argument("bid", help="Bid id or project name.")
+    track_reopen.set_defaults(func=command_track_reopen)
+
+    track_list = sub.add_parser("track-list", help="List tracked bids in the terminal.")
+    track_list.add_argument("--all", action="store_true", help="Include archived/completed bids.")
+    track_list.set_defaults(func=command_track_list)
+
+    track_build = sub.add_parser("track-build", help="Regenerate Bid-Tracker.xlsx from the JSON.")
+    track_build.set_defaults(func=command_track_build)
 
     doctor = sub.add_parser("doctor", help="Check local dependencies and optional PDF tools.")
     doctor.set_defaults(func=command_doctor)
