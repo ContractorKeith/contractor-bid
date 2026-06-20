@@ -21,3 +21,9 @@ build/
 # Local user/company configuration
 .contractor-bid/local.json
 .contractor-bid/feedback.jsonl
+
+# Local handover notes
+handover.md
+HANDOVER.md
+handover-*.md
+handovers/
