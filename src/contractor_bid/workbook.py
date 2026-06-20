@@ -1,18 +1,23 @@
 from __future__ import annotations
 
-import sys
 from pathlib import Path
 from typing import Any
 
 from .util import read_json
 
+# Import openpyxl lazily so the rest of the CLI (doctor, triage, check, the
+# tracker, etc.) still works when openpyxl is not installed. The error is raised
+# at call time in build_workbook() instead of killing the whole CLI on import.
 try:
     from openpyxl import Workbook
     from openpyxl.styles import Alignment, Font, PatternFill
     from openpyxl.utils import get_column_letter
     from openpyxl.worksheet.worksheet import Worksheet
-except ImportError:
-    sys.exit("openpyxl is required. Install with: pip install openpyxl")
+
+    OPENPYXL_AVAILABLE = True
+except ImportError:  # pragma: no cover - exercised only when openpyxl is absent
+    OPENPYXL_AVAILABLE = False
+    Workbook = Alignment = Font = PatternFill = get_column_letter = Worksheet = None  # type: ignore
 
 
 NAVY = "1F4E78"
@@ -168,6 +173,8 @@ def build_workbook(
     config: Path | None = None,
     out: Path | None = None,
 ) -> Path:
+    if not OPENPYXL_AVAILABLE:
+        raise RuntimeError("openpyxl is required to build the workbook. Install with: pip install openpyxl")
     project = project.resolve()
     config_path = locate_takeoff_json(project, config)
     data = read_json(config_path)

@@ -166,8 +166,6 @@ def classify(score: int, includes: list[str], reviews: list[str], excludes: list
         return "secondary-review"
     if reviews:
         return "flag-review"
-    if excludes:
-        return "exclude-review"
     return "low"
 
 
