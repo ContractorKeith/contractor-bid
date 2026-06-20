@@ -1,0 +1,19 @@
+{
+  "name": "contractor-bid",
+  "version": "0.2.0",
+  "description": "AI-ready bid workspaces for commercial subcontractors. Triage plan sets, build scope/spec packets, takeoff workbooks, alerts, and supplier sendoffs.",
+  "author": {
+    "name": "ContractorKeith",
+    "url": "https://github.com/ContractorKeith"
+  },
+  "repository": "https://github.com/ContractorKeith/contractor-bid",
+  "license": "MIT",
+  "keywords": [
+    "construction",
+    "estimating",
+    "bidding",
+    "csi",
+    "subcontractor",
+    "takeoff"
+  ]
+}

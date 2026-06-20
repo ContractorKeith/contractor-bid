@@ -203,7 +203,7 @@ class CliSmokeTest(unittest.TestCase):
         with self.assertRaises(SystemExit) as raised, redirect_stdout(stdout):
             main(["--version"])
         self.assertEqual(raised.exception.code, 0)
-        self.assertIn("contractor-bid 0.1.0", stdout.getvalue())
+        self.assertIn("contractor-bid 0.2.0", stdout.getvalue())
 
 
 if __name__ == "__main__":
