@@ -29,6 +29,7 @@ from contractor_bid.util import read_json
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
 
+@unittest.skipUnless(HAS_MCP, "MCP optional dependency is not installed")
 class McpServerTest(unittest.TestCase):
     def test_server_compiles_and_registers_planned_tools(self) -> None:
         py_compile.compile("src/contractor_bid/mcp_server.py", doraise=True)
