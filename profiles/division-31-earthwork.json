@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-31-earthwork",
+  "company_name": "Your Company",
+  "trade_name": "Division 31 - Earthwork",
+  "skill_description": "Whole-division starter rules for CSI Division 31 - Earthwork. Use when starting, triaging, validating, or packaging a commercial earthwork bid.",
+  "csi_divisions": [
+    "31"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 31 - Earthwork work specifically assigned to the bidder: clearing, grading, excavation, fill, compaction, dewatering, earth retention, and subgrade preparation. Site utilities, paving, concrete, landscaping, contaminated soils, rock removal, and survey must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "site clearing when assigned",
+    "mass excavation and grading",
+    "trenching and backfill when assigned",
+    "fill and compaction",
+    "subgrade preparation",
+    "dewatering when assigned",
+    "earth retention when assigned"
+  ],
+  "include_terms": [
+    "earthwork",
+    "excavation",
+    "grading",
+    "fill",
+    "backfill",
+    "compaction",
+    "subgrade",
+    "dewatering",
+    "31 00"
+  ],
+  "spec_sections": [
+    "31 00 00",
+    "31 10 00",
+    "31 20 00",
+    "31 23 00",
+    "31 25 00",
+    "31 31 00",
+    "31 50 00"
+  ],
+  "quantity_units": [
+    "CY",
+    "SF",
+    "LF",
+    "TON",
+    "ACRE"
+  ],
+  "review_terms": [
+    "rock",
+    "unsuitable soils",
+    "dewatering",
+    "erosion control",
+    "survey"
+  ],
+  "exclude_terms": [
+    "site utility",
+    "asphalt paving",
+    "concrete paving",
+    "landscaping",
+    "irrigation"
+  ],
+  "proposal_exclusions": [
+    "rock removal unless listed",
+    "contaminated soils handling unless listed",
+    "survey and staking by others unless listed",
+    "import/export fees beyond listed quantities"
+  ]
+}

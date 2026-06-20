@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-22-plumbing",
+  "company_name": "Example Division 22 Contractor",
+  "trade_name": "Division 22 - Plumbing",
+  "skill_description": "Whole-division starter rules for CSI Division 22 - Plumbing. Use when starting, triaging, validating, or packaging a commercial plumbing bid.",
+  "csi_divisions": [
+    "22"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 22 - Plumbing work specifically assigned to the bidder: domestic water, sanitary waste and vent, storm drainage, fixtures, equipment, insulation, and plumbing specialties. Site utilities, fire suppression, HVAC piping, electrical power, controls, and owner-furnished equipment must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "domestic water piping",
+    "sanitary waste and vent piping",
+    "storm drainage piping when assigned",
+    "plumbing fixtures and trim",
+    "water heaters and plumbing equipment",
+    "plumbing insulation when assigned",
+    "floor drains, cleanouts, and specialties"
+  ],
+  "include_terms": [
+    "plumbing",
+    "domestic water",
+    "sanitary",
+    "waste and vent",
+    "fixture",
+    "water heater",
+    "floor drain",
+    "cleanout",
+    "22 00"
+  ],
+  "spec_sections": [
+    "22 00 00",
+    "22 05 00",
+    "22 07 00",
+    "22 11 00",
+    "22 13 00",
+    "22 14 00",
+    "22 40 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "LF",
+    "LS"
+  ],
+  "review_terms": [
+    "site utility",
+    "gas piping",
+    "grease interceptor",
+    "storm drainage",
+    "fixture by owner"
+  ],
+  "exclude_terms": [
+    "fire sprinkler",
+    "HVAC piping",
+    "electrical wiring",
+    "site water utility"
+  ],
+  "proposal_exclusions": [
+    "site utilities beyond building connection unless listed",
+    "fire suppression by others unless listed",
+    "electrical power and controls by others unless listed",
+    "owner-furnished fixtures unless listed"
+  ]
+}

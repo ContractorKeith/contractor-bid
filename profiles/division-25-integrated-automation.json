@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-25-integrated-automation",
+  "company_name": "Your Company",
+  "trade_name": "Division 25 - Integrated Automation",
+  "skill_description": "Whole-division starter rules for CSI Division 25 - Integrated Automation. Use when starting, triaging, validating, or packaging a commercial building automation or integration bid.",
+  "csi_divisions": [
+    "25"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 25 - Integrated Automation work specifically assigned to the bidder: building automation integration, networking, controllers, programming, sequences, analytics, and system interfaces. Mechanical controls in Division 23, electrical power, low-voltage cabling, cybersecurity requirements, and owner platform work must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "integrated automation controllers",
+    "building automation software when assigned",
+    "integration gateways and interfaces",
+    "sequences and programming",
+    "automation network coordination",
+    "graphics and trend setup when assigned",
+    "commissioning support when assigned"
+  ],
+  "include_terms": [
+    "integrated automation",
+    "building automation",
+    "BAS",
+    "BMS",
+    "DDC",
+    "controls integration",
+    "gateway",
+    "sequence of operation",
+    "25 00"
+  ],
+  "spec_sections": [
+    "25 00 00",
+    "25 05 00",
+    "25 08 00",
+    "25 10 00",
+    "25 30 00",
+    "25 50 00",
+    "25 90 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "POINT",
+    "LS"
+  ],
+  "review_terms": [
+    "owner platform",
+    "cybersecurity",
+    "network",
+    "commissioning",
+    "training"
+  ],
+  "exclude_terms": [
+    "electrical power",
+    "mechanical equipment",
+    "low-voltage cabling",
+    "fire alarm"
+  ],
+  "proposal_exclusions": [
+    "power wiring by others unless listed",
+    "owner licensing and cloud subscriptions unless listed",
+    "mechanical equipment controls by others unless listed",
+    "third-party system access by owner/GC unless listed"
+  ]
+}

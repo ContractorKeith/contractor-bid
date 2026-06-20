@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-26-electrical",
+  "company_name": "Example Division 26 Contractor",
+  "trade_name": "Division 26 - Electrical",
+  "skill_description": "Whole-division starter rules for CSI Division 26 - Electrical. Use when starting, triaging, validating, or packaging a commercial electrical bid.",
+  "csi_divisions": [
+    "26"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 26 - Electrical work specifically assigned to the bidder: service, distribution, grounding, raceways, wiring, devices, lighting, controls, and electrical specialties. Communications, security, fire alarm, utility company work, HVAC controls, owner-furnished equipment, and commissioning must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "electrical service and distribution",
+    "raceways and conductors",
+    "grounding and bonding",
+    "switchboards, panels, and transformers",
+    "wiring devices",
+    "lighting fixtures and controls",
+    "equipment connections when assigned"
+  ],
+  "include_terms": [
+    "electrical",
+    "conduit",
+    "feeder",
+    "panel",
+    "switchboard",
+    "transformer",
+    "lighting",
+    "receptacle",
+    "26 00"
+  ],
+  "spec_sections": [
+    "26 00 00",
+    "26 05 00",
+    "26 20 00",
+    "26 24 00",
+    "26 27 00",
+    "26 28 00",
+    "26 51 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "LF",
+    "SF",
+    "LS"
+  ],
+  "review_terms": [
+    "utility",
+    "lighting controls",
+    "fire alarm",
+    "low voltage",
+    "owner furnished"
+  ],
+  "exclude_terms": [
+    "data cabling",
+    "security",
+    "fire alarm",
+    "HVAC controls",
+    "utility company"
+  ],
+  "proposal_exclusions": [
+    "utility company fees and work by others unless listed",
+    "low-voltage systems by others unless listed",
+    "fire alarm by others unless listed",
+    "owner-furnished equipment unless listed"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-23-hvac",
+  "company_name": "Your Company",
+  "trade_name": "Division 23 - Heating, Ventilating, and Air Conditioning (HVAC)",
+  "skill_description": "Whole-division starter rules for CSI Division 23 - Heating, Ventilating, and Air Conditioning (HVAC). Use when starting, triaging, validating, or packaging a commercial HVAC bid.",
+  "csi_divisions": [
+    "23"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 23 - Heating, Ventilating, and Air Conditioning (HVAC) work specifically assigned to the bidder: HVAC piping, equipment, ductwork, air distribution, controls, insulation, testing, and balancing. Plumbing, fire suppression, electrical power, structural supports, roofing, and owner-furnished equipment must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "HVAC equipment",
+    "ductwork and air distribution",
+    "hydronic piping when assigned",
+    "refrigerant piping when assigned",
+    "mechanical insulation",
+    "HVAC controls when assigned",
+    "testing and balancing when assigned"
+  ],
+  "include_terms": [
+    "HVAC",
+    "mechanical",
+    "ductwork",
+    "air handler",
+    "rooftop unit",
+    "VAV",
+    "diffuser",
+    "hydronic",
+    "refrigerant",
+    "23 00"
+  ],
+  "spec_sections": [
+    "23 00 00",
+    "23 05 00",
+    "23 07 00",
+    "23 09 00",
+    "23 21 00",
+    "23 31 00",
+    "23 34 00",
+    "23 37 00",
+    "23 74 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "LF",
+    "SF",
+    "TON",
+    "CFM"
+  ],
+  "review_terms": [
+    "controls",
+    "test and balance",
+    "roof curb",
+    "gas piping",
+    "structural support"
+  ],
+  "exclude_terms": [
+    "plumbing fixture",
+    "fire sprinkler",
+    "electrical feeder",
+    "roofing patch"
+  ],
+  "proposal_exclusions": [
+    "electrical power wiring by others unless listed",
+    "roof curbs and roof patching by others unless listed",
+    "structural supports by others unless listed",
+    "owner-furnished equipment unless listed"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-27-communications",
+  "company_name": "Example Division 27 Contractor",
+  "trade_name": "Division 27 - Communications",
+  "skill_description": "Whole-division starter rules for CSI Division 27 - Communications. Use when starting, triaging, validating, or packaging a commercial communications or structured cabling bid.",
+  "csi_divisions": [
+    "27"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 27 - Communications work specifically assigned to the bidder: pathways when assigned, structured cabling, racks, grounding, voice/data, AV, paging, intercom, and communications equipment. Electrical power, security, fire alarm, owner network equipment, service provider work, and programming must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "structured cabling",
+    "communications pathways when assigned",
+    "equipment racks and cable management",
+    "telecommunications grounding when assigned",
+    "voice/data outlets and patch panels",
+    "audio-video systems when assigned",
+    "paging and intercom when assigned"
+  ],
+  "include_terms": [
+    "communications",
+    "structured cabling",
+    "data",
+    "telecom",
+    "fiber",
+    "rack",
+    "patch panel",
+    "audio visual",
+    "27 00"
+  ],
+  "spec_sections": [
+    "27 00 00",
+    "27 05 00",
+    "27 10 00",
+    "27 20 00",
+    "27 30 00",
+    "27 40 00",
+    "27 50 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "DROP",
+    "LF",
+    "LS"
+  ],
+  "review_terms": [
+    "owner equipment",
+    "service provider",
+    "pathway",
+    "testing",
+    "certification"
+  ],
+  "exclude_terms": [
+    "electrical power",
+    "security",
+    "fire alarm",
+    "utility service provider"
+  ],
+  "proposal_exclusions": [
+    "active network equipment by owner unless listed",
+    "service provider fees and work by others unless listed",
+    "electrical power by others unless listed",
+    "security and fire alarm systems by others unless listed"
+  ]
+}

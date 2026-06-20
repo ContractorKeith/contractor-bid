@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-11-equipment",
+  "company_name": "Your Company",
+  "trade_name": "Division 11 - Equipment",
+  "skill_description": "Whole-division starter rules for CSI Division 11 - Equipment. Use when starting, triaging, validating, or packaging a commercial equipment bid.",
+  "csi_divisions": [
+    "11"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 11 - Equipment work specifically assigned to the bidder: commercial, foodservice, loading dock, laboratory, athletic, and other facility equipment. Utility rough-ins, structural supports, controls, owner-furnished equipment, and commissioning must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "commercial equipment when assigned",
+    "foodservice equipment when assigned",
+    "loading dock equipment when assigned",
+    "laboratory equipment when assigned",
+    "athletic and recreational equipment when assigned",
+    "equipment anchorage when assigned",
+    "startup assistance when assigned"
+  ],
+  "include_terms": [
+    "equipment",
+    "foodservice",
+    "appliance",
+    "dock leveler",
+    "laboratory equipment",
+    "athletic equipment",
+    "washer",
+    "dryer",
+    "11 00"
+  ],
+  "spec_sections": [
+    "11 00 00",
+    "11 10 00",
+    "11 30 00",
+    "11 40 00",
+    "11 52 00",
+    "11 53 00",
+    "11 70 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "SET",
+    "LS"
+  ],
+  "review_terms": [
+    "owner furnished",
+    "rough-in",
+    "startup",
+    "warranty",
+    "anchorage"
+  ],
+  "exclude_terms": [
+    "electrical wiring",
+    "plumbing piping",
+    "gas piping",
+    "structural steel"
+  ],
+  "proposal_exclusions": [
+    "utility rough-ins by others unless listed",
+    "owner-furnished equipment unless listed",
+    "structural supports and housekeeping pads unless listed",
+    "final connections by others unless listed"
+  ]
+}

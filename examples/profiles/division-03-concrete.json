@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-03-concrete",
+  "company_name": "Example Division 03 Contractor",
+  "trade_name": "Division 03 - Concrete",
+  "skill_description": "Whole-division starter rules for CSI Division 03 - Concrete. Use when starting, triaging, validating, or packaging a commercial concrete bid.",
+  "csi_divisions": [
+    "03"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 03 - Concrete work specifically assigned to the bidder: forming, reinforcing, cast-in-place, precast, finishes, and concrete repair. Earthwork, asphalt paving, utilities, landscaping, structural steel, waterproofing, and delegated design must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "concrete formwork",
+    "reinforcing steel and accessories",
+    "cast-in-place concrete",
+    "concrete slabs and pads",
+    "concrete finishing and curing",
+    "precast concrete when assigned",
+    "concrete repair and patching when assigned"
+  ],
+  "include_terms": [
+    "concrete",
+    "cast-in-place",
+    "precast",
+    "rebar",
+    "reinforcing",
+    "formwork",
+    "slab",
+    "footing",
+    "curb",
+    "03 00"
+  ],
+  "spec_sections": [
+    "03 00 00",
+    "03 10 00",
+    "03 20 00",
+    "03 30 00",
+    "03 35 00",
+    "03 40 00",
+    "03 60 00"
+  ],
+  "quantity_units": [
+    "CY",
+    "SF",
+    "LF",
+    "EA",
+    "TON"
+  ],
+  "review_terms": [
+    "sawcut",
+    "demolition",
+    "excavation",
+    "vapor barrier",
+    "waterproofing"
+  ],
+  "exclude_terms": [
+    "asphalt",
+    "striping",
+    "landscaping",
+    "irrigation",
+    "site utility"
+  ],
+  "proposal_exclusions": [
+    "unsuitable soils and subgrade correction unless listed",
+    "survey/layout by others unless listed",
+    "asphalt paving and striping unless listed",
+    "dewatering and winter conditions unless listed"
+  ]
+}

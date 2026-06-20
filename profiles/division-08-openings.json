@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-08-openings",
+  "company_name": "Your Company",
+  "trade_name": "Division 08 - Openings",
+  "skill_description": "Whole-division starter rules for CSI Division 08 - Openings. Use when starting, triaging, validating, or packaging a commercial doors, frames, hardware, glazing, or storefront bid.",
+  "csi_divisions": [
+    "08"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 08 - Openings work specifically assigned to the bidder: doors, frames, access panels, entrances, storefront, curtain wall, windows, hardware, glazing, and louvers. Structural steel, low-voltage wiring, access control, painting, and wall construction must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "hollow metal doors and frames",
+    "wood doors when assigned",
+    "access doors and panels",
+    "aluminum entrances and storefront when assigned",
+    "windows and curtain wall when assigned",
+    "finish hardware",
+    "glazing and louvers when assigned"
+  ],
+  "include_terms": [
+    "door",
+    "frame",
+    "hardware",
+    "storefront",
+    "curtain wall",
+    "window",
+    "glazing",
+    "louver",
+    "access panel",
+    "08 00"
+  ],
+  "spec_sections": [
+    "08 00 00",
+    "08 11 00",
+    "08 14 00",
+    "08 31 00",
+    "08 41 00",
+    "08 44 00",
+    "08 71 00",
+    "08 80 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "SF",
+    "LF",
+    "SET"
+  ],
+  "review_terms": [
+    "access control",
+    "electric strike",
+    "panic",
+    "closer",
+    "fire rating"
+  ],
+  "exclude_terms": [
+    "low-voltage wiring",
+    "card reader",
+    "painting",
+    "structural steel"
+  ],
+  "proposal_exclusions": [
+    "electrical and low-voltage wiring by others unless listed",
+    "access control programming by others unless listed",
+    "field painting by others unless listed",
+    "structural supports by others unless listed"
+  ]
+}
