@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-13-special-construction",
+  "company_name": "Example Division 13 Contractor",
+  "trade_name": "Division 13 - Special Construction",
+  "skill_description": "Whole-division starter rules for CSI Division 13 - Special Construction. Use when starting, triaging, validating, or packaging a commercial special construction bid.",
+  "csi_divisions": [
+    "13"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 13 - Special Construction work specifically assigned to the bidder: pre-engineered structures, pools, special-purpose rooms, controlled environments, sound/vibration assemblies, and other specialty systems. Foundations, utilities, MEP connections, controls, permits, and delegated design must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "pre-engineered structures when assigned",
+    "special-purpose rooms",
+    "controlled environment rooms when assigned",
+    "aquatic and pool systems when assigned",
+    "sound and vibration specialty systems when assigned",
+    "radiation protection or shielded rooms when assigned",
+    "special construction coordination items"
+  ],
+  "include_terms": [
+    "special construction",
+    "pre-engineered",
+    "prefabricated",
+    "pool",
+    "controlled environment",
+    "cleanroom",
+    "radiation protection",
+    "sound isolation",
+    "13 00"
+  ],
+  "spec_sections": [
+    "13 00 00",
+    "13 11 00",
+    "13 12 00",
+    "13 18 00",
+    "13 21 00",
+    "13 34 00",
+    "13 49 00"
+  ],
+  "quantity_units": [
+    "LS",
+    "EA",
+    "SF",
+    "LF"
+  ],
+  "review_terms": [
+    "delegated design",
+    "permit",
+    "foundation",
+    "utility connection",
+    "controls"
+  ],
+  "exclude_terms": [
+    "earthwork",
+    "concrete foundation",
+    "electrical feeder",
+    "plumbing piping"
+  ],
+  "proposal_exclusions": [
+    "foundations by others unless listed",
+    "utility connections by others unless listed",
+    "permits and testing fees unless listed",
+    "delegated design engineering unless listed"
+  ]
+}

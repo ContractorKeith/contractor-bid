@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-14-conveying-equipment",
+  "company_name": "Example Division 14 Contractor",
+  "trade_name": "Division 14 - Conveying Equipment",
+  "skill_description": "Whole-division starter rules for CSI Division 14 - Conveying Equipment. Use when starting, triaging, validating, or packaging a commercial elevator, lift, escalator, or conveying equipment bid.",
+  "csi_divisions": [
+    "14"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 14 - Conveying Equipment work specifically assigned to the bidder: elevators, lifts, escalators, moving walks, hoists, and related conveying systems. Hoistway construction, structural supports, electrical feeders, fire alarm interfaces, pits, and permits must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "elevators when assigned",
+    "wheelchair and platform lifts when assigned",
+    "escalators and moving walks when assigned",
+    "hoists and cranes when assigned",
+    "conveyors when assigned",
+    "controls furnished with conveying equipment",
+    "startup and inspection support when assigned"
+  ],
+  "include_terms": [
+    "conveying equipment",
+    "elevator",
+    "lift",
+    "escalator",
+    "moving walk",
+    "hoist",
+    "conveyor",
+    "14 00"
+  ],
+  "spec_sections": [
+    "14 00 00",
+    "14 20 00",
+    "14 21 00",
+    "14 24 00",
+    "14 30 00",
+    "14 40 00",
+    "14 90 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "STOP",
+    "LS"
+  ],
+  "review_terms": [
+    "hoistway",
+    "pit",
+    "machine room",
+    "fire alarm",
+    "inspection"
+  ],
+  "exclude_terms": [
+    "structural steel",
+    "concrete pit",
+    "electrical feeder",
+    "fire alarm wiring"
+  ],
+  "proposal_exclusions": [
+    "hoistway and shaft construction by others unless listed",
+    "power feeders and disconnects by others unless listed",
+    "fire alarm interface by others unless listed",
+    "inspection fees unless listed"
+  ]
+}

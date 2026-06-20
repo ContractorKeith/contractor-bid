@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-06-wood-plastics-composites",
+  "company_name": "Example Division 06 Contractor",
+  "trade_name": "Division 06 - Wood, Plastics, and Composites",
+  "skill_description": "Whole-division starter rules for CSI Division 06 - Wood, Plastics, and Composites. Use when starting, triaging, validating, or packaging a commercial carpentry or millwork bid.",
+  "csi_divisions": [
+    "06"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 06 - Wood, Plastics, and Composites work specifically assigned to the bidder: rough carpentry, sheathing, blocking, architectural woodwork, countertops, and plastic/composite fabrications. Framing in other divisions, casework in Division 12, waterproofing, hardware, and finishes must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "rough carpentry",
+    "wood blocking and backing",
+    "wood sheathing and panels",
+    "architectural woodwork when assigned",
+    "plastic laminate work when assigned",
+    "countertops when assigned",
+    "composite fabrications when assigned"
+  ],
+  "include_terms": [
+    "rough carpentry",
+    "wood",
+    "blocking",
+    "backing",
+    "sheathing",
+    "millwork",
+    "casework",
+    "plastic laminate",
+    "countertop",
+    "06 00"
+  ],
+  "spec_sections": [
+    "06 00 00",
+    "06 10 00",
+    "06 16 00",
+    "06 20 00",
+    "06 40 00",
+    "06 60 00"
+  ],
+  "quantity_units": [
+    "LF",
+    "SF",
+    "EA",
+    "BF"
+  ],
+  "review_terms": [
+    "casework",
+    "countertop",
+    "fire-retardant",
+    "blocking by others"
+  ],
+  "exclude_terms": [
+    "metal framing",
+    "finish painting",
+    "door hardware",
+    "waterproofing"
+  ],
+  "proposal_exclusions": [
+    "concealed blocking not shown on drawings unless listed",
+    "field finishing by others unless listed",
+    "door hardware and appliances unless listed",
+    "solid surface or stone tops unless listed"
+  ]
+}

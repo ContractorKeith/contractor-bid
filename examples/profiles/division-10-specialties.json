@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-10-specialties",
+  "company_name": "Example Division 10 Contractor",
+  "trade_name": "Division 10 - Specialties",
+  "skill_description": "Whole-division starter rules for CSI Division 10 - Specialties. Use when starting, triaging, validating, or packaging a commercial specialties bid.",
+  "csi_divisions": [
+    "10"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 10 - Specialties work specifically assigned to the bidder: visual display units, signage, partitions, toilet accessories, fire protection specialties, lockers, louvers, postal specialties, and other specialty products. Blocking, backing, electrical, plumbing, structural supports, and installation by others must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "visual display units",
+    "signage when assigned",
+    "toilet compartments and accessories",
+    "fire extinguisher cabinets",
+    "lockers and storage specialties",
+    "operable partitions when assigned",
+    "miscellaneous specialty products"
+  ],
+  "include_terms": [
+    "specialties",
+    "signage",
+    "toilet accessory",
+    "toilet partition",
+    "locker",
+    "fire extinguisher cabinet",
+    "markerboard",
+    "corner guard",
+    "10 00"
+  ],
+  "spec_sections": [
+    "10 00 00",
+    "10 14 00",
+    "10 21 13",
+    "10 22 00",
+    "10 28 00",
+    "10 44 00",
+    "10 51 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "LF",
+    "SF",
+    "SET"
+  ],
+  "review_terms": [
+    "blocking",
+    "backing",
+    "owner furnished",
+    "sign permit",
+    "electrical"
+  ],
+  "exclude_terms": [
+    "rough carpentry",
+    "electrical wiring",
+    "plumbing",
+    "structural support"
+  ],
+  "proposal_exclusions": [
+    "blocking and backing by others unless listed",
+    "electrical connections by others unless listed",
+    "sign permits and fees unless listed",
+    "owner-furnished items unless listed"
+  ]
+}

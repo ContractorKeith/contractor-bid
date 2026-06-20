@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-28-electronic-safety-security",
+  "company_name": "Example Division 28 Contractor",
+  "trade_name": "Division 28 - Electronic Safety and Security",
+  "skill_description": "Whole-division starter rules for CSI Division 28 - Electronic Safety and Security. Use when starting, triaging, validating, or packaging a commercial security, access control, CCTV, or fire alarm bid.",
+  "csi_divisions": [
+    "28"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 28 - Electronic Safety and Security work specifically assigned to the bidder: access control, intrusion detection, video surveillance, electronic detection, fire alarm, and related safety systems. Door hardware, electrical power, network infrastructure, monitoring contracts, owner credentials, and fire protection must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "access control systems when assigned",
+    "intrusion detection when assigned",
+    "video surveillance when assigned",
+    "fire alarm systems when assigned",
+    "safety and security cabling when assigned",
+    "head-end equipment and panels",
+    "testing and certification when assigned"
+  ],
+  "include_terms": [
+    "security",
+    "access control",
+    "card reader",
+    "CCTV",
+    "camera",
+    "intrusion",
+    "fire alarm",
+    "detection",
+    "28 00"
+  ],
+  "spec_sections": [
+    "28 00 00",
+    "28 05 00",
+    "28 10 00",
+    "28 13 00",
+    "28 20 00",
+    "28 31 00",
+    "28 46 00"
+  ],
+  "quantity_units": [
+    "EA",
+    "LF",
+    "DEVICE",
+    "LS"
+  ],
+  "review_terms": [
+    "door hardware",
+    "monitoring",
+    "network",
+    "permit",
+    "programming"
+  ],
+  "exclude_terms": [
+    "electrical power",
+    "door hardware",
+    "locksmith",
+    "sprinkler",
+    "network switch"
+  ],
+  "proposal_exclusions": [
+    "door hardware by others unless listed",
+    "electrical power by others unless listed",
+    "monitoring contracts and fees unless listed",
+    "owner network equipment unless listed"
+  ]
+}

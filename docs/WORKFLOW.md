@@ -38,13 +38,9 @@ can rebuild packets, workbook, alerts, and sendoff in one pass.
 
 Built-in starter profiles:
 
-- `fences-gates` (Div 32)
-- `concrete-flatwork` (Div 03)
-- `drywall-framing` (Div 09)
-- `electrical` (Div 26/27/28)
-- `plumbing` (Div 22)
-- `hvac` (Div 23)
-- `roofing` (Div 07)
+- Canonical CSI starters use `division-XX-*` ids and cover every active MasterFormat division from 03 through 33.
+- Trade-specific examples such as `fences-gates`, `concrete-flatwork`, `drywall-framing`, `electrical`, `plumbing`, `hvac`, and `roofing` show how to narrow a division into a company-specific bid scope.
+- See `docs/CSI_DIVISIONS.md` for the full active/reserved division table.
 
 ## Naming
 

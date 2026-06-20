@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "profile_id": "division-05-metals",
+  "company_name": "Example Division 05 Contractor",
+  "trade_name": "Division 05 - Metals",
+  "skill_description": "Whole-division starter rules for CSI Division 05 - Metals. Use when starting, triaging, validating, or packaging a commercial metals bid.",
+  "csi_divisions": [
+    "05"
+  ],
+  "scope_rule": "Base bid is limited to CSI Division 05 - Metals work specifically assigned to the bidder: structural steel, joists, metal deck, cold-formed metal framing, metal fabrications, stairs, railings, and ornamental metals. Concrete, fireproofing, painting, doors/hardware, and delegated engineering must be explicitly included, excluded, or flagged before pricing.",
+  "base_scope": [
+    "structural steel framing when assigned",
+    "steel joists and metal deck when assigned",
+    "cold-formed metal framing when assigned",
+    "metal fabrications",
+    "metal stairs and ladders",
+    "handrails and guardrails",
+    "ornamental metals when assigned"
+  ],
+  "include_terms": [
+    "metals",
+    "structural steel",
+    "steel joist",
+    "metal deck",
+    "cold-formed",
+    "fabrication",
+    "stair",
+    "railing",
+    "05 00"
+  ],
+  "spec_sections": [
+    "05 00 00",
+    "05 05 00",
+    "05 12 00",
+    "05 21 00",
+    "05 31 00",
+    "05 40 00",
+    "05 50 00",
+    "05 70 00"
+  ],
+  "quantity_units": [
+    "TON",
+    "LB",
+    "LF",
+    "EA",
+    "SF"
+  ],
+  "review_terms": [
+    "shop drawings",
+    "delegated design",
+    "embed",
+    "anchor bolt",
+    "galvanizing"
+  ],
+  "exclude_terms": [
+    "concrete",
+    "fireproofing",
+    "painting",
+    "door hardware",
+    "glazing"
+  ],
+  "proposal_exclusions": [
+    "professional engineering unless listed",
+    "field painting and touch-up beyond listed scope",
+    "concrete embeds and anchor bolts unless listed",
+    "fireproofing by others unless listed"
+  ]
+}

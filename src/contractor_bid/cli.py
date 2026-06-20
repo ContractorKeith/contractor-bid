@@ -369,7 +369,7 @@ def build_parser() -> argparse.ArgumentParser:
     list_profiles.set_defaults(func=command_list_profiles)
 
     init = sub.add_parser("init", help="Create a reusable scope profile and generated agent skill.")
-    init.add_argument("--profile", default=None, help="Profile id, e.g. fences-gates or concrete.")
+    init.add_argument("--profile", default=None, help="Profile id, e.g. division-32-exterior-improvements.")
     init.add_argument("--company", default=None)
     init.add_argument("--trade", default=None)
     init.add_argument("--divisions", default="")
