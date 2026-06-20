@@ -111,7 +111,7 @@ def _resolve_optional_path(path: str | None, base: Path) -> Path | None:
 
 
 def _nearby_projects(root: Path) -> list[str]:
-    if not root.exists():
+    if not root.is_dir():
         return []
     nearby: list[str] = []
     for path in sorted(root.iterdir()):
