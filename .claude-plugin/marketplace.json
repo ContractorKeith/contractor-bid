@@ -1,0 +1,13 @@
+{
+  "name": "contractor-bid",
+  "owner": {
+    "name": "ContractorKeith"
+  },
+  "plugins": [
+    {
+      "name": "contractor-bid",
+      "source": "./",
+      "description": "AI-ready bid workspaces for commercial subcontractors."
+    }
+  ]
+}

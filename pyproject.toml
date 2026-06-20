@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "contractor-bid"
-version = "0.1.0"
+version = "0.2.0"
 description = "AI-ready commercial construction bid project starter kit for subcontractors in any CSI division."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -18,8 +18,14 @@ dependencies = [
 ]
 keywords = ["construction", "estimating", "subcontractor", "bid", "csi", "takeoff", "ai"]
 
+[project.optional-dependencies]
+mcp = [
+  "mcp>=1.8.1"
+]
+
 [project.scripts]
 contractor-bid = "contractor_bid.cli:main"
+contractor-bid-mcp = "contractor_bid.mcp_server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/contractor_bid"]
@@ -31,6 +37,11 @@ packages = ["src/contractor_bid"]
 "scripts" = "contractor_bid/scripts"
 "profiles" = "contractor_bid/profiles"
 "skills" = "contractor_bid/skills"
+"commands" = "contractor_bid/commands"
+".claude-plugin" = "contractor_bid/.claude-plugin"
+".cursor-plugin" = "contractor_bid/.cursor-plugin"
+".mcp.json" = "contractor_bid/.mcp.json"
+"codex-marketplace.json" = "contractor_bid/codex-marketplace.json"
 "AGENTS.md" = "contractor_bid/AGENTS.md"
 "CLAUDE.md" = "contractor_bid/CLAUDE.md"
 
@@ -41,8 +52,14 @@ include = [
   "/examples",
   "/docs",
   "/scripts",
+  "/packaging",
   "/profiles",
   "/skills",
+  "/commands",
+  "/.claude-plugin",
+  "/.cursor-plugin",
+  "/.mcp.json",
+  "/codex-marketplace.json",
   "/README.md",
   "/AGENTS.md",
   "/CLAUDE.md",

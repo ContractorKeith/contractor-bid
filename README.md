@@ -4,7 +4,7 @@
 
 AI-ready bid workspaces for commercial subcontractors.
 
-> **Status: early access / in active development (v0.1.0).** This is a public testing
+> **Status: early access / in active development (v0.2.0).** This is a public testing
 > release shared to gather real-world feedback. Expect rough edges, and verify every
 > output against the source documents before pricing a real bid. Bug reports and
 > contributions are welcome and encouraged — please
@@ -21,7 +21,8 @@ It does not price the job for you. It helps turn bid documents into a reviewable
 
 ## What This Repo Does
 
-`contractor-bid` is a Python CLI plus agent instructions, templates, starter trade profiles, and validation checks.
+`contractor-bid` is a Python CLI plus an optional MCP server, agent instructions,
+templates, starter trade profiles, and validation checks.
 
 Use it when you want to open Claude, Codex, or another model and say:
 
@@ -103,7 +104,30 @@ Use `contractor-bid init` when your trade or company rules are different.
 
 ## Install
 
+### Recommended: pipx
+
+Install the CLI:
+
+```bash
+pipx install contractor-bid
+```
+
+Install the CLI plus MCP server for Claude Code, Codex, Cursor, or another MCP-capable agent:
+
+```bash
+pipx install "contractor-bid[mcp]"
+```
+
+This gives you both:
+
+```bash
+contractor-bid doctor
+contractor-bid-mcp
+```
+
 ### macOS / Linux
+
+From a source checkout:
 
 ```bash
 git clone https://github.com/ContractorKeith/contractor-bid.git
@@ -133,6 +157,7 @@ Required:
 
 - Python 3.11 or newer
 - Git, for install and updates
+- `pipx`, for the recommended isolated package install path
 
 Installed automatically into the virtualenv:
 
@@ -152,6 +177,27 @@ contractor-bid doctor
 ```
 
 No GitHub CLI is required for normal use.
+
+## Agent Plugin Setup
+
+The plugin layer wraps the installed Python engine. Install the engine first:
+
+```bash
+pipx install "contractor-bid[mcp]"
+```
+
+Claude Code:
+
+```text
+/plugin marketplace add ContractorKeith/contractor-bid
+/plugin install contractor-bid@contractor-bid
+```
+
+Codex and Cursor can reuse the same `contractor-bid-mcp` server and `skills/`. This repo
+includes `.mcp.json`, `.claude-plugin/`, `codex-marketplace.json`, and
+`.cursor-plugin/` metadata for direct Git-hosted or local install flows.
+
+More detail: [MCP And Agent Plugin Setup](docs/MCP_PLUGIN.md).
 
 ## Quick Start
 

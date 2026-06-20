@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evalSuite id="contractor-bid-mcp-v0.2.0" version="1">
+  <description>Read-only MCP eval prompts for a sanitized contractor-bid fixture workspace.</description>
+  <fixture>
+    <workspaceRoot>tests/fixtures/mcp-workspace</workspaceRoot>
+    <projectPath>bids/070126-mcp-sample</projectPath>
+    <profile>fences-gates</profile>
+    <sourcePdf>tests/fixtures/triage-sample.pdf</sourcePdf>
+  </fixture>
+  <case id="profiles-available">
+    <prompt>Which built-in profile should I use for a fence and gate bid?</prompt>
+    <requiredTools>cb_list_profiles</requiredTools>
+    <expectedAnswerContains>fences-gates</expectedAnswerContains>
+  </case>
+  <case id="candidate-page-count">
+    <prompt>How many candidate pages did triage flag for the sample fence project?</prompt>
+    <requiredTools>cb_triage</requiredTools>
+    <expectedAnswerContains>3 candidate page</expectedAnswerContains>
+  </case>
+  <case id="primary-source-page">
+    <prompt>Which source PDF page is the primary fence review candidate?</prompt>
+    <requiredTools>cb_triage</requiredTools>
+    <expectedAnswerContains>bid-docs/triage-sample.pdf page 1</expectedAnswerContains>
+  </case>
+  <case id="review-only-signal">
+    <prompt>Which review-only term appears in the sample triage output?</prompt>
+    <requiredTools>cb_triage</requiredTools>
+    <expectedAnswerContains>access control</expectedAnswerContains>
+  </case>
+  <case id="excluded-signal">
+    <prompt>Which excluded fence-related scope did the sample triage output flag?</prompt>
+    <requiredTools>cb_triage</requiredTools>
+    <expectedAnswerContains>silt fence</expectedAnswerContains>
+  </case>
+  <case id="packet-summary">
+    <prompt>After approved sources are written, which page packet artifacts exist?</prompt>
+    <requiredTools>cb_build_packets</requiredTools>
+    <expectedAnswerContains>scope-pages.pdf</expectedAnswerContains>
+  </case>
+  <case id="workbook-artifact">
+    <prompt>Which workbook artifact should be reviewed before pricing?</prompt>
+    <requiredTools>cb_build_workbook</requiredTools>
+    <expectedAnswerContains>01-Takeoff-Worksheet-REV1.xlsx</expectedAnswerContains>
+  </case>
+  <case id="validator-output">
+    <prompt>Which validator file summarizes warnings and hard errors?</prompt>
+    <requiredTools>cb_check</requiredTools>
+    <expectedAnswerContains>ALERTS.md</expectedAnswerContains>
+  </case>
+  <case id="sendoff-zip">
+    <prompt>Which supplier sendoff artifact can be shared for vendor review?</prompt>
+    <requiredTools>cb_package_sendoff</requiredTools>
+    <expectedAnswerContains>supplier-sendoff</expectedAnswerContains>
+  </case>
+  <case id="tracker-readonly">
+    <prompt>How many active bids are currently in the fixture tracker?</prompt>
+    <requiredTools>cb_track_list</requiredTools>
+    <expectedAnswerContains>active bid</expectedAnswerContains>
+  </case>
+</evalSuite>

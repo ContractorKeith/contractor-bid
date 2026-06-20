@@ -4,6 +4,27 @@ All notable changes to `contractor-bid` will be documented here.
 
 ## Unreleased
 
+## [0.2.0] - 2026-06-20
+
+MCP and agent plugin distribution release.
+
+- Added `contractor-bid-mcp`, a FastMCP stdio server installed with the optional
+  `contractor-bid[mcp]` extra.
+- Added MCP tools for doctor, profile listing, project creation, triage, packet
+  building, workbook building, validation, sendoff packaging, learning feedback,
+  and bid tracker operations.
+- Added structured MCP responses with status, artifacts, summaries, alerts,
+  next-tool hints, and data payloads.
+- Added tracker write confirmation behavior for MCP tools so agents can show
+  proposed changes before writing.
+- Added Claude Code, Codex, and Cursor plugin metadata plus `.mcp.json` and
+  slash command wrappers.
+- Added a PyPI release workflow for tagged releases.
+- Added Homebrew formula template and release packaging notes.
+- Added MCP round-trip tests and read-only XML eval prompts for a sanitized
+  fixture workflow.
+- Documented `pipx install "contractor-bid[mcp]"` and agent plugin setup.
+
 ## [0.1.0] - 2026-06-20
 
 First public testing release. Early access — feedback and contributions encouraged.

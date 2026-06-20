@@ -1,0 +1,30 @@
+{
+  "name": "contractor-bid",
+  "version": "0.2.0",
+  "description": "AI-ready bid workspaces for commercial subcontractors.",
+  "author": {
+    "name": "ContractorKeith",
+    "url": "https://github.com/ContractorKeith"
+  },
+  "repository": "https://github.com/ContractorKeith/contractor-bid",
+  "license": "MIT",
+  "skills": [
+    "skills"
+  ],
+  "commands": [
+    "commands"
+  ],
+  "mcpServers": {
+    "contractor-bid": {
+      "command": "contractor-bid-mcp",
+      "args": []
+    }
+  },
+  "keywords": [
+    "construction",
+    "estimating",
+    "bidding",
+    "csi",
+    "subcontractor"
+  ]
+}
