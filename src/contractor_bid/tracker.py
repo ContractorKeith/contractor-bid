@@ -74,7 +74,10 @@ def find_entry(data: dict[str, Any], key: str) -> dict[str, Any] | None:
 
 def _load_project_meta(project_path: Path) -> dict[str, Any]:
     """Pull tracker fields from a bid project's project.json when present."""
-    meta: dict[str, Any] = {}
+    meta: dict[str, Any] = {
+        "project": project_path.name,
+        "id": slugify(project_path.name),
+    }
     project_json = project_path / "project.json"
     if not project_json.exists():
         return meta
