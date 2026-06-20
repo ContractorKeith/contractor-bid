@@ -696,12 +696,12 @@ def cb_track_add(
 def cb_track_update(
     bid: Annotated[str, Field(description="Bid id or exact project name to update.")],
     workspace_root: WorkspaceRoot = "",
-    location: Annotated[str, Field(description="Project location/address.")] = "",
-    due: Annotated[str, Field(description="Bid due date or date/time.")] = "",
-    progress: Annotated[str, Field(description="Tracker progress stage.")] = "",
-    next_action: Annotated[str, Field(description="Next action to take.")] = "",
-    gc: Annotated[str, Field(description="Client / GC contact.")] = "",
-    note: Annotated[str, Field(description="Optional dated note to append.")] = "",
+    location: Annotated[str | None, Field(description="Project location/address.")] = None,
+    due: Annotated[str | None, Field(description="Bid due date or date/time.")] = None,
+    progress: Annotated[str | None, Field(description="Tracker progress stage.")] = None,
+    next_action: Annotated[str | None, Field(description="Next action to take.")] = None,
+    gc: Annotated[str | None, Field(description="Client / GC contact.")] = None,
+    note: Annotated[str | None, Field(description="Optional dated note to append.")] = None,
     confirm: Annotated[
         bool,
         Field(description="Must be true after user confirmation before this tool writes."),
