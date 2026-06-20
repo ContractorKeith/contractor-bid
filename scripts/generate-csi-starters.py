@@ -18,7 +18,8 @@ from contractor_bid.util import read_json, write_json  # noqa: E402
 
 def example_profile(profile: dict) -> dict:
     item = dict(profile)
-    division = profile["csi_divisions"][0]
+    divisions = profile.get("csi_divisions", [])
+    division = divisions[0] if divisions else "XX"
     item["company_name"] = f"Example Division {division} Contractor"
     return item
 
