@@ -173,6 +173,8 @@ def add_or_update(
             "profile",
             "project_path",
         ):
+            if field_name == "project" and name is None and not meta.get("project"):
+                continue
             value = incoming.get(field_name)
             if value is not None and value != "" and value != entry.get(field_name):
                 entry[field_name] = value
