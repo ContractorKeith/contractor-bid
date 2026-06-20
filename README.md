@@ -4,6 +4,13 @@
 
 AI-ready bid workspaces for commercial subcontractors.
 
+> **Status: early access / in active development (v0.1.0).** This is a public testing
+> release shared to gather real-world feedback. Expect rough edges, and verify every
+> output against the source documents before pricing a real bid. Bug reports and
+> contributions are welcome and encouraged — please
+> [open an issue](https://github.com/ContractorKeith/contractor-bid/issues) or see
+> [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ![contractor-bid workflow](docs/assets/contractor-bid-flow.svg)
 
 Commercial bid folders are usually messy: large plan sets, project manuals, addenda, bid forms, scope gaps, and adjacent trades that can accidentally drift into your number. `contractor-bid` gives a subcontractor a repeatable project structure that an AI agent can work inside without losing the audit trail.
@@ -159,8 +166,11 @@ contractor-bid check bids/070126-example-project --profile fences-gates
 contractor-bid package-sendoff bids/070126-example-project
 ```
 
-Review `scope-pages-sources.json` before `build-packets`; triage suggestions are a starting point,
-not a pricing decision.
+Triage writes its suggestions to `scope-pages-sources.suggested.json`. Review that file, then
+merge the pages you approve into `scope-pages-sources.json` before `build-packets`. The
+`--write-sources` flag above only auto-fills `scope-pages-sources.json` while it is still empty;
+once it has your content, triage leaves it alone. Triage suggestions are a starting point, not a
+pricing decision.
 
 Then open:
 
