@@ -3,8 +3,10 @@ from __future__ import annotations
 import argparse
 import sys
 from datetime import date
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
+from . import __version__
 from .doctor import format_doctor, run_doctor
 from .learning import record_feedback
 from .packets import build_packets
@@ -14,6 +16,13 @@ from .sendoff import package_sendoff
 from .triage import triage_project
 from .validate import validate_project
 from .workbook import build_workbook
+
+
+def package_version() -> str:
+    try:
+        return version("contractor-bid")
+    except PackageNotFoundError:
+        return __version__
 
 
 def ask(prompt: str, default: str = "") -> str:
@@ -35,6 +44,7 @@ def command_init(args: argparse.Namespace) -> int:
     if args.non_interactive:
         company = args.company or "Your Company"
         trade = args.trade or "Your Scope"
+        scope_rule = args.scope_rule
         divisions = parse_csv(args.divisions)
         base_scope = parse_csv(args.base_scope)
         include_terms = parse_csv(args.include_terms)
@@ -47,6 +57,14 @@ def command_init(args: argparse.Namespace) -> int:
         print("Create a reusable scope profile for your commercial bid workflow.\n")
         company = ask("Company name", args.company or "Your Company")
         trade = ask("Trade / scope name", args.trade or "Fences and Gates")
+        scope_rule = ask(
+            "Scope rule",
+            args.scope_rule
+            or (
+                f"Base bid is limited to {trade}. Adjacent scopes must be explicitly "
+                "included, excluded, or flagged before pricing."
+            ),
+        )
         divisions = ask_list("CSI division(s), comma-separated", parse_csv(args.divisions) or ["32"])
         base_scope = ask_list("Work you usually carry in base bid")
         include_terms = ask_list("Keywords/spec terms that identify your scope")
@@ -60,6 +78,7 @@ def command_init(args: argparse.Namespace) -> int:
         company_name=company,
         trade_name=trade,
         profile_id=args.profile,
+        scope_rule=scope_rule,
         divisions=divisions,
         base_scope=base_scope,
         include_terms=include_terms,
@@ -165,6 +184,11 @@ def build_parser() -> argparse.ArgumentParser:
         description="Create and maintain AI-ready commercial subcontractor bid projects.",
     )
     parser.add_argument("--root", type=Path, default=Path.cwd(), help="Workspace root containing profiles/ and skills/.")
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {package_version()}",
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     init = sub.add_parser("init", help="Create a reusable scope profile and generated agent skill.")
@@ -179,6 +203,7 @@ def build_parser() -> argparse.ArgumentParser:
     init.add_argument("--review-terms", default="")
     init.add_argument("--exclude-terms", default="")
     init.add_argument("--proposal-exclusions", default="")
+    init.add_argument("--scope-rule", default=None)
     init.add_argument("--non-interactive", action="store_true")
     init.set_defaults(func=command_init)
 

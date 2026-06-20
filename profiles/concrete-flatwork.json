@@ -3,6 +3,7 @@
   "profile_id": "concrete-flatwork",
   "company_name": "Your Company",
   "trade_name": "Concrete Flatwork",
+  "skill_description": "Bid-project scope rules for concrete flatwork. Use when starting, triaging, validating, or packaging a commercial concrete flatwork bid.",
   "csi_divisions": ["03"],
   "scope_rule": "Base bid is limited to concrete flatwork defined by the profile. Adjacent sitework, asphalt, striping, landscaping, and utility work must be explicitly included, excluded, or flagged before pricing.",
   "base_scope": ["slabs", "sidewalks", "curbs", "equipment pads", "reinforcing for carried concrete"],

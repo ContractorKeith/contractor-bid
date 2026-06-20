@@ -3,6 +3,7 @@
   "profile_id": "electrical",
   "company_name": "Your Company",
   "trade_name": "Electrical",
+  "skill_description": "Bid-project scope rules for electrical work. Use when starting, triaging, validating, or packaging a commercial electrical bid.",
   "csi_divisions": ["26", "27", "28"],
   "scope_rule": "Base bid is limited to electrical systems defined by the profile. Low-voltage, fire alarm, security, data, controls, utility company work, and owner-furnished equipment must be explicitly included, excluded, or flagged before pricing.",
   "base_scope": ["panels", "feeders", "branch circuits", "lighting", "devices", "gear", "conduit"],

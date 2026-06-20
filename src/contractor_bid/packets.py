@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections import OrderedDict
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from .util import coerce_list, markdown_table, rel_display, read_json
 
@@ -173,7 +173,6 @@ def write_summary(
     combined_exists: bool,
 ) -> Path:
     work = project / "bid-package-working"
-    open_first = work / ("scope-and-spec-pages.pdf" if combined_exists else "scope-pages.pdf")
     lines = [
         f"# Bid Scope Summary - {data.get('project_name', project.name)}",
         "",
@@ -185,13 +184,37 @@ def write_summary(
         "",
         "## Extracted Packet Location",
         "",
-        f"- Open this first: `{open_first}`",
-        f"- `{work / 'scope-pages.pdf'}` ({scope_count} page(s))",
     ]
-    if spec_count:
-        lines.append(f"- `{work / 'spec-pages.pdf'}` ({spec_count} page(s))")
+
+    packet_lines: list[str] = []
     if combined_exists:
-        lines.append(f"- `{work / 'scope-and-spec-pages.pdf'}` ({scope_count + spec_count} page(s))")
+        combined = work / "scope-and-spec-pages.pdf"
+        packet_lines.append(f"- Open this first: `{rel_display(combined, project)}`")
+    elif scope_count:
+        scope_pdf = work / "scope-pages.pdf"
+        packet_lines.append(f"- Open this first: `{rel_display(scope_pdf, project)}`")
+    elif spec_count:
+        spec_pdf = work / "spec-pages.pdf"
+        packet_lines.append(f"- Open this first: `{rel_display(spec_pdf, project)}`")
+
+    if scope_count:
+        scope_pdf = work / "scope-pages.pdf"
+        packet_lines.append(f"- `{rel_display(scope_pdf, project)}` ({scope_count} page(s))")
+    if spec_count:
+        spec_pdf = work / "spec-pages.pdf"
+        packet_lines.append(f"- `{rel_display(spec_pdf, project)}` ({spec_count} page(s))")
+    if combined_exists:
+        combined = work / "scope-and-spec-pages.pdf"
+        packet_lines.append(
+            f"- `{rel_display(combined, project)}` ({scope_count + spec_count} page(s))"
+        )
+    if not packet_lines:
+        packet_lines.append(
+            "- No page packet PDFs were written yet. Fill "
+            "`bid-package-working/takeoff/scope-pages-sources.json` and re-run "
+            "`contractor-bid build-packets`."
+        )
+    lines += packet_lines
 
     sections = [
         ("What To Open First", "what_to_open_first"),

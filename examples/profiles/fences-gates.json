@@ -3,6 +3,7 @@
   "profile_id": "fences-gates",
   "company_name": "Example Fence Contractor",
   "trade_name": "Fences and Gates",
+  "skill_description": "Bid-project scope rules for fences and gates. Use when starting, triaging, validating, or packaging a commercial fence/gate bid.",
   "csi_divisions": ["32"],
   "scope_rule": "Base bid is limited to permanent fences, gates, gate hardware, and fence/gate-specific accessories. Adjacent scopes must be explicitly included, excluded, or flagged before pricing.",
   "base_scope": ["fence runs", "gate openings", "gate hardware", "operators", "posts", "rails", "panels", "fabric"],

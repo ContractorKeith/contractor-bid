@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 
 from contractor_bid.cli import main
+from contractor_bid.util import read_json
 
 
 class CliSmokeTest(unittest.TestCase):
@@ -35,12 +38,18 @@ class CliSmokeTest(unittest.TestCase):
                         "review-only",
                         "--exclude-terms",
                         "excluded work",
+                        "--scope-rule",
+                        "Carry sample scope only.",
                         "--non-interactive",
                     ]
                 ),
                 0,
             )
             self.assertTrue((root / "profiles" / "sample-scope.json").exists())
+            self.assertEqual(
+                read_json(root / "profiles" / "sample-scope.json")["scope_rule"],
+                "Carry sample scope only.",
+            )
             self.assertTrue((root / "skills" / "sample-scope-bid-scope" / "SKILL.md").exists())
 
             self.assertEqual(
@@ -123,6 +132,13 @@ class CliSmokeTest(unittest.TestCase):
                 0,
             )
             self.assertTrue((project / ".agent" / "skills" / "fences-gates-bid-scope" / "SKILL.md").exists())
+
+    def test_version_exits_zero(self) -> None:
+        stdout = StringIO()
+        with self.assertRaises(SystemExit) as raised, redirect_stdout(stdout):
+            main(["--version"])
+        self.assertEqual(raised.exception.code, 0)
+        self.assertIn("contractor-bid 0.1.0", stdout.getvalue())
 
 
 if __name__ == "__main__":

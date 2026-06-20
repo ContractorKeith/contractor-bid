@@ -3,6 +3,7 @@
   "profile_id": "drywall-framing",
   "company_name": "Your Company",
   "trade_name": "Drywall and Metal Framing",
+  "skill_description": "Bid-project scope rules for drywall and metal framing. Use when starting, triaging, validating, or packaging a commercial interiors bid.",
   "csi_divisions": ["09"],
   "scope_rule": "Base bid is limited to metal framing, gypsum board assemblies, finishing, and listed accessories. Adjacent insulation, ceilings, blocking, painting, and firestopping must be explicitly included, excluded, or flagged before pricing.",
   "base_scope": ["metal studs", "gypsum board", "shaftwall", "drywall finishing", "corner bead", "control joints"],

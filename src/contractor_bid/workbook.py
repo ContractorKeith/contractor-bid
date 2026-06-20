@@ -273,7 +273,7 @@ def build_workbook(
     title_block(specs, f"{data.get('project_name', project.name)} - Scope & Specs", "", 4)
     spec_rows = [
         [item.get("category", ""), item.get("requirement", ""), item.get("source", ""), item.get("notes", "")]
-        for item in data.get("scope_specs", data.get("gate_specs", []))
+        for item in data.get("scope_specs", [])
     ]
     write_rows(specs, 4, [["Category", "Requirement", "Source", "Notes"]] + spec_rows)
     style_header_row(specs, 4, 4)

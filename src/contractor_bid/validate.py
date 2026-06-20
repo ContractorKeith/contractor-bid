@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import re
 from datetime import date, datetime
 from pathlib import Path
@@ -33,7 +32,7 @@ SUMMARY_FIELDS = {
     "not_in_base_scope": "explicit exclusions",
 }
 
-PLACEHOLDERS = ("PROJECT NAME", "YYYY-MM-DD", "TBD", "TODO", "{{", "}}", "[", "]")
+PLACEHOLDERS = ("PROJECT NAME", "YYYY-MM-DD", "TBD", "TODO", "{{", "}}")
 
 
 def parse_due_date(folder_name: str) -> date | None:

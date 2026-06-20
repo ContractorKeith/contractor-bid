@@ -36,6 +36,8 @@ def build_profile(
     company_name: str,
     trade_name: str,
     profile_id: str | None = None,
+    skill_description: str | None = None,
+    scope_rule: str | None = None,
     divisions: list[str] | None = None,
     base_scope: list[str] | None = None,
     include_terms: list[str] | None = None,
@@ -53,7 +55,13 @@ def build_profile(
         "trade_name": trade_name,
         "csi_divisions": divisions or [],
         "created_at": now_iso(),
-        "scope_rule": (
+        "skill_description": skill_description
+        or (
+            f"Bid-project scope rules for {trade_name}. Use when starting, triaging, "
+            "validating, or packaging a bid for this subcontractor scope."
+        ),
+        "scope_rule": scope_rule
+        or (
             f"Base bid is limited to {trade_name}. Adjacent scopes must be explicitly "
             "included, excluded, or flagged before pricing."
         ),
@@ -95,7 +103,7 @@ def render_skill(profile: dict[str, Any]) -> str:
     divisions = ", ".join(profile.get("csi_divisions", [])) or "Not filled yet"
     return f"""---
 name: {profile["profile_id"]}-bid-scope
-description: Bid-project scope rules for {profile["trade_name"]}. Use when starting, triaging, validating, or packaging a bid for this subcontractor scope.
+description: {profile.get("skill_description") or f"Bid-project scope rules for {profile['trade_name']}. Use when starting, triaging, validating, or packaging a bid for this subcontractor scope."}
 ---
 
 # {profile["trade_name"]} Bid Scope
