@@ -20,6 +20,7 @@
       .blue { fill: #64a8c8; }
       .panel { fill: #16323f; stroke: #e8e2da; stroke-opacity: 0.32; stroke-width: 2; }
       .paper { fill: #e8e2da; fill-opacity: 0.08; stroke: #e8e2da; stroke-opacity: 0.34; stroke-width: 2; }
+      .avatar-line { fill: #e8e2da; font-size: 13px; opacity: 0.84; }
     </style>
   </defs>
 
@@ -54,7 +55,7 @@
   <text x="426" y="306" class="mono small"><tspan fill="#7bb661">$</tspan> build-packets</text>
   <text x="426" y="344" class="mono small"><tspan fill="#7bb661">$</tspan> build-workbook</text>
   <text x="426" y="382" class="mono small"><tspan fill="#7bb661">$</tspan> check + package-sendoff</text>
-  <text x="560" y="224" text-anchor="middle" class="mono tiny">Claude / Codex / local model can work here</text>
+  <text x="560" y="224" text-anchor="middle" class="mono tiny">Claude / Codex / local models</text>
 
   <line x1="720" y1="295" x2="798" y2="295" stroke="#e07a1f" stroke-width="4" marker-end="url(#arrow-orange)"/>
 
@@ -64,7 +65,8 @@
   <g class="mono">
     <rect x="842" y="198" width="112" height="72" rx="6" class="paper"/>
     <text x="858" y="225" class="small">summary</text>
-    <text x="858" y="248" class="tiny">what / where / why</text>
+    <text x="858" y="246" class="tiny">what / where</text>
+    <text x="858" y="264" class="tiny">why</text>
 
     <rect x="976" y="198" width="112" height="72" rx="6" class="paper"/>
     <text x="992" y="225" class="small">page PDFs</text>
@@ -72,19 +74,20 @@
 
     <rect x="842" y="292" width="112" height="72" rx="6" class="paper"/>
     <text x="858" y="319" class="small">workbook</text>
-    <text x="858" y="342" class="tiny">BOM + quote inputs</text>
+    <text x="858" y="342" class="tiny">BOM + quotes</text>
 
     <rect x="976" y="292" width="112" height="72" rx="6" class="paper"/>
     <text x="992" y="319" class="small">alerts</text>
-    <text x="992" y="342" class="tiny">scope drift check</text>
+    <text x="992" y="340" class="tiny">scope drift</text>
+    <text x="992" y="358" class="tiny">check</text>
 
     <rect x="842" y="386" width="112" height="72" rx="6" class="paper"/>
     <text x="858" y="413" class="small">proposal</text>
-    <text x="858" y="436" class="tiny">GC-facing draft</text>
+    <text x="858" y="436" class="tiny">GC draft</text>
 
     <rect x="976" y="386" width="112" height="72" rx="6" class="paper"/>
     <text x="992" y="413" class="small">sendoff</text>
-    <text x="992" y="436" class="tiny">zip for suppliers</text>
+    <text x="992" y="436" class="tiny">vendor zip</text>
   </g>
 
   <path d="M965 482 C930 548 790 562 638 535 C516 513 408 467 352 407" fill="none" stroke="#64a8c8" stroke-width="3" stroke-dasharray="9 9" marker-end="url(#arrow-blue)"/>
@@ -92,6 +95,15 @@
   <text x="378" y="486" class="mono blue" font-size="20" font-weight="700">learn from corrections</text>
   <text x="378" y="512" class="mono tiny">feedback.jsonl -> profile, skill, template, validator</text>
 
-  <text x="56" y="562" class="mono accent" font-size="25" font-weight="800">from source docs to a reviewable package before pricing</text>
-  <text x="1144" y="562" text-anchor="end" class="mono tiny">ContractorKeith palette: blueprint blue, construction orange, cream linework</text>
+  <text x="56" y="548" class="mono accent" font-size="23" font-weight="800">source docs -> reviewable bid package before pricing</text>
+  <g>
+    <circle cx="74" cy="580" r="17" fill="#ffe100" stroke="#e8e2da" stroke-opacity="0.85" stroke-width="2"/>
+    <path d="M60 577 C62 566 68 561 74 561 C80 561 86 566 88 577 Z" fill="#e0b14f" stroke="#0f2530" stroke-opacity="0.72" stroke-width="1.4"/>
+    <path d="M61 577 H87" stroke="#0f2530" stroke-opacity="0.72" stroke-width="2" stroke-linecap="round"/>
+    <path d="M65 581 C67 590 81 590 83 581 C81 584 78 586 74 586 C70 586 67 584 65 581 Z" fill="#f0b38b" stroke="#0f2530" stroke-opacity="0.65" stroke-width="1"/>
+    <path d="M68 580 H72 M76 580 H80 M70 586 C73 588 76 588 79 586" stroke="#0f2530" stroke-opacity="0.78" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+  </g>
+  <text x="102" y="575" class="mono avatar-line">built by @ContractorKeith</text>
+  <text x="102" y="595" class="mono avatar-line">contractorkeith.com</text>
+  <text x="1144" y="584" text-anchor="end" class="mono accent" font-size="15" font-weight="800">Star the repo if this saves bid setup time.</text>
 </svg>

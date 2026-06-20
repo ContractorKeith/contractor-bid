@@ -6,6 +6,8 @@ AI-ready bid workspaces for commercial subcontractors.
 
 Commercial bid folders are usually messy: large plan sets, project manuals, addenda, bid forms, scope gaps, and adjacent trades that can accidentally drift into your number. `contractor-bid` gives a subcontractor a repeatable project structure that an AI agent can work inside without losing the audit trail.
 
+If this saves you bid setup time, star the repo so more subcontractors can find it.
+
 It does not price the job for you. It helps turn bid documents into a reviewable package: relevant pages, source-backed summaries, workbook inputs, proposal language, alerts, and a sendoff folder.
 
 ## What This Repo Does
