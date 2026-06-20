@@ -31,6 +31,27 @@ def load_profile(path_or_id: str | Path, root: Path) -> dict[str, Any]:
     raise FileNotFoundError(f"Scope profile not found: {path_or_id}")
 
 
+def list_available_profiles(root: Path) -> list[tuple[str, str, str]]:
+    seen: set[str] = set()
+    rows: list[tuple[str, str, str]] = []
+    for source, base in [("workspace", root / "profiles")] + [
+        ("built-in", path) for path in resource_dirs("profiles")
+    ]:
+        if not base.exists():
+            continue
+        for path in sorted(base.glob("*.json")):
+            try:
+                profile = read_json(path)
+            except Exception:
+                continue
+            profile_id = str(profile.get("profile_id") or path.stem)
+            if profile_id in seen:
+                continue
+            seen.add(profile_id)
+            rows.append((profile_id, str(profile.get("trade_name") or profile_id), source))
+    return rows
+
+
 def build_profile(
     *,
     company_name: str,

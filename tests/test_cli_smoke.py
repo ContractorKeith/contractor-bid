@@ -133,6 +133,71 @@ class CliSmokeTest(unittest.TestCase):
             )
             self.assertTrue((project / ".agent" / "skills" / "fences-gates-bid-scope" / "SKILL.md").exists())
 
+    def test_list_profiles_status_and_run_commands(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            project = root / "bids" / "070126-fence-sample"
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                self.assertEqual(main(["--root", str(root), "list-profiles"]), 0)
+            self.assertIn("fences-gates - Fences and Gates", stdout.getvalue())
+
+            self.assertEqual(
+                main(
+                    [
+                        "--root",
+                        str(root),
+                        "new",
+                        str(project),
+                        "--profile",
+                        "fences-gates",
+                        "--project-name",
+                        "Fence Sample",
+                    ]
+                ),
+                0,
+            )
+
+            stdout = StringIO()
+            with redirect_stdout(stdout):
+                self.assertEqual(
+                    main(
+                        [
+                            "--root",
+                            str(root),
+                            "status",
+                            str(project),
+                            "--profile",
+                            "fences-gates",
+                            "--today",
+                            "2026-06-29",
+                        ]
+                    ),
+                    0,
+                )
+            self.assertIn("Deliverable", stdout.getvalue())
+            self.assertFalse((project / "bid-package-working" / "ALERTS.md").exists())
+
+            self.assertEqual(
+                main(
+                    [
+                        "--root",
+                        str(root),
+                        "run",
+                        str(project),
+                        "--profile",
+                        "fences-gates",
+                        "--today",
+                        "2026-06-29",
+                    ]
+                ),
+                0,
+            )
+            self.assertTrue((project / "bid-package-working" / "ALERTS.md").exists())
+            zips = list((project / "bid-package-working" / "supplier-sendoff").glob("*.zip"))
+            self.assertEqual(len(zips), 1)
+
     def test_version_exits_zero(self) -> None:
         stdout = StringIO()
         with self.assertRaises(SystemExit) as raised, redirect_stdout(stdout):

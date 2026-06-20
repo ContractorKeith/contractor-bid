@@ -10,11 +10,12 @@ from . import __version__
 from .doctor import format_doctor, run_doctor
 from .learning import record_feedback
 from .packets import build_packets
-from .profile import build_profile, load_profile, parse_csv, write_profile
+from .profile import build_profile, list_available_profiles, load_profile, parse_csv, write_profile
 from .project import create_project, ensure_workspace
 from .sendoff import package_sendoff
 from .triage import triage_project
-from .validate import validate_project
+from .util import markdown_table
+from .validate import deliverable_checklist, validate_project
 from .workbook import build_workbook
 
 
@@ -115,7 +116,13 @@ def command_new(args: argparse.Namespace) -> int:
 def command_triage(args: argparse.Namespace) -> int:
     root = args.root.resolve()
     profile = load_profile(args.profile, root)
-    hits = triage_project(args.project.resolve(), profile, render=args.render, max_render=args.max_render)
+    hits = triage_project(
+        args.project.resolve(),
+        profile,
+        render=args.render,
+        max_render=args.max_render,
+        write_sources=args.write_sources,
+    )
     print(f"Triage complete: {len(hits)} candidate page(s)")
     print(f"- {args.project.resolve() / 'bid-package-working' / 'takeoff' / 'candidate-pages.md'}")
     print(f"- {args.project.resolve() / 'bid-package-working' / 'takeoff' / 'triage-scope-signals.md'}")
@@ -153,6 +160,26 @@ def command_check(args: argparse.Namespace) -> int:
     return exit_code
 
 
+def command_status(args: argparse.Namespace) -> int:
+    profile = load_profile(args.profile, args.root.resolve())
+    today = date.fromisoformat(args.today) if args.today else None
+    project = args.project.resolve()
+    rows, _alerts, _errors = deliverable_checklist(project / "bid-package-working")
+    _out, exit_code, warnings, errors = validate_project(
+        project,
+        profile,
+        today=today,
+        write=False,
+    )
+    print(f"Status for: {project}")
+    print("")
+    print("\n".join(markdown_table(["Status", "Deliverable", "Path"], rows)))
+    print("")
+    print(f"Warnings: {len(warnings)}")
+    print(f"Hard errors: {len(errors)}")
+    return exit_code
+
+
 def command_package(args: argparse.Namespace) -> int:
     out_dir, zip_path = package_sendoff(args.project.resolve(), name=args.name)
     print(f"Built sendoff folder: {out_dir}")
@@ -178,6 +205,38 @@ def command_doctor(args: argparse.Namespace) -> int:
     return exit_code
 
 
+def command_list_profiles(args: argparse.Namespace) -> int:
+    rows = list_available_profiles(args.root.resolve())
+    if not rows:
+        print("No profiles found.")
+        return 1
+    for profile_id, trade_name, source in rows:
+        print(f"{profile_id} - {trade_name} ({source})")
+    return 0
+
+
+def command_run(args: argparse.Namespace) -> int:
+    profile = load_profile(args.profile, args.root.resolve())
+    project = args.project.resolve()
+
+    packets = build_packets(project)
+    print(f"Built page-packet artifacts: {packets['summary']}")
+
+    workbook = build_workbook(project, profile=profile)
+    print(f"Built workbook: {workbook}")
+
+    today = date.fromisoformat(args.today) if args.today else None
+    alerts, exit_code, warnings, errors = validate_project(project, profile, today=today)
+    print(f"Wrote alerts: {alerts}")
+    print(f"Warnings: {len(warnings)}")
+    print(f"Hard errors: {len(errors)}")
+
+    out_dir, zip_path = package_sendoff(project, name=args.name)
+    print(f"Built sendoff folder: {out_dir}")
+    print(f"Built sendoff zip:    {zip_path}")
+    return exit_code
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="contractor-bid",
@@ -190,6 +249,9 @@ def build_parser() -> argparse.ArgumentParser:
         version=f"%(prog)s {package_version()}",
     )
     sub = parser.add_subparsers(dest="command", required=True)
+
+    list_profiles = sub.add_parser("list-profiles", help="List built-in and workspace profiles.")
+    list_profiles.set_defaults(func=command_list_profiles)
 
     init = sub.add_parser("init", help="Create a reusable scope profile and generated agent skill.")
     init.add_argument("--profile", default=None, help="Profile id, e.g. fences-gates or concrete.")
@@ -221,6 +283,11 @@ def build_parser() -> argparse.ArgumentParser:
     triage.add_argument("--profile", required=True)
     triage.add_argument("--render", action="store_true", help="Render top candidate pages with pdftoppm when available.")
     triage.add_argument("--max-render", type=int, default=20)
+    triage.add_argument(
+        "--write-sources",
+        action="store_true",
+        help="Copy suggested scope pages into the canonical sources JSON only if it is empty.",
+    )
     triage.set_defaults(func=command_triage)
 
     packets = sub.add_parser("build-packets", help="Build scope/spec page PDFs and quick-read summary.")
@@ -242,10 +309,23 @@ def build_parser() -> argparse.ArgumentParser:
     check.add_argument("--no-write", action="store_true")
     check.set_defaults(func=command_check)
 
+    status = sub.add_parser("status", help="Show bid package status without writing ALERTS.md.")
+    status.add_argument("project", type=Path)
+    status.add_argument("--profile", required=True)
+    status.add_argument("--today", default=None, help="Override date for due-date math, YYYY-MM-DD.")
+    status.set_defaults(func=command_status)
+
     package = sub.add_parser("package-sendoff", help="Create supplier/partner sendoff folder and zip.")
     package.add_argument("project", type=Path)
     package.add_argument("--name", default=None)
     package.set_defaults(func=command_package)
+
+    run = sub.add_parser("run", help="Run packets, workbook, validation, and sendoff packaging.")
+    run.add_argument("project", type=Path)
+    run.add_argument("--profile", required=True)
+    run.add_argument("--today", default=None, help="Override date for due-date math, YYYY-MM-DD.")
+    run.add_argument("--name", default=None, help="Optional sendoff package name.")
+    run.set_defaults(func=command_run)
 
     learn = sub.add_parser("learn", help="Record a correction or reusable lesson for future bids.")
     learn.add_argument("--note", required=True)

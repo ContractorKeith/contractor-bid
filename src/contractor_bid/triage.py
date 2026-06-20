@@ -22,6 +22,9 @@ ROLE_PATTERNS = {
     "access / controls": r"\b(access\s+control|operator|panel|controller|keypad|reader|alarm)\b",
 }
 
+SHEET_RE = re.compile(r"\b([A-Z]{1,4}[- ]?\d+(?:\.\d+)?[A-Z]?)\b")
+SOURCE_PLACEHOLDERS = ("PROJECT NAME", "YYYY-MM-DD", "TBD", "TODO", "{{", "}}")
+
 
 @dataclass
 class PageHit:
@@ -127,6 +130,33 @@ def extract_page_text(pdf: Path, page: int) -> str:
     return reader.pages[page - 1].extract_text() or ""
 
 
+def split_pdftotext_output(text: str, page_count: int) -> list[str] | None:
+    pages = text.split("\f")
+    if len(pages) == page_count + 1 and not pages[-1].strip():
+        pages = pages[:-1]
+    if len(pages) != page_count:
+        return None
+    return pages
+
+
+def extract_pdf_text_pages(pdf: Path, page_count: int) -> list[str]:
+    if shutil.which("pdftotext"):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "all-pages.txt"
+            run(["pdftotext", "-layout", str(pdf), str(out)])
+            text = out.read_text(encoding="utf-8", errors="ignore")
+        pages = split_pdftotext_output(text, page_count)
+        if pages is not None:
+            return pages
+
+    try:
+        from pypdf import PdfReader
+    except Exception as exc:
+        raise RuntimeError("Install Poppler or pypdf to extract PDF text") from exc
+    reader = PdfReader(str(pdf))
+    return [(reader.pages[idx].extract_text() or "") for idx in range(page_count)]
+
+
 def classify(score: int, includes: list[str], reviews: list[str], excludes: list[str]) -> str:
     if includes and score >= 10:
         return "primary-review"
@@ -158,12 +188,93 @@ def render_page_image(pdf: Path, page: int, out_dir: Path, status: str) -> str:
     return image.name if image.exists() else ""
 
 
+def best_effort_sheet(text: str) -> str:
+    match = SHEET_RE.search(text)
+    return match.group(1).replace(" ", "") if match else ""
+
+
+def suggested_scope_entries(hits: list[PageHit]) -> list[dict[str, Any]]:
+    entries: list[dict[str, Any]] = []
+    seen: set[tuple[str, int]] = set()
+    for hit in hits:
+        if hit.status not in {"primary-review", "secondary-review"}:
+            continue
+        key = (hit.source_relpath, hit.pdf_page)
+        if key in seen:
+            continue
+        seen.add(key)
+        entries.append(
+            {
+                "source_pdf": hit.source_relpath,
+                "pdf_page": hit.pdf_page,
+                "sheet": best_effort_sheet(hit.snippet),
+                "title": "",
+                "evidence": hit.snippet,
+            }
+        )
+    return entries
+
+
+def empty_or_placeholder(value: Any) -> bool:
+    if value is None:
+        return True
+    if isinstance(value, list):
+        return not value or all(empty_or_placeholder(item) for item in value)
+    if isinstance(value, dict):
+        return not value or all(empty_or_placeholder(item) for item in value.values())
+    text = str(value).strip()
+    if not text:
+        return True
+    upper = text.upper()
+    return any(token in upper for token in SOURCE_PLACEHOLDERS)
+
+
+def canonical_sources_empty(data: dict[str, Any]) -> bool:
+    for field in ("scope_pages", "spec_pages", "excluded_or_reference_only"):
+        if data.get(field):
+            return False
+    fields = (
+        "bid_decision_summary",
+        "what_to_open_first",
+        "scope_items",
+        "quantity_mentions",
+        "brand_or_product_mentions",
+        "access_or_interface_notes",
+        "not_in_base_scope",
+        "open_questions",
+        "no_spec_pages_found",
+    )
+    return all(empty_or_placeholder(data.get(field)) for field in fields)
+
+
+def build_suggested_sources(project: Path, hits: list[PageHit]) -> dict[str, Any]:
+    work = project / "bid-package-working"
+    canonical = work / "takeoff" / "scope-pages-sources.json"
+    if canonical.exists():
+        try:
+            data = json.loads(canonical.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            data = {}
+    else:
+        data = {}
+
+    suggested = dict(data)
+    suggested.setdefault("project_name", project.name)
+    suggested.setdefault("prepared", "")
+    suggested.setdefault("scope_note", "")
+    suggested["scope_pages"] = suggested_scope_entries(hits)
+    suggested.setdefault("spec_pages", [])
+    suggested.setdefault("excluded_or_reference_only", [])
+    return suggested
+
+
 def triage_project(
     project: Path,
     profile: dict[str, Any],
     *,
     render: bool = False,
     max_render: int = 20,
+    write_sources: bool = False,
 ) -> list[PageHit]:
     project = project.resolve()
     bid_docs = project / "bid-docs"
@@ -188,12 +299,21 @@ def triage_project(
     units = profile.get("quantity_units", [])
 
     hits: list[PageHit] = []
+    scanned_warnings: list[str] = []
     rendered = 0
     for pdf in pdfs:
         pages = pdf_count(pdf)
+        page_texts = extract_pdf_text_pages(pdf, pages)
+        mean_chars = sum(len(compact(text)) for text in page_texts) / max(pages, 1)
+        if mean_chars < 15:
+            warning = (
+                f"WARNING: {rel_display(pdf, project)} looks scanned/image-only - "
+                "needs OCR before triage works."
+            )
+            print(warning)
+            scanned_warnings.append(warning)
         combined_text: list[str] = []
-        for page in range(1, pages + 1):
-            text = extract_page_text(pdf, page)
+        for page, text in enumerate(page_texts, start=1):
             combined_text.append(f"\n\n--- PAGE {page} ---\n{text}")
             includes = find_terms(text, include_terms)
             reviews = find_terms(text, review_terms)
@@ -232,11 +352,18 @@ def triage_project(
         )
 
     hits.sort(key=lambda item: (item.status != "primary-review", -item.score, item.source_relpath, item.pdf_page))
-    write_outputs(project, profile, hits)
+    write_outputs(project, profile, hits, scanned_warnings=scanned_warnings, write_sources=write_sources)
     return hits
 
 
-def write_outputs(project: Path, profile: dict[str, Any], hits: list[PageHit]) -> None:
+def write_outputs(
+    project: Path,
+    profile: dict[str, Any],
+    hits: list[PageHit],
+    *,
+    scanned_warnings: list[str] | None = None,
+    write_sources: bool = False,
+) -> None:
     work = project / "bid-package-working"
     text_dir = work / "text-extracts"
     takeoff_dir = work / "takeoff"
@@ -279,6 +406,10 @@ def write_outputs(project: Path, profile: dict[str, Any], hits: list[PageHit]) -
         f"Profile: `{profile['profile_id']}` ({profile['trade_name']})",
         "",
     ]
+    if scanned_warnings:
+        candidate_lines += ["## Warnings", ""]
+        candidate_lines += [f"- {warning}" for warning in scanned_warnings]
+        candidate_lines.append("")
     for status in ("primary-review", "secondary-review", "flag-review", "exclude-review"):
         bucket = [hit for hit in hits if hit.status == status]
         candidate_lines += [f"## {status}", ""]
@@ -320,10 +451,33 @@ def write_outputs(project: Path, profile: dict[str, Any], hits: list[PageHit]) -
         "\n".join(triage_lines) + "\n", encoding="utf-8"
     )
 
+    suggested = build_suggested_sources(project, hits)
+    suggested_path = takeoff_dir / "scope-pages-sources.suggested.json"
+    write_json(suggested_path, suggested)
+    suggested_count = len(suggested.get("scope_pages", []))
+    print(
+        f"Suggested {suggested_count} scope page(s) -> review "
+        "`bid-package-working/takeoff/scope-pages-sources.suggested.json`."
+    )
+    if write_sources:
+        canonical_path = takeoff_dir / "scope-pages-sources.json"
+        current = {}
+        if canonical_path.exists():
+            current = json.loads(canonical_path.read_text(encoding="utf-8"))
+        if not current or canonical_sources_empty(current):
+            write_json(canonical_path, suggested)
+            print("Wrote suggested pages into `bid-package-working/takeoff/scope-pages-sources.json`.")
+        else:
+            print(
+                "Skipped `scope-pages-sources.json` because it already has user-entered content."
+            )
+
     metadata = {
         "profile": profile["profile_id"],
         "project": str(project),
         "python": sys.version.split()[0],
         "hits": len(hits),
+        "scanned_warnings": scanned_warnings or [],
+        "suggested_scope_pages": suggested_count,
     }
     write_json(text_dir / "extraction-metadata.json", metadata)

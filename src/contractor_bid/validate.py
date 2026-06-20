@@ -126,6 +126,22 @@ def check_page_sources(work: Path) -> list[str]:
     return warnings
 
 
+def deliverable_checklist(work: Path) -> tuple[list[list[str]], list[str], list[str]]:
+    alerts: list[str] = []
+    errors: list[str] = []
+    rows: list[list[str]] = []
+    if not work.exists():
+        errors.append("bid-package-working/ does not exist.")
+    for rel, label, required in CHECKLIST:
+        target = work / rel
+        exists = target.exists()
+        status = "OK" if exists else ("MISSING" if required else "optional")
+        rows.append([status, label, f"`bid-package-working/{rel}`"])
+        if required and not exists:
+            alerts.append(f"Missing required deliverable: bid-package-working/{rel}")
+    return rows, alerts, errors
+
+
 def validate_project(
     project: Path,
     profile: dict[str, Any],
@@ -166,16 +182,9 @@ def validate_project(
         lines.append("- Folder name has no MMDDYY due-date prefix; urgency cannot be computed.")
     lines.append("")
 
-    checklist_rows: list[list[str]] = []
-    if not work.exists():
-        errors.append("bid-package-working/ does not exist.")
-    for rel, label, required in CHECKLIST:
-        target = work / rel
-        exists = target.exists()
-        status = "OK" if exists else ("MISSING" if required else "optional")
-        checklist_rows.append([status, label, f"`bid-package-working/{rel}`"])
-        if required and not exists:
-            alerts.append(f"Missing required deliverable: bid-package-working/{rel}")
+    checklist_rows, checklist_alerts, checklist_errors = deliverable_checklist(work)
+    alerts.extend(checklist_alerts)
+    errors.extend(checklist_errors)
     lines += ["## Deliverable Checklist", ""]
     lines += markdown_table(["Status", "Deliverable", "Path"], checklist_rows)
     lines.append("")
