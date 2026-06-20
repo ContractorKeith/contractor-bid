@@ -41,9 +41,12 @@ def check(root: Path) -> int:
             failures.append(f"missing: {path.relative_to(root)}")
             continue
         if isinstance(expected, dict):
-            actual = read_json(path)
-            if actual != expected:
-                failures.append(f"stale: {path.relative_to(root)}")
+            try:
+                actual = read_json(path)
+                if actual != expected:
+                    failures.append(f"stale: {path.relative_to(root)}")
+            except Exception as e:
+                failures.append(f"corrupt/invalid JSON: {path.relative_to(root)} ({e})")
         else:
             actual = path.read_text(encoding="utf-8")
             if actual != expected:
