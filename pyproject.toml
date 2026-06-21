@@ -19,6 +19,9 @@ dependencies = [
 keywords = ["construction", "estimating", "subcontractor", "bid", "csi", "takeoff", "ai"]
 
 [project.optional-dependencies]
+docs = [
+  "mkdocs-material>=9.6,<10"
+]
 mcp = [
   "mcp>=1.8.1"
 ]

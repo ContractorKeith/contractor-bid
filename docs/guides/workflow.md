@@ -1,4 +1,4 @@
-# Workflow
+# Full Bid Workflow
 
 ## One-Time Setup
 
@@ -40,7 +40,8 @@ Built-in starter profiles:
 
 - Canonical CSI starters use `division-XX-*` ids and cover every active MasterFormat division from 03 through 33.
 - Trade-specific examples such as `fences-gates`, `concrete-flatwork`, `drywall-framing`, `electrical`, `plumbing`, `hvac`, and `roofing` show how to narrow a division into a company-specific bid scope.
-- See `docs/CSI_DIVISIONS.md` for the full active/reserved division table.
+- See [CSI Division Starters](../reference/csi-divisions.md) for the full active/reserved
+  division table.
 
 ## Naming
 
