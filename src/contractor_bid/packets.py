@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import warnings
 from collections import OrderedDict
 from pathlib import Path
 from typing import Any
@@ -114,8 +115,12 @@ def write_packet(
                 f"{entry.get('sheet', '')} {entry.get('title', '')}".strip() or f"Page {packet_page}",
                 packet_page - 1,
             )
-        except Exception:
-            pass
+        except Exception as exc:
+            warnings.warn(
+                f"Could not add PDF outline item for packet page {packet_page}: {exc}",
+                RuntimeWarning,
+                stacklevel=2,
+            )
         rows.append(
             [
                 packet_page,
