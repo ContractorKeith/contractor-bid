@@ -213,6 +213,29 @@ More detail: [MCP And Agent Plugin Setup](docs/guides/mcp-plugin-setup.md).
 
 ## Quick Start
 
+Want a deterministic proof-of-life before touching real bid docs? From a source checkout, copy
+the fictional fences/gates sample and run the pipeline:
+
+```bash
+mkdir -p /tmp/contractor-bid-demo/bids
+cp -R examples/fictional-fences-gates-demo \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence
+PYTHONPATH=src python3 -m contractor_bid triage \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence --profile fences-gates
+PYTHONPATH=src python3 -m contractor_bid build-packets \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence
+PYTHONPATH=src python3 -m contractor_bid build-workbook \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence --profile fences-gates
+PYTHONPATH=src python3 -m contractor_bid check \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence --profile fences-gates --today 2026-06-30
+PYTHONPATH=src python3 -m contractor_bid package-sendoff \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence
+```
+
+The sample uses only fake PDFs and fake quantities. See
+[`examples/fictional-fences-gates-demo/README.md`](examples/fictional-fences-gates-demo/README.md)
+for what it proves.
+
 Create a workspace for your bids:
 
 ```bash

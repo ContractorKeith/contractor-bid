@@ -1,0 +1,224 @@
+{
+  "_README": "Fictional demo takeoff. Quantities are fake and source-backed only for pipeline testing.",
+  "project_name": "Fictional Cedar Park Service Yard",
+  "prepared_date": "2026-06-20",
+  "scope_rule": "Base bid is limited to permanent fences, gates, gate hardware, and fence/gate-specific accessories. Adjacent scopes must be explicitly included, excluded, or flagged before pricing.",
+  "latest_revision_basis": [
+    "Fictional bid set dated 2026-06-20",
+    "Addendum 01 revising fence run to 420 LF"
+  ],
+  "project_details": [
+    ["Project", "Fictional Cedar Park Service Yard"],
+    ["Address", "100 Demo Service Road, Example City, ST"],
+    ["GC / Contact", "Demo GC Estimating <estimating@example.invalid>"],
+    ["Bid Due", "2026-07-01 14:00"],
+    ["Prepared", "2026-06-20"],
+    ["Scope Profile", "fences-gates"],
+    ["Scope Rule", "Base bid is limited to permanent fences, gates, gate hardware, and fence/gate-specific accessories. Adjacent scopes must be explicitly included, excluded, or flagged before pricing."],
+    ["Latest Basis", "Addendum 01 revises fence run from 400 LF to 420 LF."],
+    ["Base Carry", "Permanent chain link fence, G-1 double swing gate, and gate hardware."],
+    ["Critical Exclusions", "Bollards, concrete, paving, temporary fence, silt fence, tree protection fence, electrical/access-control wiring, guardrail, and handrail."]
+  ],
+  "scope_summary": [
+    {
+      "status": "Included",
+      "scope": "Galvanized chain link fence",
+      "quantity": "420 LF",
+      "notes": "Addendum 01 quantity basis."
+    },
+    {
+      "status": "Included",
+      "scope": "Double swing gate G-1 and hardware",
+      "quantity": "1 EA gate, 1 EA hardware set",
+      "notes": "A1.0 and A7.2."
+    },
+    {
+      "status": "Excluded",
+      "scope": "Bollards, concrete, paving, temporary fence, silt fence, and tree protection fence",
+      "quantity": "0",
+      "notes": "Shown for coordination only or by others."
+    },
+    {
+      "status": "Flag / Review",
+      "scope": "Guardrail and handrail",
+      "quantity": "0",
+      "notes": "Architectural metals adjacent scope."
+    },
+    {
+      "status": "Alternate / Not Included",
+      "scope": "Gate operator and access-control interface",
+      "quantity": "0",
+      "notes": "Price separately only if requested."
+    }
+  ],
+  "bom": [
+    {
+      "section": "32 31 13",
+      "item": "Chain link fence system",
+      "description": "8 FT high galvanized chain link fence with posts, top rail, fabric, accessories, and three strands barbed wire.",
+      "qty": 420,
+      "uom": "LF",
+      "status": "Included",
+      "source": "A1.0 p1, A7.2 p2, ADD-01 p1",
+      "supplier": "Demo Fence Supplier",
+      "material_unit_cost": 0,
+      "labor_unit_cost": 0,
+      "lead_time": "Demo only",
+      "quote_notes": "Fake quantity and pricing placeholders."
+    },
+    {
+      "section": "32 31 13",
+      "item": "Double swing gate G-1",
+      "description": "24 FT double swing gate including gate posts, frames, truss rods, and accessories.",
+      "qty": 1,
+      "uom": "EA",
+      "status": "Included",
+      "source": "A1.0 p1, A7.2 p2, ADD-01 p1",
+      "supplier": "Demo Gate Supplier",
+      "material_unit_cost": 0,
+      "labor_unit_cost": 0,
+      "lead_time": "Demo only",
+      "quote_notes": "Fake quantity and pricing placeholders."
+    },
+    {
+      "section": "32 31 13",
+      "item": "Gate hardware set",
+      "description": "Latch, hinges, panic hardware, and gate-specific accessories for G-1.",
+      "qty": 1,
+      "uom": "EA",
+      "status": "Included",
+      "source": "A1.0 p1, A7.2 p2, Section 32 31 13 p1",
+      "supplier": "Demo Hardware Supplier",
+      "material_unit_cost": 0,
+      "labor_unit_cost": 0,
+      "lead_time": "Demo only",
+      "quote_notes": "Fake quantity and pricing placeholders."
+    },
+    {
+      "section": "Civil",
+      "item": "Bollards, concrete, and paving restoration",
+      "description": "Bollards, concrete mow strip, and paving restoration shown for coordination only.",
+      "qty": 0,
+      "uom": "EA",
+      "status": "Excluded",
+      "source": "C2.0 p4, ADD-01 p1",
+      "supplier": "",
+      "material_unit_cost": 0,
+      "labor_unit_cost": 0,
+      "lead_time": "",
+      "quote_notes": "Excluded adjacent civil scope."
+    },
+    {
+      "section": "Temporary Controls",
+      "item": "Temporary fence, silt fence, and tree protection fence",
+      "description": "Temporary fence, silt fence, and tree protection fence are by others.",
+      "qty": 0,
+      "uom": "LF",
+      "status": "Excluded",
+      "source": "C2.0 p4",
+      "supplier": "",
+      "material_unit_cost": 0,
+      "labor_unit_cost": 0,
+      "lead_time": "",
+      "quote_notes": "Excluded adjacent scope."
+    },
+    {
+      "section": "Architectural Metals",
+      "item": "Guardrail and handrail",
+      "description": "Guardrail and handrail at loading dock are review-only adjacent architectural metals scope.",
+      "qty": 0,
+      "uom": "LF",
+      "status": "Flag / Review",
+      "source": "S4.0 p5",
+      "supplier": "",
+      "material_unit_cost": 0,
+      "labor_unit_cost": 0,
+      "lead_time": "",
+      "quote_notes": "Flag before pricing; not base bid."
+    },
+    {
+      "section": "Access Control",
+      "item": "Gate operator and access-control interface",
+      "description": "Gate operator, keypad, card reader, conduit, wiring, and electrical power are alternate or by Division 26.",
+      "qty": 0,
+      "uom": "EA",
+      "status": "Alternate / Not Included",
+      "source": "E3.1 p3",
+      "supplier": "",
+      "material_unit_cost": 0,
+      "labor_unit_cost": 0,
+      "lead_time": "",
+      "quote_notes": "Do not include in base bid unless separately accepted."
+    }
+  ],
+  "scope_specs": [
+    {
+      "category": "Fence System",
+      "requirement": "Permanent chain link fences and gates include posts, rails, fabric, gate frames, latch hardware, hinges, and accessories.",
+      "source": "Section 32 31 13 p1",
+      "notes": "Base scope."
+    },
+    {
+      "category": "Gate Operators",
+      "requirement": "Gate operators are not included unless specifically identified as an accepted alternate.",
+      "source": "Section 32 31 13 p1",
+      "notes": "Keep out of base bid."
+    },
+    {
+      "category": "Submittals",
+      "requirement": "Product data, shop drawings, and hardware schedule.",
+      "source": "Section 32 31 13 p1",
+      "notes": "Carry as normal administrative scope only."
+    }
+  ],
+  "page_references": [
+    {
+      "source": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 1,
+      "sheet": "A1.0",
+      "finding": "420 LF chain link fence and G-1 gate.",
+      "action": "Included in base bid."
+    },
+    {
+      "source": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 4,
+      "sheet": "C2.0",
+      "finding": "Bollards, concrete, paving, temporary fence, silt fence, and tree protection fence.",
+      "action": "Excluded or by others."
+    },
+    {
+      "source": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 5,
+      "sheet": "S4.0",
+      "finding": "Guardrail and handrail at loading dock.",
+      "action": "Flag as review-only adjacent scope."
+    }
+  ],
+  "rfi_notes": [
+    "Confirm whether the gate operator/access-control alternate should be priced separately.",
+    "Confirm no decorative metal fence quantities are required in base bid.",
+    "Verify final proposal uses Addendum 01's 420 LF quantity basis."
+  ],
+  "alerts": [
+    "Fictional demo: pricing cells intentionally use zero-dollar placeholders.",
+    "Addendum 01 is the latest quantity basis for the sample.",
+    "Excluded and review-only adjacent scopes are present in source text but are not base bid."
+  ],
+  "source_files": [
+    {
+      "file": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pages": "1-5",
+      "role": "Fictional plan set"
+    },
+    {
+      "file": "bid-docs/fictional-cedar-park-project-manual.pdf",
+      "pages": "1-2",
+      "role": "Fictional project manual"
+    },
+    {
+      "file": "bid-docs/fictional-cedar-park-addendum-01.pdf",
+      "pages": "1",
+      "role": "Fictional addendum"
+    }
+  ]
+}

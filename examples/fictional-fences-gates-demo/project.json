@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "project_name": "Fictional Cedar Park Service Yard",
+  "project_slug": "fictional-cedar-park-service-yard",
+  "bid_due": "2026-07-01 14:00",
+  "gc": "Demo GC Estimating <estimating@example.invalid>",
+  "address": "100 Demo Service Road, Example City, ST",
+  "scope_profile": "fences-gates",
+  "created": "2026-06-20"
+}
+

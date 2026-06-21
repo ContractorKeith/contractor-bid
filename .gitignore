@@ -18,6 +18,8 @@ site/
 **/bid-package-working/*.pdf
 **/bid-package-working/*.xlsx
 **/bid-package-working/supplier-sendoff/
+!examples/fictional-fences-gates-demo/bid-docs/
+!examples/fictional-fences-gates-demo/bid-docs/*.pdf
 
 # Local user/company configuration
 .contractor-bid/local.json

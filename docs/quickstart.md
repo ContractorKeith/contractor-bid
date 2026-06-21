@@ -10,7 +10,37 @@ mkdir contractor-bid-workspace
 cd contractor-bid-workspace
 ```
 
-## 2. Create A Bid Project
+## 2. Optional: Run The Fictional Sample First
+
+From a source checkout, you can run a deterministic fences/gates proof-of-life without real
+customer documents:
+
+```bash
+mkdir -p /tmp/contractor-bid-demo/bids
+cp -R examples/fictional-fences-gates-demo \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence
+
+PYTHONPATH=src python3 -m contractor_bid triage \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence \
+  --profile fences-gates
+PYTHONPATH=src python3 -m contractor_bid build-packets \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence
+PYTHONPATH=src python3 -m contractor_bid build-workbook \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence \
+  --profile fences-gates
+PYTHONPATH=src python3 -m contractor_bid check \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence \
+  --profile fences-gates \
+  --today 2026-06-30
+PYTHONPATH=src python3 -m contractor_bid package-sendoff \
+  /tmp/contractor-bid-demo/bids/070126-fictional-cedar-park-fence
+```
+
+The sample lives in `examples/fictional-fences-gates-demo/`. It uses fake PDFs and fake
+quantities to show carried fence/gate scope, excluded adjacent scope, workbook generation,
+alerts, and a clean sendoff zip.
+
+## 3. Create A Bid Project
 
 Choose a profile. Whole-division starters use `division-XX-*` ids. Narrow examples like
 `fences-gates`, `electrical`, and `hvac` are also included.
@@ -31,7 +61,7 @@ bids/070126-example-project/
   project.json
 ```
 
-## 3. Add Source Documents
+## 4. Add Source Documents
 
 Put source PDFs and bid forms in:
 
@@ -42,7 +72,7 @@ bids/070126-example-project/bid-docs/
 Do not commit real bid documents, supplier quotes, estimates, tracker files, or customer data
 to the public repo.
 
-## 4. Run Triage
+## 5. Run Triage
 
 ```bash
 contractor-bid triage bids/070126-example-project \
@@ -61,7 +91,7 @@ Copy only approved source pages into:
 bid-package-working/takeoff/scope-pages-sources.json
 ```
 
-## 5. Build Review Artifacts
+## 6. Build Review Artifacts
 
 ```bash
 contractor-bid build-packets bids/070126-example-project

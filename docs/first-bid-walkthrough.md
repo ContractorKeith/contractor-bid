@@ -3,6 +3,10 @@
 This walkthrough explains the intended estimator loop. The exact profile and quantities will
 change by trade, but the review pattern should stay the same.
 
+If you want to see the whole loop before using real documents, run the sanitized sample in
+`examples/fictional-fences-gates-demo/`. It uses fake fences/gates PDFs and fake quantities to
+prove triage, approved page packets, workbook generation, alerts, and sendoff packaging.
+
 ## Step 1. Pick The Closest Scope Profile
 
 Start broad, then narrow.

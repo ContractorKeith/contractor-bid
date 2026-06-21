@@ -1,0 +1,103 @@
+{
+  "_README": "Fictional demo input. Page numbers are 1-based PDF page numbers, not sheet numbers.",
+  "project_name": "Fictional Cedar Park Service Yard",
+  "prepared": "2026-06-20",
+  "scope_profile": "fences-gates",
+  "scope_note": "Base bid is limited to permanent fences, gates, gate hardware, and fence/gate-specific accessories. Adjacent scopes must be explicitly included, excluded, or flagged before pricing.",
+  "bid_decision_summary": "Carry the permanent chain link fence, one double swing gate, and gate hardware shown on A1.0/A7.2 using Addendum 01's 420 LF quantity basis. Keep bollards, concrete, paving, temporary fence, silt fence, tree protection fence, electrical/access-control wiring, handrail, and guardrail out of base bid.",
+  "what_to_open_first": [
+    "A1.0 Overall Site Plan for the fence run and G-1 gate",
+    "A7.2 Fence and Gate Details",
+    "Addendum 01 for the revised 420 LF quantity basis",
+    "Section 32 31 13 for chain link fence and gate requirements"
+  ],
+  "scope_items": [
+    "420 LF galvanized chain link fence",
+    "1 EA 24 FT double swing gate G-1",
+    "Gate posts, terminal posts, line posts, rails, fabric, latch, hinges, truss rods, panic hardware, and accessories",
+    "Three strands barbed wire where shown on A7.2"
+  ],
+  "quantity_mentions": [
+    "420 LF chain link fence",
+    "1 EA double swing gate",
+    "1 EA gate hardware set"
+  ],
+  "brand_or_product_mentions": [
+    "No proprietary brand named in the fictional source documents"
+  ],
+  "access_or_interface_notes": [
+    "Gate operator/access-control alternate is not carried in base bid unless separately accepted",
+    "Electrical power, low-voltage conduit, keypad, card reader, and access-control wiring are by Division 26"
+  ],
+  "not_in_base_scope": [
+    "Bollards",
+    "Concrete mow strip",
+    "Paving restoration",
+    "Temporary fence",
+    "Silt fence",
+    "Tree protection fence",
+    "Guardrail and handrail",
+    "Electrical and access-control wiring",
+    "Gate operator alternate unless separately accepted"
+  ],
+  "open_questions": [
+    "Should the gate operator/access-control alternate be priced separately?",
+    "Confirm no decorative metal fence quantities are required in base bid."
+  ],
+  "no_spec_pages_found": "",
+  "scope_pages": [
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 1,
+      "sheet": "A1.0",
+      "title": "Overall Site Plan",
+      "evidence": "420 LF chain link fence around maintenance yard and one 24 FT double swing gate G-1."
+    },
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 2,
+      "sheet": "A7.2",
+      "title": "Fence and Gate Details",
+      "evidence": "8 FT high chain link fence, posts, rails, fabric, double swing gate, latch, hinges, truss rods, and barbed wire."
+    },
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-addendum-01.pdf",
+      "pdf_page": 1,
+      "sheet": "ADD-01",
+      "title": "Addendum 01",
+      "evidence": "Revises fence run from 400 LF to 420 LF and confirms G-1 remains one 24 FT double swing gate."
+    }
+  ],
+  "spec_pages": [
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-project-manual.pdf",
+      "pdf_page": 1,
+      "section": "32 31 13",
+      "title": "Chain Link Fences and Gates",
+      "evidence": "Permanent chain link fences and gates include posts, rails, fabric, gate frames, latch hardware, hinges, and accessories."
+    }
+  ],
+  "excluded_or_reference_only": [
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 3,
+      "reason": "Gate operator/access-control alternate and Division 26 wiring are not included in base bid."
+    },
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 4,
+      "reason": "Concrete, bollards, paving, temporary fence, silt fence, and tree protection fence are excluded adjacent scope."
+    },
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-bid-set.pdf",
+      "pdf_page": 5,
+      "reason": "Guardrail and handrail are review-only architectural metals scope."
+    },
+    {
+      "source_pdf": "bid-docs/fictional-cedar-park-project-manual.pdf",
+      "pdf_page": 2,
+      "reason": "Decorative metal fence section has no base-bid quantity in this fictional sample."
+    }
+  ]
+}
+
