@@ -1,6 +1,8 @@
 # contractor-bid
 
 [![CI](https://github.com/ContractorKeith/contractor-bid/actions/workflows/ci.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/ci.yml)
+[![Security](https://github.com/ContractorKeith/contractor-bid/actions/workflows/security.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/security.yml)
+[![CodeQL](https://github.com/ContractorKeith/contractor-bid/actions/workflows/codeql.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/codeql.yml)
 
 AI-ready bid workspaces for commercial subcontractors.
 
@@ -18,6 +20,13 @@ Commercial bid folders are usually messy: large plan sets, project manuals, adde
 If this saves you bid setup time, star the repo so more subcontractors can find it.
 
 It does not price the job for you. It helps turn bid documents into a reviewable package: relevant pages, source-backed summaries, workbook inputs, proposal language, alerts, and a sendoff folder.
+
+## Security
+
+`contractor-bid` is a local-first CLI and optional stdio MCP server. It does not run a
+hosted service, collect credentials, or send bid documents to ContractorKeith. See
+[SECURITY.md](SECURITY.md) for the reporting policy, supported versions, security model,
+and current repository security controls.
 
 ## What This Repo Does
 

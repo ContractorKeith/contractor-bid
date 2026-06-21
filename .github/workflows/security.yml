@@ -1,0 +1,62 @@
+name: Security
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "17 10 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  python-security:
+    name: Python and dependency security
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Install package and security tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ".[mcp]" bandit detect-secrets pip-audit
+
+      - name: Bandit static security scan
+        run: python -m bandit -r src scripts -x tests --severity-level medium
+
+      - name: Audit project dependencies
+        run: python -m pip_audit --progress-spinner off .
+
+      - name: Audit installed optional dependency tree
+        run: python -m pip_audit --progress-spinner off --local --skip-editable
+
+      - name: Secret pattern scan
+        run: |
+          detect-secrets scan \
+            --all-files \
+            --exclude-files '^(dist/|\.claude/worktrees/|\.ruff_cache/|packaging/homebrew/contractor-bid\.rb$)' \
+            > detect-secrets.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          data = json.loads(Path("detect-secrets.json").read_text(encoding="utf-8"))
+          findings = data.get("results", {})
+          if findings:
+              for filename, items in findings.items():
+                  print(f"{filename}: {len(items)} potential secret(s)")
+              raise SystemExit(1)
+          PY
