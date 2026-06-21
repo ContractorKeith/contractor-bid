@@ -1,6 +1,7 @@
 # contractor-bid
 
 [![CI](https://github.com/ContractorKeith/contractor-bid/actions/workflows/ci.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/ci.yml)
+[![Docs](https://github.com/ContractorKeith/contractor-bid/actions/workflows/docs.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/docs.yml)
 [![Security](https://github.com/ContractorKeith/contractor-bid/actions/workflows/security.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/security.yml)
 [![CodeQL](https://github.com/ContractorKeith/contractor-bid/actions/workflows/codeql.yml/badge.svg)](https://github.com/ContractorKeith/contractor-bid/actions/workflows/codeql.yml)
 
@@ -20,6 +21,8 @@ Commercial bid folders are usually messy: large plan sets, project manuals, adde
 If this saves you bid setup time, star the repo so more subcontractors can find it.
 
 It does not price the job for you. It helps turn bid documents into a reviewable package: relevant pages, source-backed summaries, workbook inputs, proposal language, alerts, and a sendoff folder.
+
+Full documentation: [contractorkeith.github.io/contractor-bid](https://contractorkeith.github.io/contractor-bid/)
 
 ## Security
 
@@ -69,7 +72,7 @@ Each bid project is built around `bid-package-working/`:
 
 The pattern comes from real fence/gate bid work. In one package, the workflow produced a scope PDF, a spec PDF, a combined packet, a workbook, alerts, and a supplier zip. In another smaller package, the scope packet was only a few pages and no separate spec packet was needed. The structure stayed the same, which is what lets the model and estimator stay aligned.
 
-More detail: [What A Bid Project Produces](docs/WHAT_YOU_GET.md).
+More detail: [What A Bid Project Produces](docs/concepts/bid-package.md).
 
 ## Who It Is For
 
@@ -105,7 +108,7 @@ Canonical starter profiles are included for the active CSI MasterFormat division
 | 32 - Exterior Improvements | `division-32-exterior-improvements` |
 | 33 - Utilities | `division-33-utilities` |
 
-Divisions 15-20, 24, 29, and 30 are reserved in this range, so they are documented but do not get bid starters. More detail: [CSI Division Starters](docs/CSI_DIVISIONS.md).
+Divisions 15-20, 24, 29, and 30 are reserved in this range, so they are documented but do not get bid starters. More detail: [CSI Division Starters](docs/reference/csi-divisions.md).
 
 The repo also keeps narrower trade-specific examples like `fences-gates`, `concrete-flatwork`, `drywall-framing`, `electrical`, `plumbing`, `hvac`, and `roofing`.
 
@@ -206,7 +209,7 @@ Codex and Cursor can reuse the same `contractor-bid-mcp` server and `skills/`. T
 includes `.mcp.json`, `.claude-plugin/`, `codex-marketplace.json`, and
 `.cursor-plugin/` metadata for direct Git-hosted or local install flows.
 
-More detail: [MCP And Agent Plugin Setup](docs/MCP_PLUGIN.md).
+More detail: [MCP And Agent Plugin Setup](docs/guides/mcp-plugin-setup.md).
 
 ## Quick Start
 

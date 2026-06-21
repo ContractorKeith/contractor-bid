@@ -1,0 +1,59 @@
+site_name: contractor-bid
+site_description: AI-ready commercial construction bid workspaces for subcontractors.
+site_url: https://contractorkeith.github.io/contractor-bid/
+repo_name: ContractorKeith/contractor-bid
+repo_url: https://github.com/ContractorKeith/contractor-bid
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: assets/contractor-bid-flow.svg
+  favicon: assets/contractor-bid-flow.svg
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: teal
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: teal
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Start Here:
+      - Overview: index.md
+      - Install: install.md
+      - Quick Start: quickstart.md
+      - First Bid Walkthrough: first-bid-walkthrough.md
+      - Documentation Plan: roadmap.md
+  - Concepts:
+      - Bid Package Outputs: concepts/bid-package.md
+      - Self-Learning Pattern: concepts/self-learning.md
+  - Guides:
+      - Full Bid Workflow: guides/workflow.md
+      - MCP And Agent Plugin Setup: guides/mcp-plugin-setup.md
+  - Reference:
+      - Commands: reference/commands.md
+      - CSI Division Starters: reference/csi-divisions.md
+      - Security: reference/security.md
+  - Troubleshooting: troubleshooting.md
