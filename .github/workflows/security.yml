@@ -47,7 +47,7 @@ jobs:
         run: |
           detect-secrets scan \
             --all-files \
-            --exclude-files '^(dist/|\.claude/worktrees/|\.ruff_cache/|packaging/homebrew/contractor-bid\.rb$)' \
+            --exclude-files '^(\.git/|dist/|\.claude/worktrees/|\.ruff_cache/|packaging/homebrew/contractor-bid\.rb$)' \
             > detect-secrets.json
           python - <<'PY'
           import json
