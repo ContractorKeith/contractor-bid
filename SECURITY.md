@@ -1,7 +1,7 @@
 # Security Policy
 
 `contractor-bid` is a local-first Python CLI and optional stdio MCP server for building
-source-backed commercial bid workspaces. It is not a hosted service, does not collect
+source-backed commercial bid workspaces. It does not run a hosted service, does not collect
 credentials, and does not send bid documents, estimates, supplier quotes, or customer files
 to ContractorKeith.
 

@@ -29,6 +29,7 @@ from .tracker import (
     find_entry,
     load_tracker,
     move_entry,
+    reopen_entry,
     render_tracker,
     tracker_paths,
 )
@@ -803,6 +804,49 @@ def cb_track_move(
 
 @mcp.tool(
     annotations=ToolAnnotations(
+        title="Propose or reopen tracker bid",
+        readOnlyHint=False,
+        destructiveHint=False,
+        idempotentHint=True,
+    )
+)
+def cb_track_reopen(
+    bid: Annotated[str, Field(description="Bid id or exact project name to reopen.")],
+    workspace_root: WorkspaceRoot = "",
+    confirm: Annotated[
+        bool,
+        Field(description="Must be true after user confirmation before this tool writes."),
+    ] = False,
+) -> dict[str, Any]:
+    """Move an archived tracker bid back to Active after explicit confirmation."""
+    try:
+        root = _workspace_root(workspace_root)
+        data = load_tracker(root)
+        existing = find_entry(data, bid)
+        if existing is None:
+            raise ValueError(f"No bid found matching: {bid}")
+        if not confirm:
+            return _proposal_response(
+                f"Proposed reopening '{existing.get('project', bid)}' back to Active Bids.",
+                {"bid": bid},
+            )
+        ensure_workspace(root)
+        entry = reopen_entry(root, bid)
+        render_tracker(root)
+        return _dump(
+            ToolResponse(
+                status="ok",
+                artifacts=_tracker_artifacts(root),
+                summary=f"Reopened '{entry.get('project')}' back to Active Bids.",
+                data={"entry": entry},
+            )
+        )
+    except Exception as exc:
+        return _error_response(exc)
+
+
+@mcp.tool(
+    annotations=ToolAnnotations(
         title="List tracker bids",
         readOnlyHint=True,
         destructiveHint=False,
@@ -831,6 +875,42 @@ def cb_track_list(
                     "archived": archived,
                     "include_archived": include_archived,
                 },
+            )
+        )
+    except Exception as exc:
+        return _error_response(exc)
+
+
+@mcp.tool(
+    annotations=ToolAnnotations(
+        title="Build tracker spreadsheet",
+        readOnlyHint=False,
+        destructiveHint=False,
+        idempotentHint=True,
+    )
+)
+def cb_track_build(workspace_root: WorkspaceRoot = "") -> dict[str, Any]:
+    """Regenerate Bid-Tracker.xlsx from the tracker JSON without changing tracker data."""
+    try:
+        root = _workspace_root(workspace_root)
+        ensure_workspace(root)
+        out = render_tracker(root)
+        if out is None:
+            return _dump(
+                ToolResponse(
+                    status="warning",
+                    summary="openpyxl is required to render Bid-Tracker.xlsx.",
+                    alerts=["Install openpyxl in the contractor-bid environment."],
+                    artifacts=_tracker_artifacts(root),
+                    data={"workspace_root": str(root), "tracker_xlsx": None},
+                )
+            )
+        return _dump(
+            ToolResponse(
+                status="ok",
+                artifacts=_tracker_artifacts(root),
+                summary=f"Built tracker spreadsheet: {out}",
+                data={"workspace_root": str(root), "tracker_xlsx": str(out)},
             )
         )
     except Exception as exc:

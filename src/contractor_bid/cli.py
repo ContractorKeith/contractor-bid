@@ -166,7 +166,10 @@ def command_check(args: argparse.Namespace) -> int:
         today=today,
         write=not args.no_write,
     )
-    print(f"Wrote alerts: {out}")
+    if args.no_write:
+        print(f"Checked alerts without writing: {out}")
+    else:
+        print(f"Wrote alerts: {out}")
     print(f"Warnings: {len(warnings)}")
     print(f"Hard errors: {len(errors)}")
     return exit_code

@@ -18,6 +18,11 @@ launcher into ~/.local/bin.
 Options:
   --install-poppler  Try to install Poppler with Homebrew (macOS) or apt (Linux).
   --repo URL         Override the Git repository URL.
+
+Environment overrides:
+  CONTRACTOR_BID_HOME      Install directory (default: ~/.contractor-bid).
+  CONTRACTOR_BID_BIN       Launcher directory (default: ~/.local/bin).
+  CONTRACTOR_BID_REPO_URL  Git repository URL used when cloning.
 EOF
 }
 

@@ -231,7 +231,7 @@ def build_workbook(
     summary.freeze_panes = "A5"
 
     bom_ws = wb.create_sheet("BOM")
-    title_block(bom_ws, f"{data.get('project_name', project.name)} - BOM", "Yellow columns are supplier/pricing inputs.", 12)
+    title_block(bom_ws, f"{data.get('project_name', project.name)} - BOM", "Yellow columns are supplier/pricing inputs.", 13)
     headers = [
         "Section",
         "Item",

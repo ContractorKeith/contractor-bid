@@ -16,7 +16,10 @@ try:
         cb_new_project,
         cb_package_sendoff,
         cb_track_add,
+        cb_track_build,
         cb_track_list,
+        cb_track_move,
+        cb_track_reopen,
         cb_triage,
         mcp,
     )
@@ -46,8 +49,10 @@ class McpServerTest(unittest.TestCase):
                 "cb_package_sendoff",
                 "cb_learn",
                 "cb_track_add",
+                "cb_track_build",
                 "cb_track_update",
                 "cb_track_move",
+                "cb_track_reopen",
                 "cb_track_list",
                 "cb_list_profiles",
             },
@@ -146,6 +151,25 @@ class McpServerTest(unittest.TestCase):
             listed = cb_track_list(workspace_root=str(root))
             self.assertEqual(listed["status"], "ok")
             self.assertEqual(len(listed["data"]["active"]), 1)
+
+            moved = cb_track_move(
+                "Tracker Sample",
+                outcome="completed",
+                workspace_root=str(root),
+                confirm=True,
+            )
+            self.assertEqual(moved["status"], "ok")
+
+            reopen_proposal = cb_track_reopen("Tracker Sample", workspace_root=str(root))
+            self.assertEqual(reopen_proposal["status"], "warning")
+
+            reopened = cb_track_reopen("Tracker Sample", workspace_root=str(root), confirm=True)
+            self.assertEqual(reopened["status"], "ok")
+            self.assertEqual(reopened["data"]["entry"]["status"], "active")
+
+            rebuilt = cb_track_build(workspace_root=str(root))
+            self.assertEqual(rebuilt["status"], "ok")
+            self.assertTrue((root / "Bid-Tracker.xlsx").exists())
 
     def test_version_bumped_for_mcp_release(self) -> None:
         self.assertEqual(__version__, "0.2.0")

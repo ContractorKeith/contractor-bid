@@ -38,3 +38,7 @@ handovers/
 # Local planning / working notes (not for publication)
 IMPROVEMENT_PLAN.md
 mcp-plugin-planning.md
+
+# Local agent tool artifacts
+.codex/
+outputs/
