@@ -7,7 +7,7 @@
 
 AI-ready bid workspaces for commercial subcontractors.
 
-> **Status: early access / in active development (v0.2.0).** This is a public testing
+> **Status: early access / in active development (v0.2.1).** This is a public testing
 > release shared to gather real-world feedback. Expect rough edges, and verify every
 > output against the source documents before pricing a real bid. Bug reports and
 > contributions are welcome and encouraged — please
@@ -60,17 +60,15 @@ Each bid project is built around `bid-package-working/`:
 
 | File | Purpose |
 |---|---|
-| `00-Bid-Scope-Summary.md` | First-read summary: what it is, where it is, what to open first, what is excluded, and what needs clarification. |
-| `00-Scope-Reference-Index.md` | Drawing/spec/RFI index for the carried scope. |
-| `scope-pages.pdf` | Isolated drawing pages relevant to the subcontractor's scope. |
+| `00-Bid-Scope-Summary.md` | First-read summary: what it is, what to open first, the packet page map back to source pages, what is excluded, and what needs clarification. |
+| `scope-pages.pdf` | Isolated drawing pages relevant to the subcontractor's scope, with outline bookmarks. |
 | `spec-pages.pdf` | Isolated spec pages when specs are found. |
-| `scope-and-spec-pages.pdf` | Combined page packet for review or supplier handoff. |
-| `01-Takeoff-Worksheet-REV1.xlsx` | Workbook with BOM rows, supplier quote inputs, RFIs, alerts, and sources. |
+| `01-Takeoff-Worksheet-REV1.xlsx` | Workbook with BOM rows, supplier quote inputs, scope summary, RFIs, alerts, and sources. |
 | `02 - Proposal Letter.md` | Draft proposal language with inclusions, exclusions, alternates, and clarifications. |
 | `ALERTS.md` | Validator output for missing deliverables, due dates, addenda, and excluded/review-only scope terms. |
 | `supplier-sendoff/*.zip` | Shareable package for vendors, suppliers, or internal review. |
 
-The pattern comes from real fence/gate bid work. In one package, the workflow produced a scope PDF, a spec PDF, a combined packet, a workbook, alerts, and a supplier zip. In another smaller package, the scope packet was only a few pages and no separate spec packet was needed. The structure stayed the same, which is what lets the model and estimator stay aligned.
+The pattern comes from real fence/gate bid work. In one package, the workflow produced a scope PDF, a spec PDF, a workbook, alerts, and a supplier zip. In another smaller package, the scope packet was only a few pages and no separate spec packet was needed. The structure stayed the same, which is what lets the model and estimator stay aligned.
 
 More detail: [What A Bid Project Produces](docs/concepts/bid-package.md).
 

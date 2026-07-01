@@ -15,8 +15,7 @@ contractor-bid triage "{{PROJECT_NAME}}" --profile {{PROFILE_ID}} --render
 ```
 
 3. Review:
-   - `bid-package-working/takeoff/candidate-pages.md`
-   - `bid-package-working/takeoff/triage-scope-signals.md`
+   - `bid-package-working/takeoff/candidate-pages.md` (candidate pages plus scope signals)
    - `bid-package-working/takeoff/review-pages.md`
 
 4. Fill `bid-package-working/takeoff/scope-pages-sources.json`.

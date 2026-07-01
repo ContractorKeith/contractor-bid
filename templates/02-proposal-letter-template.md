@@ -14,7 +14,7 @@ Thank you for the opportunity to bid the above referenced project. We reviewed t
 
 ## Scope Of Work
 
-- TBD. Mirror the final included scope from `00-Scope-Reference-Index.md`.
+- TBD. Mirror the final included scope from the workbook Summary sheet and `00-Bid-Scope-Summary.md`.
 
 ## Inclusions
 
@@ -43,6 +43,6 @@ Sincerely,
 
 ## Attachments
 
-- `00-Scope-Reference-Index.md`
+- `00-Bid-Scope-Summary.md`
 - `01-Takeoff-Worksheet-REV1.xlsx`
 - `scope-pages.pdf` and `spec-pages.pdf` when extracted

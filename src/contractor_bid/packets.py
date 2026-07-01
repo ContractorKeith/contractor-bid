@@ -87,11 +87,8 @@ def bullets(items: Any, empty: str = "Not filled yet.") -> list[str]:
 def write_packet(
     entries: list[dict[str, Any]],
     out_pdf: Path,
-    out_index: Path,
     data: dict[str, Any],
-    project: Path,
     packet_label: str,
-    excluded: list[dict[str, Any]] | None = None,
 ) -> int:
     try:
         from pypdf import PdfReader, PdfWriter
@@ -100,7 +97,6 @@ def write_packet(
 
     writer = PdfWriter()
     readers: dict[str, PdfReader] = {}
-    rows: list[list[Any]] = []
     for packet_page, entry in enumerate(entries, start=1):
         pdf_path: Path = entry["pdf_path"]
         reader = readers.setdefault(str(pdf_path), PdfReader(str(pdf_path)))
@@ -121,16 +117,6 @@ def write_packet(
                 RuntimeWarning,
                 stacklevel=2,
             )
-        rows.append(
-            [
-                packet_page,
-                f"`{rel_display(pdf_path, project)}`",
-                entry["pdf_page"],
-                entry.get("sheet", ""),
-                entry.get("title", ""),
-                entry.get("evidence", ""),
-            ]
-        )
 
     writer.add_metadata(
         {
@@ -141,43 +127,18 @@ def write_packet(
     out_pdf.parent.mkdir(parents=True, exist_ok=True)
     with out_pdf.open("wb") as fh:
         writer.write(fh)
-
-    lines = [
-        f"# {packet_label} Index",
-        "",
-        f"Project: {data.get('project_name', '')}",
-        f"Prepared: {data.get('prepared', '')}",
-        f"Output: `{out_pdf.name}`",
-        "",
-        data.get("scope_note", ""),
-        "",
-    ]
-    lines += markdown_table(
-        ["Packet page", "Source file", "Source PDF page", "Sheet / Detail", "Title", "Evidence"],
-        rows,
-    )
-    if excluded:
-        lines += ["", "## Excluded / Reference Only", ""]
-        lines += markdown_table(
-            ["Source file", "Source PDF page", "Reason"],
-            [
-                [f"`{item.get('source_pdf', '')}`", item.get("pdf_page", ""), item.get("reason", "")]
-                for item in excluded
-            ],
-        )
-    lines += ["", "## Output Summary", "", f"- `{out_pdf.name}` pages: {len(entries)}"]
-    out_index.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return len(entries)
 
 
 def write_summary(
     data: dict[str, Any],
     project: Path,
-    scope_count: int,
-    spec_count: int,
-    combined_exists: bool,
+    scope_entries: list[dict[str, Any]],
+    spec_entries: list[dict[str, Any]],
 ) -> Path:
     work = project / "bid-package-working"
+    scope_count = len(scope_entries)
+    spec_count = len(spec_entries)
     lines = [
         f"# Bid Scope Summary - {data.get('project_name', project.name)}",
         "",
@@ -192,10 +153,7 @@ def write_summary(
     ]
 
     packet_lines: list[str] = []
-    if combined_exists:
-        combined = work / "scope-and-spec-pages.pdf"
-        packet_lines.append(f"- Open this first: `{rel_display(combined, project)}`")
-    elif scope_count:
+    if scope_count:
         scope_pdf = work / "scope-pages.pdf"
         packet_lines.append(f"- Open this first: `{rel_display(scope_pdf, project)}`")
     elif spec_count:
@@ -208,11 +166,6 @@ def write_summary(
     if spec_count:
         spec_pdf = work / "spec-pages.pdf"
         packet_lines.append(f"- `{rel_display(spec_pdf, project)}` ({spec_count} page(s))")
-    if combined_exists:
-        combined = work / "scope-and-spec-pages.pdf"
-        packet_lines.append(
-            f"- `{rel_display(combined, project)}` ({scope_count + spec_count} page(s))"
-        )
     if not packet_lines:
         packet_lines.append(
             "- No page packet PDFs were written yet. Fill "
@@ -235,11 +188,14 @@ def write_summary(
         lines += bullets(data.get(key))
 
     rows: list[list[Any]] = []
-    for label, items in (("Scope", data.get("scope_pages", [])), ("Spec", data.get("spec_pages", []))):
-        for item in items:
+    for pdf_name, entries in (
+        ("scope-pages.pdf", scope_entries),
+        ("spec-pages.pdf", spec_entries),
+    ):
+        for packet_page, item in enumerate(entries, start=1):
             rows.append(
                 [
-                    label,
+                    f"`{pdf_name}` p.{packet_page}",
                     f"`{item.get('source_pdf', '')}`",
                     item.get("pdf_page", ""),
                     item.get("sheet", ""),
@@ -248,9 +204,9 @@ def write_summary(
                 ]
             )
     if rows:
-        lines += ["", "## Extracted Source Map", ""]
+        lines += ["", "## Packet Page Map", ""]
         lines += markdown_table(
-            ["Packet", "Source file", "Source PDF page", "Sheet / Detail", "Title", "Evidence"],
+            ["Packet page", "Source file", "Source PDF page", "Sheet / Detail", "Title", "Evidence"],
             rows,
         )
 
@@ -279,53 +235,27 @@ def build_packets(project: Path, *, sources: Path | None = None) -> dict[str, An
 
     scope_entries = collect_entries(data.get("scope_pages", []), project, work)
     spec_entries = collect_entries(data.get("spec_pages", []), project, work)
-    excluded = data.get("excluded_or_reference_only", [])
 
     scope_count = 0
     spec_count = 0
     if scope_entries:
-        scope_count = write_packet(
-            scope_entries,
-            work / "scope-pages.pdf",
-            work / "scope-pages-index.md",
-            data,
-            project,
-            "Scope Pages",
-            excluded,
-        )
+        scope_count = write_packet(scope_entries, work / "scope-pages.pdf", data, "Scope Pages")
     if spec_entries:
-        spec_count = write_packet(
-            spec_entries,
-            work / "spec-pages.pdf",
-            work / "spec-pages-index.md",
-            data,
-            project,
-            "Spec Pages",
-            None,
-        )
+        spec_count = write_packet(spec_entries, work / "spec-pages.pdf", data, "Spec Pages")
 
-    combined_exists = False
-    if scope_count and spec_count:
-        try:
-            from pypdf import PdfReader, PdfWriter
-        except ImportError as exc:
-            raise RuntimeError("pypdf is required for combined PDF generation") from exc
-        writer = PdfWriter()
-        for packet in (work / "scope-pages.pdf", work / "spec-pages.pdf"):
-            reader = PdfReader(str(packet))
-            for page in reader.pages:
-                writer.add_page(page)
-        combined = work / "scope-and-spec-pages.pdf"
-        with combined.open("wb") as fh:
-            writer.write(fh)
-        combined_exists = True
+    # Remove artifacts from older releases that are now folded into the summary.
+    for stale in (
+        work / "scope-pages-index.md",
+        work / "spec-pages-index.md",
+        work / "scope-and-spec-pages.pdf",
+    ):
+        stale.unlink(missing_ok=True)
 
     # Keep the summary useful even before the user has installed pypdf or filled pages.
-    summary = write_summary(data, project, scope_count, spec_count, combined_exists)
+    summary = write_summary(data, project, scope_entries, spec_entries)
 
     return {
         "scope_pages": scope_count,
         "spec_pages": spec_count,
-        "combined": combined_exists,
         "summary": str(summary),
     }

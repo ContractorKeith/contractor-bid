@@ -81,8 +81,7 @@ Triage produces candidate evidence. It does not approve scope.
 
 Open:
 
-- `bid-package-working/takeoff/candidate-pages.md`
-- `bid-package-working/takeoff/triage-scope-signals.md`
+- `bid-package-working/takeoff/candidate-pages.md` (candidate pages plus scope signals)
 - `bid-package-working/takeoff/scope-pages-sources.suggested.json`
 
 If Poppler is installed, rendered page images are written to:
@@ -115,12 +114,9 @@ contractor-bid build-packets bids/070126-example-project
 
 This creates reviewable PDFs and a quick-read summary when source pages are approved:
 
-- `00-Bid-Scope-Summary.md`
+- `00-Bid-Scope-Summary.md` (includes the packet page map back to source pages)
 - `scope-pages.pdf`
-- `scope-pages-index.md`
 - `spec-pages.pdf`
-- `spec-pages-index.md`
-- `scope-and-spec-pages.pdf`
 
 ## Step 7. Fill The Takeoff JSON
 

@@ -60,7 +60,7 @@ Base bid is limited to roofing systems defined by the profile: membrane or steep
 
 1. Put source PDFs, spreadsheets, and addenda in `bid-docs/`.
 2. Run `contractor-bid triage <project> --profile roofing`.
-3. Review `bid-package-working/takeoff/candidate-pages.md` and `triage-scope-signals.md`.
+3. Review `bid-package-working/takeoff/candidate-pages.md` (candidate pages plus scope signals).
 4. Fill `takeoff/scope-pages-sources.json`, then run `contractor-bid build-packets <project>`.
 5. Fill the takeoff JSON, then run `contractor-bid build-workbook <project>`.
 6. Run `contractor-bid check <project> --profile roofing` before sending anything out.
@@ -68,4 +68,4 @@ Base bid is limited to roofing systems defined by the profile: membrane or steep
 
 ## Guardrail
 
-Do not silently price excluded or flagged adjacent scopes. Carry the scope boundary through the summary, reference index, workbook, proposal letter, alerts, and sendoff package.
+Do not silently price excluded or flagged adjacent scopes. Carry the scope boundary through the summary, workbook, proposal letter, alerts, and sendoff package.

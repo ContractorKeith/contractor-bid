@@ -344,10 +344,7 @@ def cb_triage(
         work = project_path / "bid-package-working"
         artifacts = [
             work / "text-extracts" / "page-hits.json",
-            work / "text-extracts" / "page-hits.csv",
-            work / "text-extracts" / "scope-signals.json",
             work / "takeoff" / "candidate-pages.md",
-            work / "takeoff" / "triage-scope-signals.md",
             work / "takeoff" / "scope-pages-sources.suggested.json",
         ]
         if write_sources:
@@ -413,10 +410,7 @@ def cb_build_packets(
         artifacts = [
             Path(result["summary"]),
             work / "scope-pages.pdf",
-            work / "scope-pages-index.md",
             work / "spec-pages.pdf",
-            work / "spec-pages-index.md",
-            work / "scope-and-spec-pages.pdf",
         ]
         status: Literal["ok", "warning", "error"] = "ok"
         alerts: list[str] = []

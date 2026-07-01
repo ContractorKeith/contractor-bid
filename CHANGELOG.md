@@ -4,6 +4,34 @@ All notable changes to `contractor-bid` will be documented here.
 
 ## Unreleased
 
+## [0.2.1] - 2026-07-01
+
+Output consolidation release: fewer files, less duplication, same information.
+
+- Consolidated triage outputs. `page-hits.json` now carries the aggregate scope
+  signals and extraction metadata, and `candidate-pages.md` gained a Scope
+  Signals section. Removed the duplicate `page-hits.csv`, `scope-signals.json`,
+  `extraction-metadata.json`, and `triage-scope-signals.md`.
+- Consolidated packet outputs. `00-Bid-Scope-Summary.md` now includes a Packet
+  Page Map that ties each packet page back to its source PDF page. Removed
+  `scope-pages-index.md`, `spec-pages-index.md`, and the duplicate combined
+  `scope-and-spec-pages.pdf` (both packet PDFs keep outline bookmarks).
+- Removed the hand-maintained `00-Scope-Reference-Index.md` from project
+  scaffolding. Its content lives in the bid scope summary and the workbook
+  (Scope Summary, Refs & RFIs, and Sources sheets), so scope references now
+  have one source of truth.
+- Trimmed the supplier sendoff package to the deliverables a reviewer needs:
+  summary, workbook, proposal letter, scope/spec packets, review log, and
+  alerts (13 files down to 8).
+- Re-running `triage` or `build-packets` now cleans up the retired artifacts
+  from older releases.
+- Added `cb_track_reopen` and `cb_track_build` MCP tools, matching the
+  `track-reopen` and `track-build` CLI commands.
+- Fixed the BOM sheet title to span all 13 columns and `check --no-write`
+  output to say it checked without writing.
+- Documented `install.sh` environment overrides and refreshed docs, skills,
+  and templates for the simplified output set.
+
 ## [0.2.0] - 2026-06-20
 
 MCP and agent plugin distribution release.

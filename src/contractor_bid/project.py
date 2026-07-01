@@ -58,11 +58,6 @@ def create_project(
     }
 
     copy_template("project-readme-template.md", project_dir / "README.md", replacements)
-    copy_template(
-        "00-scope-reference-index-template.md",
-        work / "00-Scope-Reference-Index.md",
-        replacements,
-    )
     copy_template("02-proposal-letter-template.md", work / "02 - Proposal Letter.md", replacements)
     copy_template(
         "scope-pages-sources-template.json",
@@ -92,7 +87,6 @@ def create_project(
 
     return [
         bid_docs,
-        work / "00-Scope-Reference-Index.md",
         work / "02 - Proposal Letter.md",
         takeoff / "scope-pages-sources.json",
         takeoff / f"{slug}.json",

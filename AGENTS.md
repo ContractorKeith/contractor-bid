@@ -11,7 +11,7 @@ This repo builds AI-ready commercial subcontractor bid projects.
 - Source PDFs and bid forms belong in `bid-docs/`; generated artifacts belong in `bid-package-working/`.
 - Treat `takeoff/*.json` as the source of truth for workbook generation.
 - Do not silently include excluded or review-only adjacent scopes in base bid.
-- Carry the same scope boundary through the summary, reference index, workbook, proposal letter, alerts, and sendoff.
+- Carry the same scope boundary through the summary, workbook, proposal letter, alerts, and sendoff.
 - Record user corrections with `contractor-bid learn`; only update durable profile rules when the user confirms the correction should persist.
 - Keep the workspace bid tracker current with the `track-*` commands, but ALWAYS confirm with the user and show a one-line change summary before writing (see `skills/bid-tracker/SKILL.md`).
 

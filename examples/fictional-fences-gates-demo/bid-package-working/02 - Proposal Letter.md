@@ -53,7 +53,7 @@ Demo Fence Subcontractor
 
 ## Attachments
 
-- `00-Scope-Reference-Index.md`
+- `00-Bid-Scope-Summary.md`
 - `01-Takeoff-Worksheet-REV1.xlsx`
 - `scope-pages.pdf`
 - `spec-pages.pdf`

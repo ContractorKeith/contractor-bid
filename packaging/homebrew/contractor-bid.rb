@@ -1,11 +1,11 @@
 class ContractorBid < Formula
   include Language::Python::Virtualenv
 
-  # Template for the v0.2.0 tap update. Before publishing, replace the source SHA
+  # Template for the v0.2.1 tap update. Before publishing, replace the source SHA
   # and regenerate the Python resource blocks with `brew update-python-resources`.
   desc "AI-ready commercial construction bid workspaces for subcontractors"
   homepage "https://github.com/ContractorKeith/contractor-bid"
-  url "https://github.com/ContractorKeith/contractor-bid/archive/refs/tags/v0.2.0.tar.gz"
+  url "https://github.com/ContractorKeith/contractor-bid/archive/refs/tags/v0.2.1.tar.gz"
   sha256 "REPLACE_WITH_V0_2_0_TARBALL_SHA256"
   license "MIT"
   head "https://github.com/ContractorKeith/contractor-bid.git", branch: "main"

@@ -66,7 +66,7 @@ Then point Codex at this repo or a local checkout and use `.mcp.json` to registe
 ## Cursor
 
 The repo includes `.cursor-plugin/plugin.json` for direct repo/community install flows. Cursor
-marketplace submission is a separate review step and should not block the v0.2.0 release.
+marketplace submission is a separate review step and should not block the v0.2.1 release.
 
 Install the engine first:
 
@@ -126,4 +126,4 @@ python3 -m unittest tests.test_mcp_server
 
 - `contractor-bid init` remains CLI-only because interactive prompts are not a good MCP fit.
 - OCR is not included yet. Scanned image-only PDFs need OCR before triage can read them.
-- Homebrew publishing needs the release tarball SHA after the v0.2.0 tag is cut.
+- Homebrew publishing needs the release tarball SHA after the v0.2.1 tag is cut.

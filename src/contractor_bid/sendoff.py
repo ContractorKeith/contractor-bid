@@ -9,16 +9,11 @@ from .util import slugify
 
 INCLUDE_FILES = [
     "00-Bid-Scope-Summary.md",
-    "00-Scope-Reference-Index.md",
     "01-Takeoff-Worksheet-REV1.xlsx",
     "02 - Proposal Letter.md",
     "scope-pages.pdf",
-    "scope-pages-index.md",
     "spec-pages.pdf",
-    "spec-pages-index.md",
-    "scope-and-spec-pages.pdf",
     "takeoff/review-pages.md",
-    "takeoff/triage-scope-signals.md",
     "ALERTS.md",
 ]
 

@@ -61,7 +61,9 @@ class FictionalFencesGatesDemoPipelineTest(unittest.TestCase):
 
             self.run_cli(["--root", str(root), "triage", str(project), "--profile", "fences-gates"])
             work = project / "bid-package-working"
-            hits = read_json(work / "text-extracts" / "page-hits.json")["hits"]
+            page_hits = read_json(work / "text-extracts" / "page-hits.json")
+            self.assertIn("chain link", page_hits["signals"]["include_terms"])
+            hits = page_hits["hits"]
             statuses = {(hit["source_file"], hit["pdf_page"]): hit["status"] for hit in hits}
             self.assertEqual(
                 statuses[("fictional-cedar-park-bid-set.pdf", 1)],
@@ -82,6 +84,14 @@ class FictionalFencesGatesDemoPipelineTest(unittest.TestCase):
             self.assertIn("chain link", candidate_pages)
             self.assertIn("exclude-review", candidate_pages)
             self.assertIn("flag-review", candidate_pages)
+            self.assertIn("## Scope Signals", candidate_pages)
+            for rel in (
+                "text-extracts/page-hits.csv",
+                "text-extracts/scope-signals.json",
+                "text-extracts/extraction-metadata.json",
+                "takeoff/triage-scope-signals.md",
+            ):
+                self.assertFalse((work / rel).exists(), rel)
 
             sources = read_json(work / "takeoff" / "scope-pages-sources.json")
             self.assertEqual(len(sources["scope_pages"]), 3)
@@ -97,17 +107,23 @@ class FictionalFencesGatesDemoPipelineTest(unittest.TestCase):
             for rel in (
                 "00-Bid-Scope-Summary.md",
                 "scope-pages.pdf",
-                "scope-pages-index.md",
                 "spec-pages.pdf",
+            ):
+                self.assertTrue((work / rel).exists(), rel)
+            for rel in (
+                "scope-pages-index.md",
                 "spec-pages-index.md",
                 "scope-and-spec-pages.pdf",
             ):
-                self.assertTrue((work / rel).exists(), rel)
+                self.assertFalse((work / rel).exists(), rel)
 
             summary = (work / "00-Bid-Scope-Summary.md").read_text(encoding="utf-8")
             self.assertIn("420 LF galvanized chain link fence", summary)
             self.assertIn("Bollards", summary)
             self.assertIn("Guardrail and handrail", summary)
+            self.assertIn("## Packet Page Map", summary)
+            self.assertIn("`scope-pages.pdf` p.1", summary)
+            self.assertIn("`spec-pages.pdf` p.1", summary)
 
             self.run_cli(
                 [
@@ -184,18 +200,13 @@ class FictionalFencesGatesDemoPipelineTest(unittest.TestCase):
             self.assertTrue(zip_path.exists())
             expected_zip_names = {
                 f"{package_name}/00-Bid-Scope-Summary.md",
-                f"{package_name}/00-Scope-Reference-Index.md",
                 f"{package_name}/01-Takeoff-Worksheet-REV1.xlsx",
                 f"{package_name}/02 - Proposal Letter.md",
                 f"{package_name}/ALERTS.md",
                 f"{package_name}/README.md",
-                f"{package_name}/scope-and-spec-pages.pdf",
-                f"{package_name}/scope-pages-index.md",
                 f"{package_name}/scope-pages.pdf",
-                f"{package_name}/spec-pages-index.md",
                 f"{package_name}/spec-pages.pdf",
                 f"{package_name}/takeoff/review-pages.md",
-                f"{package_name}/takeoff/triage-scope-signals.md",
             }
             with zipfile.ZipFile(zip_path) as zf:
                 self.assertEqual(set(zf.namelist()), expected_zip_names)

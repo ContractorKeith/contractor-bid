@@ -172,7 +172,7 @@ class McpServerTest(unittest.TestCase):
             self.assertTrue((root / "Bid-Tracker.xlsx").exists())
 
     def test_version_bumped_for_mcp_release(self) -> None:
-        self.assertEqual(__version__, "0.2.0")
+        self.assertEqual(__version__, "0.2.1")
 
 
 if __name__ == "__main__":

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 import json
 import re
 import shutil
@@ -368,37 +367,27 @@ def write_outputs(
     text_dir = work / "text-extracts"
     takeoff_dir = work / "takeoff"
 
-    json_hits = [asdict(hit) for hit in hits]
-    write_json(text_dir / "page-hits.json", {"profile": profile["profile_id"], "hits": json_hits})
-    with (text_dir / "page-hits.csv").open("w", encoding="utf-8", newline="") as fh:
-        writer = csv.DictWriter(
-            fh,
-            fieldnames=[
-                "status",
-                "score",
-                "source_relpath",
-                "pdf_page",
-                "include_terms",
-                "review_terms",
-                "exclude_terms",
-                "role_hints",
-                "quantity_mentions",
-                "rendered_image",
-            ],
-        )
-        writer.writeheader()
-        for hit in hits:
-            row = asdict(hit)
-            writer.writerow({key: json.dumps(row[key]) if isinstance(row[key], list) else row[key] for key in writer.fieldnames})
-
     signals = {
-        "profile": profile["profile_id"],
         "quantity_mentions": sorted({q for hit in hits for q in hit.quantity_mentions}),
         "include_terms": sorted({term for hit in hits for term in hit.include_terms}),
         "review_terms": sorted({term for hit in hits for term in hit.review_terms}),
         "exclude_terms": sorted({term for hit in hits for term in hit.exclude_terms}),
     }
-    write_json(text_dir / "scope-signals.json", signals)
+    suggested = build_suggested_sources(project, hits)
+    suggested_count = len(suggested.get("scope_pages", []))
+
+    write_json(
+        text_dir / "page-hits.json",
+        {
+            "profile": profile["profile_id"],
+            "project": project.name,
+            "python": sys.version.split()[0],
+            "scanned_warnings": scanned_warnings or [],
+            "suggested_scope_pages": suggested_count,
+            "signals": signals,
+            "hits": [asdict(hit) for hit in hits],
+        },
+    )
 
     candidate_lines = [
         f"# Candidate Pages - {project.name}",
@@ -430,31 +419,26 @@ def write_outputs(
             ["Score", "Source", "PDF page", "Why it matched", "Image"], rows
         )
         candidate_lines.append("")
-    (takeoff_dir / "candidate-pages.md").write_text("\n".join(candidate_lines), encoding="utf-8")
 
-    triage_lines = [
-        f"# Triage Scope Signals - {project.name}",
+    candidate_lines += [
+        "## Scope Signals",
         "",
-        "Use these signals as a prompt aid. They are not a takeoff.",
-        "",
-        "## Quantity Mentions",
+        "Prompt aid only. These are text mentions, not takeoff quantities.",
         "",
     ]
-    triage_lines += [f"- {value}" for value in signals["quantity_mentions"]] or ["- None found."]
-    triage_lines += ["", "## Include Terms", ""]
-    triage_lines += [f"- {value}" for value in signals["include_terms"]] or ["- None found."]
-    triage_lines += ["", "## Flag / Review Terms", ""]
-    triage_lines += [f"- {value}" for value in signals["review_terms"]] or ["- None found."]
-    triage_lines += ["", "## Exclusion Terms", ""]
-    triage_lines += [f"- {value}" for value in signals["exclude_terms"]] or ["- None found."]
-    (takeoff_dir / "triage-scope-signals.md").write_text(
-        "\n".join(triage_lines) + "\n", encoding="utf-8"
-    )
+    for title, key in (
+        ("Quantity Mentions", "quantity_mentions"),
+        ("Include Terms", "include_terms"),
+        ("Flag / Review Terms", "review_terms"),
+        ("Exclusion Terms", "exclude_terms"),
+    ):
+        candidate_lines += [f"### {title}", ""]
+        candidate_lines += [f"- {value}" for value in signals[key]] or ["- None found."]
+        candidate_lines.append("")
+    (takeoff_dir / "candidate-pages.md").write_text("\n".join(candidate_lines), encoding="utf-8")
 
-    suggested = build_suggested_sources(project, hits)
     suggested_path = takeoff_dir / "scope-pages-sources.suggested.json"
     write_json(suggested_path, suggested)
-    suggested_count = len(suggested.get("scope_pages", []))
     print(
         f"Suggested {suggested_count} scope page(s) -> review "
         "`bid-package-working/takeoff/scope-pages-sources.suggested.json`."
@@ -472,12 +456,12 @@ def write_outputs(
                 "Skipped `scope-pages-sources.json` because it already has user-entered content."
             )
 
-    metadata = {
-        "profile": profile["profile_id"],
-        "project": str(project),
-        "python": sys.version.split()[0],
-        "hits": len(hits),
-        "scanned_warnings": scanned_warnings or [],
-        "suggested_scope_pages": suggested_count,
-    }
-    write_json(text_dir / "extraction-metadata.json", metadata)
+    # Remove artifacts from older releases that are now folded into
+    # page-hits.json and candidate-pages.md.
+    for stale in (
+        text_dir / "page-hits.csv",
+        text_dir / "scope-signals.json",
+        text_dir / "extraction-metadata.json",
+        takeoff_dir / "triage-scope-signals.md",
+    ):
+        stale.unlink(missing_ok=True)

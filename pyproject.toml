@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "contractor-bid"
-version = "0.2.0"
+version = "0.2.1"
 description = "AI-ready commercial construction bid project starter kit for subcontractors in any CSI division."
 readme = "README.md"
 requires-python = ">=3.11"

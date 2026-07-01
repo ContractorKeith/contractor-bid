@@ -1,14 +1,14 @@
 # Homebrew Packaging
 
-`contractor-bid.rb` is a tap-ready formula template for the v0.2.0 release.
+`contractor-bid.rb` is a tap-ready formula template for the v0.2.1 release.
 
 Before publishing it to a Homebrew tap:
 
-1. Cut and push the `v0.2.0` tag.
+1. Cut and push the `v0.2.1` tag.
 2. Compute the GitHub source tarball SHA:
 
    ```bash
-   curl -L https://github.com/ContractorKeith/contractor-bid/archive/refs/tags/v0.2.0.tar.gz \
+   curl -L https://github.com/ContractorKeith/contractor-bid/archive/refs/tags/v0.2.1.tar.gz \
      | shasum -a 256
    ```
 

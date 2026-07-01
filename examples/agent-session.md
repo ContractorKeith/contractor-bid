@@ -47,8 +47,7 @@ contractor-bid triage bids/070126-example-ti --profile drywall-framing --render
 
 The agent reviews:
 
-- `bid-package-working/takeoff/candidate-pages.md`
-- `bid-package-working/takeoff/triage-scope-signals.md`
+- `bid-package-working/takeoff/candidate-pages.md` (candidate pages plus scope signals)
 - `bid-package-working/takeoff/scope-pages-sources.suggested.json`
 
 The suggested JSON is not final. The user or agent should copy only approved page entries into:

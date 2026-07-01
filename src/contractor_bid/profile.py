@@ -96,12 +96,10 @@ def build_profile(
         "intake_questions": DEFAULT_QUESTIONS,
         "deliverables": {
             "summary": "bid-package-working/00-Bid-Scope-Summary.md",
-            "reference_index": "bid-package-working/00-Scope-Reference-Index.md",
             "takeoff_workbook": "bid-package-working/01-Takeoff-Worksheet-REV1.xlsx",
             "proposal_letter": "bid-package-working/02 - Proposal Letter.md",
             "scope_pages": "bid-package-working/scope-pages.pdf",
             "spec_pages": "bid-package-working/spec-pages.pdf",
-            "combined_pages": "bid-package-working/scope-and-spec-pages.pdf",
             "alerts": "bid-package-working/ALERTS.md",
         },
         "learning": {
@@ -157,7 +155,7 @@ Spec section hints: {sections}
 
 1. Put source PDFs, spreadsheets, and addenda in `bid-docs/`.
 2. Run `contractor-bid triage <project> --profile {profile["profile_id"]}`.
-3. Review `bid-package-working/takeoff/candidate-pages.md` and `triage-scope-signals.md`.
+3. Review `bid-package-working/takeoff/candidate-pages.md` (candidate pages plus scope signals).
 4. Fill `takeoff/scope-pages-sources.json`, then run `contractor-bid build-packets <project>`.
 5. Fill the takeoff JSON, then run `contractor-bid build-workbook <project>`.
 6. Run `contractor-bid check <project> --profile {profile["profile_id"]}` before sending anything out.
@@ -165,7 +163,7 @@ Spec section hints: {sections}
 
 ## Guardrail
 
-Do not silently price excluded or flagged adjacent scopes. Carry the scope boundary through the summary, reference index, workbook, proposal letter, alerts, and sendoff package.
+Do not silently price excluded or flagged adjacent scopes. Carry the scope boundary through the summary, workbook, proposal letter, alerts, and sendoff package.
 """
 
 

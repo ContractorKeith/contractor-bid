@@ -6,12 +6,10 @@
 
 | Artifact | Why it matters |
 |---|---|
-| `00-Bid-Scope-Summary.md` | The fast read: what appears in scope, what to open first, what still needs measurement, and what is excluded. |
-| `00-Scope-Reference-Index.md` | A drawing/spec/RFI index that keeps source references visible. |
-| `scope-pages.pdf` | A short PDF packet of only the pages relevant to the subcontractor's scope. |
+| `00-Bid-Scope-Summary.md` | The fast read: what appears in scope, what to open first, a packet page map back to source pages, what still needs measurement, and what is excluded. |
+| `scope-pages.pdf` | A short PDF packet of only the pages relevant to the subcontractor's scope, with outline bookmarks. |
 | `spec-pages.pdf` | A short PDF packet of relevant spec pages when specs are found. |
-| `scope-and-spec-pages.pdf` | One combined packet for review or supplier handoff. |
-| `01-Takeoff-Worksheet-REV1.xlsx` | A workbook with BOM rows, supplier quote columns, alerts, RFIs, and source references. |
+| `01-Takeoff-Worksheet-REV1.xlsx` | A workbook with BOM rows, supplier quote columns, scope summary, alerts, RFIs, and source references. |
 | `02 - Proposal Letter.md` | A proposal draft that carries inclusions, exclusions, alternates, and clarifications. |
 | `ALERTS.md` | A validation report for missing artifacts, due date urgency, addenda, and scope-drift terms. |
 | `supplier-sendoff/*.zip` | A clean handoff package for suppliers, vendors, or internal review. |
@@ -20,17 +18,16 @@
 
 The first version came from active fence/gate bid workflows. In those projects, the useful package was not "one model answer." It was a folder with:
 
-- a quick-read summary,
+- a quick-read summary with a packet page map,
 - a page-source JSON,
 - isolated scope/spec PDF packets,
 - a workbook generated from JSON,
-- a reference index,
 - a proposal draft,
 - a review log,
 - alerts for adjacent-scope drift,
 - and a sendoff zip.
 
-One real package ended with a 15-page scope packet, an 11-page spec packet, a 26-page combined packet, a workbook, and a supplier sendoff zip. Another smaller package had a 6-page scope packet and no separate spec packet. That difference is the point: the tool should adapt to the bid set while keeping the same reviewable structure.
+One real package ended with a 15-page scope packet, an 11-page spec packet, a workbook, and a supplier sendoff zip. Another smaller package had a 6-page scope packet and no separate spec packet. That difference is the point: the tool should adapt to the bid set while keeping the same reviewable structure.
 
 ## What It Does Not Do
 

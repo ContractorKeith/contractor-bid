@@ -109,6 +109,16 @@ class TriageTest(unittest.TestCase):
             self.assertEqual(canonical["scope_pages"], suggested["scope_pages"])
             candidate_pages = (takeoff / "candidate-pages.md").read_text(encoding="utf-8")
             self.assertIn("looks scanned/image-only", candidate_pages)
+            self.assertIn("## Scope Signals", candidate_pages)
+            self.assertIn("chain link", candidate_pages)
+
+            text_extracts = project / "bid-package-working" / "text-extracts"
+            page_hits = read_json(text_extracts / "page-hits.json")
+            self.assertIn("chain link", page_hits["signals"]["include_terms"])
+            self.assertTrue(page_hits["scanned_warnings"])
+            for stale in ("page-hits.csv", "scope-signals.json", "extraction-metadata.json"):
+                self.assertFalse((text_extracts / stale).exists(), stale)
+            self.assertFalse((takeoff / "triage-scope-signals.md").exists())
 
     def test_write_sources_does_not_overwrite_user_content(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

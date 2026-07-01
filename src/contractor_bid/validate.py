@@ -10,7 +10,6 @@ from .util import markdown_table, read_json
 
 CHECKLIST = [
     ("00-Bid-Scope-Summary.md", "Bid scope summary", True),
-    ("00-Scope-Reference-Index.md", "Scope reference index", True),
     ("01-Takeoff-Worksheet-REV1.xlsx", "Takeoff/BOM workbook", True),
     ("02 - Proposal Letter.md", "Proposal letter", True),
     ("takeoff", "takeoff/ folder", True),
@@ -18,9 +17,7 @@ CHECKLIST = [
     ("takeoff/scope-pages-sources.json", "Page-packet sources JSON", True),
     ("text-extracts", "text-extracts/ from triage", False),
     ("takeoff/candidate-pages.md", "Candidate pages", False),
-    ("takeoff/triage-scope-signals.md", "Triage scope signals", False),
     ("scope-pages.pdf", "Scope pages packet", False),
-    ("scope-pages-index.md", "Scope pages index", False),
     ("spec-pages.pdf", "Spec pages packet", False),
     ("supplier-sendoff", "Supplier sendoff package", False),
 ]

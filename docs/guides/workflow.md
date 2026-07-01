@@ -28,7 +28,7 @@ contractor-bid doctor
 6. Copy approved suggestions into `scope-pages-sources.json`; do not blindly accept every hit.
 7. Build page packets and quick-read summary.
 8. Fill the takeoff JSON and build the workbook.
-9. Update the reference index and proposal letter.
+9. Update the proposal letter.
 10. Run alerts check.
 11. Package sendoff.
 
@@ -52,11 +52,10 @@ Date-prefixed folder names use the bid due date: `MMDDYY-project-slug`. The vali
 A ready project should have:
 
 - `00-Bid-Scope-Summary.md`
-- `00-Scope-Reference-Index.md`
 - `01-Takeoff-Worksheet-REV1.xlsx`
 - `02 - Proposal Letter.md`
-- `scope-pages.pdf` and index when scope pages are isolated
-- `spec-pages.pdf` and index when spec pages exist
+- `scope-pages.pdf` when scope pages are isolated
+- `spec-pages.pdf` when spec pages exist
 - `takeoff/review-pages.md`
 - `takeoff/scope-pages-sources.json`
 - a scope takeoff JSON

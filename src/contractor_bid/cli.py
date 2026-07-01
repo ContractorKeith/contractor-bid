@@ -137,7 +137,6 @@ def command_triage(args: argparse.Namespace) -> int:
     )
     print(f"Triage complete: {len(hits)} candidate page(s)")
     print(f"- {args.project.resolve() / 'bid-package-working' / 'takeoff' / 'candidate-pages.md'}")
-    print(f"- {args.project.resolve() / 'bid-package-working' / 'takeoff' / 'triage-scope-signals.md'}")
     return 0
 
 
