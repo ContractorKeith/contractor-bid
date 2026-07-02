@@ -7,10 +7,22 @@
 
 AI-ready bid workspaces for commercial subcontractors.
 
+<!-- Demo GIF slot: docs/assets/demo.gif
+     Record with VHS using scripts/demo.tape (30 seconds, the fictional
+     fences-gates demo pipeline). Uncomment once recorded and approved:
+![contractor-bid demo](docs/assets/demo.gif)
+-->
+
+Install in one command:
+
+```bash
+pipx install "contractor-bid[mcp]"   # or: brew install ContractorKeith/tap/contractor-bid
+```
+
 > **Status: early access / in active development (v0.2.1).** This is a public testing
 > release shared to gather real-world feedback. Expect rough edges, and verify every
 > output against the source documents before pricing a real bid. Bug reports and
-> contributions are welcome and encouraged — please
+> contributions are welcome and encouraged. Please
 > [open an issue](https://github.com/ContractorKeith/contractor-bid/issues) or see
 > [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -134,6 +146,15 @@ This gives you both:
 contractor-bid doctor
 contractor-bid-mcp
 ```
+
+### Homebrew (macOS / Linux)
+
+```bash
+brew install ContractorKeith/tap/contractor-bid
+```
+
+The formula installs the core CLI plus Poppler. For the MCP server and agent
+plugins, use the pipx install with the `[mcp]` extra above.
 
 ### macOS / Linux
 
@@ -345,14 +366,14 @@ contractor-bid track-list
 
 This writes `.contractor-bid/bid-tracker.json` (source of truth) and regenerates `Bid-Tracker.xlsx`:
 
-- **Active Bids** — Project, Location, Due, Progress, Next Action, Client / GC, Updated. Due dates within two days are amber; past-due are red.
-- **Archived & Completed** — finished bids move here automatically with an outcome (won, lost, no-bid, completed).
+- **Active Bids**: Project, Location, Due, Progress, Next Action, Client / GC, Updated. Due dates within two days are amber; past-due are red.
+- **Archived & Completed**: finished bids move here automatically with an outcome (won, lost, no-bid, completed).
 
-The `bid-tracker` skill lets Claude, Codex, or another agent keep the tracker current as you work — and it asks for confirmation with a change summary before every write. Both tracker files are gitignored so your bid pipeline stays private.
+The `bid-tracker` skill lets Claude, Codex, or another agent keep the tracker current as you work, and it asks for confirmation with a change summary before every write. Both tracker files are gitignored so your bid pipeline stays private.
 
 ## Architecture
 
-`contractor-bid` is a small, dependency-light Python CLI. The design rule is simple: **JSON files are the source of truth, and the scripts are deterministic glue that turn them into reviewable artifacts.** An AI agent reads the scope profile and skill, fills the JSON, and runs the commands — so every output traces back to a source page or a stated assumption.
+`contractor-bid` is a small, dependency-light Python CLI. The design rule is simple: **JSON files are the source of truth, and the scripts are deterministic glue that turn them into reviewable artifacts.** An AI agent reads the scope profile and skill, fills the JSON, and runs the commands, so every output traces back to a source page or a stated assumption.
 
 ### Per-bid data flow
 
@@ -375,15 +396,15 @@ contractor-bid/
 ├── src/contractor_bid/      # the CLI package (one module per command area)
 │   ├── cli.py               # argparse entrypoint; dispatches each subcommand
 │   ├── profile.py           # scope-profile schema + skill generation (render_skill)
-│   ├── project.py           # `new` — scaffolds a bid project folder from templates
+│   ├── project.py           # `new`: scaffolds a bid project folder from templates
 │   ├── triage.py            # PDF text extraction + candidate-page scoring
-│   ├── packets.py           # `build-packets` — scope/spec PDFs + quick-read summary
-│   ├── workbook.py          # `build-workbook` — styled takeoff/BOM .xlsx
-│   ├── validate.py          # `check` / `status` — deliverable + scope-drift checks
-│   ├── sendoff.py           # `package-sendoff` — supplier zip
+│   ├── packets.py           # `build-packets`: scope/spec PDFs + quick-read summary
+│   ├── workbook.py          # `build-workbook`: styled takeoff/BOM .xlsx
+│   ├── validate.py          # `check` / `status`: deliverable + scope-drift checks
+│   ├── sendoff.py           # `package-sendoff`: supplier zip
 │   ├── tracker.py           # bid tracker (track-* commands)
-│   ├── learning.py          # `learn` — correction/feedback log
-│   ├── doctor.py            # `doctor` — environment checks
+│   ├── learning.py          # `learn`: correction/feedback log
+│   ├── doctor.py            # `doctor`: environment checks
 │   └── util.py              # shared helpers
 ├── profiles/<id>.json       # built-in scope profiles (one per trade / CSI division)
 ├── skills/<id>-bid-scope/   # generated agent skills (one per profile)

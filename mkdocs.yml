@@ -42,6 +42,7 @@ markdown_extensions:
 nav:
   - Start Here:
       - Overview: index.md
+      - Why contractor-bid: why.md
       - Install: install.md
       - Quick Start: quickstart.md
       - First Bid Walkthrough: first-bid-walkthrough.md

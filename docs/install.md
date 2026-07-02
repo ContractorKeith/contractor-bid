@@ -40,6 +40,17 @@ Check the install:
 contractor-bid doctor
 ```
 
+## Install With Homebrew
+
+macOS or Linux:
+
+```bash
+brew install ContractorKeith/tap/contractor-bid
+```
+
+The formula installs the core CLI and Poppler together. It does not include the
+MCP server; for agent integrations use the pipx install with the `[mcp]` extra.
+
 ## Install From A Source Checkout
 
 macOS or Linux:
